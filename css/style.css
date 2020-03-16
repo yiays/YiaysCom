@@ -162,8 +162,9 @@ header>a:not(.active):nth-child(3){
 
 /* #main */
 #main{
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-template-columns: min-content auto;
+	grid-template-rows: auto auto;
 	margin-top: 1rem;
 }
 #main h2{
@@ -175,11 +176,16 @@ header>a:not(.active):nth-child(3){
 	width: 15vw;
 	min-width: 10rem;
 	max-width: 15rem;
+	height: calc(15vw - 3rem);
+	max-height: 12rem;
 }
 #main .pfp{
 	width: 100%;
 	height: auto;
-	border-radius: 50%;
+	border-radius: 50%;position: relative;
+	top: max(-8vw, -5rem);
+	left: -1rem;
+	border: 1rem solid #eee;
 }
 #main article{
 	padding-left: 2rem;
@@ -188,6 +194,7 @@ header>a:not(.active):nth-child(3){
 
 .links{
 	text-align: left;
+	grid-column: 1 / 3;
 }
 .link{
 	display: inline-block;
