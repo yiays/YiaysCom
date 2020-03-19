@@ -1,8 +1,13 @@
+// Check for mouse movement
+hasmouse = null;
+$(window).one('mousemove',function(){if(hasmouse === null) hasmouse=true}).one('touchstart',function(){if (hasmouse===null) hasmouse=false});
+
 $(document).ready(function(){
 	$.ajax({
 		url: "https://api.github.com/users/yiays/events",
 		method: "GET",
 		success: function(data){
+			created = [];
 			$('#commitsloading').remove();
 			data.forEach(function(ev){
 				if(ev.type == "PushEvent"){
@@ -19,6 +24,7 @@ $(document).ready(function(){
 						//$('#commits').append('<li>'+ev.created_at+'</td><td>'+ev.repo.name+'</td><td>Commit#'+ev.payload.head.substring(0,7)+'</td><td>'+ev.payload.commits[0].message+'</li>');
 						// Comitted <a href="">#3deac40</a> to <a href>yiays/merely</a>: Fix m/die easter egg <i class="dim">- 3 days ago</i>
 						$('#commits>div').append('<li class="event">'+
+																		 '<img alt="commit" src="/img/oct/git-commit.svg">'+
 																		 '<b>Committed <a href="https://github.com/'+ev.repo.name+'/commit/'+ev.payload.head+'">#'+ev.payload.head.substring(0,7)+'</a>'+
 																		 ' to <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><br>'+
 																		 '<ul>'+notes+'</ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i>'+
@@ -27,13 +33,16 @@ $(document).ready(function(){
 					}
 				}
 				else if(ev.type == "ForkEvent"){
-					$('#commits>div').append('<li class="event"><b>Forked <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a> to <a href="https://github.com/'+ev.payload.forkee.full_name+'">'+ev.payload.forkee.full_name+'</a></b><ul><li>'+ev.payload.forkee.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+					$('#commits>div').append('<li class="event"><img alt="fork" src="/img/oct/repo-forked.svg"><b>Forked <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a> to <a href="https://github.com/'+ev.payload.forkee.full_name+'">'+ev.payload.forkee.full_name+'</a></b><ul><li>'+ev.payload.forkee.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
 				}
 				else if(ev.type == "CreateEvent"){
-					$('#commits>div').append('<li class="event"><b>Created <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+					if(created.indexOf(ev.repo.name)==-1){
+						$('#commits>div').append('<li class="event"><img alt="repo create" src="/img/oct/repo.svg"><b>Created <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+						created.push(ev.repo.name);
+					}
 				}
 				else if(ev.type == "PullRequestEvent"){
-					$('#commits>div').append('<li class="event"><b>'+ev.payload.action[0].toUpperCase()+ev.payload.action.slice(1)+' a <a href="'+ev.payload.pull_request.html_url+'">pull request</a> in <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.pull_request.title+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+					$('#commits>div').append('<li class="event"><img alt="fork" src="/img/oct/repo-pull.svg"><b>'+ev.payload.action[0].toUpperCase()+ev.payload.action.slice(1)+' a <a href="'+ev.payload.pull_request.html_url+'">pull request</a> in <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.pull_request.title+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
 				}
 			});
 		},
@@ -77,6 +86,26 @@ $('.langtable td').on('click',function(e){
 	$('.project[data-langs~="'+$(this).find('.lang').attr('data-lang')+'"]').removeClass('hide');
 	return false;
 });
+
+hoverproject = null;
+hoverprojecttimer = null;
+$('.project').hover(
+	function(e){
+		hoverprojecttimer = setTimeout(function(){
+			hoverproject = $(e.target).closest('.project').attr('id');
+		},500)},
+	function(e){
+		clearTimeout(hoverprojecttimer);
+		hoverproject = null;
+	}
+);
+$('.project').on('click',function(e){
+	if(!hasmouse && $(e.target).closest('.project').attr('id') != hoverproject){
+		e.preventDefault();
+		return false;
+	}
+});
+
 $('#refresh-projects').on('click',function(e){
 	e.preventDefault();
 	$('.langtable td.active').removeClass('active');
