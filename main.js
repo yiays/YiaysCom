@@ -2,7 +2,17 @@
 hasmouse = null;
 $(window).one('mousemove',function(){if(hasmouse === null) hasmouse=true}).one('touchstart',function(){if (hasmouse===null) hasmouse=false});
 
+$('.pfp').on('click', function(){
+	$('.floaty').toggleClass("show");
+	if($('.floaty').is('.show'))
+		window.location.hash = '#/main';
+	else
+		history.pushState("", document.title, window.location.pathname);
+});
+
 $(document).ready(function(){
+	loadpage(window.location.hash);
+	
 	$.ajax({
 		url: "https://api.github.com/users/yiays/events",
 		method: "GET",
@@ -23,7 +33,7 @@ $(document).ready(function(){
 					if(notes.length){
 						//$('#commits').append('<li>'+ev.created_at+'</td><td>'+ev.repo.name+'</td><td>Commit#'+ev.payload.head.substring(0,7)+'</td><td>'+ev.payload.commits[0].message+'</li>');
 						// Comitted <a href="">#3deac40</a> to <a href>yiays/merely</a>: Fix m/die easter egg <i class="dim">- 3 days ago</i>
-						$('#commits>div').append('<li class="event">'+
+						$('#commits').append('<li class="event">'+
 																		 '<img alt="commit" src="/img/oct/git-commit.svg">'+
 																		 '<b>Committed <a href="https://github.com/'+ev.repo.name+'/commit/'+ev.payload.head+'">#'+ev.payload.head.substring(0,7)+'</a>'+
 																		 ' to <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><br>'+
@@ -33,16 +43,16 @@ $(document).ready(function(){
 					}
 				}
 				else if(ev.type == "ForkEvent"){
-					$('#commits>div').append('<li class="event"><img alt="fork" src="/img/oct/repo-forked.svg"><b>Forked <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a> to <a href="https://github.com/'+ev.payload.forkee.full_name+'">'+ev.payload.forkee.full_name+'</a></b><ul><li>'+ev.payload.forkee.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+					$('#commits').append('<li class="event"><img alt="fork" src="/img/oct/repo-forked.svg"><b>Forked <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a> to <a href="https://github.com/'+ev.payload.forkee.full_name+'">'+ev.payload.forkee.full_name+'</a></b><ul><li>'+ev.payload.forkee.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
 				}
 				else if(ev.type == "CreateEvent"){
 					if(created.indexOf(ev.repo.name)==-1){
-						$('#commits>div').append('<li class="event"><img alt="repo create" src="/img/oct/repo.svg"><b>Created <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+						$('#commits').append('<li class="event"><img alt="repo create" src="/img/oct/repo.svg"><b>Created <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
 						created.push(ev.repo.name);
 					}
 				}
 				else if(ev.type == "PullRequestEvent"){
-					$('#commits>div').append('<li class="event"><img alt="fork" src="/img/oct/repo-pull.svg"><b>'+ev.payload.action[0].toUpperCase()+ev.payload.action.slice(1)+' a <a href="'+ev.payload.pull_request.html_url+'">pull request</a> in <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.pull_request.title+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+					$('#commits').append('<li class="event"><img alt="fork" src="/img/oct/repo-pull.svg"><b>'+ev.payload.action[0].toUpperCase()+ev.payload.action.slice(1)+' a <a href="'+ev.payload.pull_request.html_url+'">pull request</a> in <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.pull_request.title+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
 				}
 			});
 		},
@@ -62,9 +72,9 @@ $(document).ready(function(){
 					var post = data.result[id];
 					var content = post.Content.substring(0,128).replace(/<.*?>/g,'');
 					if(content.lastIndexOf('<')>=0) content=content.substring(0,content.lastIndexOf('<'));
-					$('#posts>div').prepend('<li class="event"><a href="https://blog.yiays.com/'+post.url+'"><b>'+post.Title+'</b></a><br>'+
-																 '<div>'+content+'...</div>'+
-																 '<i class="dim">'+date_fold(new Date(post.Date))+'</i></li>');
+					$('#posts').prepend('<li class="event"><a href="https://blog.yiays.com/'+post.url+'"><b>'+post.Title+'</b></a><br>'+
+															'<div>'+content+'...</div>'+
+															'<i class="dim">'+date_fold(new Date(post.Date))+'</i></li>');
 				}
 			}else{
 				$('#posts').html('<li class="event" style="color: red;">Failed to fetch blog posts!</li>');
@@ -77,15 +87,51 @@ $(document).ready(function(){
 	});
 });
 
-$('.langtable td').on('click',function(e){
-	e.preventDefault();
-	$('.langtable td.active').removeClass('active');
-	$(this).addClass('active');
-	$('#refresh-projects.hide').removeClass('hide');
-	$('.project').addClass('hide');
-	$('.project[data-langs~="'+$(this).find('.lang').attr('data-lang')+'"]').removeClass('hide');
-	return false;
+$(window).bind('hashchange', function() {
+  loadpage(window.location.hash);
 });
+
+function loadpage(hash){
+	if(hash.startsWith('#/activity')){
+		$('.floaty').addClass('show');
+		$('.cardpage').addClass('hidden');
+		$('#activity').removeClass('hidden');
+		if(hash.startsWith('#/activity/github')){
+			$('.activity-feed').addClass('hidden');
+			$('#commits').removeClass('hidden');
+			$('#activity .nav-link.active').removeClass('active');
+			$('#activity .nav-link[href="#/activity/github"]').addClass('active');
+		}else if(hash.startsWith('#/activity/blog')){
+			$('.activity-feed').addClass('hidden');
+			$('#posts').removeClass('hidden');
+			$('#activity .nav-link.active').removeClass('active');
+			$('#activity .nav-link[href="#/activity/blog"]').addClass('active');
+		}
+	}else if(hash.startsWith('#/portfolio')){
+		$('.floaty').addClass('show');
+		$('.cardpage').addClass('hidden');
+		$('#portfolio').removeClass('hidden');
+		var lang = hash.split('/', 3)[2];
+		if(lang){
+			$('.lang.active').removeClass('active');
+			$(".lang[href='#/portfolio/"+lang+"']").addClass('active');
+			$('.project').addClass('hidden');
+			$('.project[data-langs~="'+lang+'"]').removeClass('hidden');
+		}else{
+			$('.lang.active').removeClass('active');
+			$(".lang[href='#/portfolio']").addClass('active');
+			$('.project.hidden').removeClass('hidden');
+		}
+	}else if(hash.startsWith('#/main')){
+		$('.floaty').addClass('show');
+		$('.cardpage').addClass('hidden');
+		$('#main').removeClass('hidden');
+	}else{
+		$('.floaty').removeClass('show');
+		$('.cardpage').addClass('hidden');
+		$('#main').removeClass('hidden');
+	}
+}
 
 hoverproject = null;
 hoverprojecttimer = null;
@@ -104,23 +150,6 @@ $('.project').on('click',function(e){
 		e.preventDefault();
 		return false;
 	}
-});
-
-$('#refresh-projects').on('click',function(e){
-	e.preventDefault();
-	$('.langtable td.active').removeClass('active');
-	$('.project.hide').removeClass('hide');
-	$(this).addClass('hide');
-	return false;
-});
-
-$('header>a').on('click',function(e){
-	e.preventDefault();
-	$('header>a').removeClass('active');
-	$(this).addClass('active');
-	$('.gradient-1').removeClass('blue purple');
-	$('.gradient-1').addClass($(this).data('colour'));
-	return false;
 });
 
 function date_fold(time){
