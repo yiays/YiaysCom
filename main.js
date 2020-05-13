@@ -36,7 +36,7 @@ $(document).ready(function(){
 						$('#commits').append('<li class="event">'+
 																		 '<img alt="commit" src="/img/oct/git-commit.svg">'+
 																		 '<b>Committed <a href="https://github.com/'+ev.repo.name+'/commit/'+ev.payload.head+'">#'+ev.payload.head.substring(0,7)+'</a>'+
-																		 ' to <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><br>'+
+																		 ' to <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+':'+ev.payload.ref.substring(11)+'</a></b><br>'+
 																		 '<ul>'+notes+'</ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i>'+
 																		 '</li>'
 						);
