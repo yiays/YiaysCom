@@ -63,19 +63,16 @@ $(document).ready(function(){
 	});
 
 	$.ajax({
-		url: 'https://blog.yiays.com/api/blog.php?q=posts',
+		url: 'https://blog.yiays.com/api/posts/',
 		method: 'GET',
-		success: function(data){
+		success: function(posts){
 			$('#postsloading').remove();
-			if(data.status){
-				for(var id in data.result){
-					var post = data.result[id];
-					var content = post.Content.substring(0,128).replace(/<.*?>/g,'');
-					if(content.lastIndexOf('<')>=0) content=content.substring(0,content.lastIndexOf('<'));
-					$('#posts').prepend('<li class="event"><a href="https://blog.yiays.com/'+post.url+'"><b>'+post.Title+'</b></a><br>'+
-															'<div>'+content+'...</div>'+
+			if(posts){
+				posts.forEach(function(post){
+					$('#posts').append('<li class="event"><a href="https://blog.yiays.com/'+post.Url+'"><b>'+post.Title+'</b></a><br>'+
+															'<div>'+post.Preview+'</div>'+
 															'<i class="dim">'+date_fold(new Date(post.Date))+'</i></li>');
-				}
+				});
 			}else{
 				$('#posts').html('<li class="event" style="color: red;">Failed to fetch blog posts!</li>');
 			}
