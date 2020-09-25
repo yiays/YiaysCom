@@ -487,6 +487,9 @@ h2{
 .project#dino .poster>p>img{
 	filter: none;
 }
+.project#wipeout{
+	background: #cacaca url('/img/wipeout.svg') no-repeat center/cover;
+}
 .project#signage{
 	background: rgb(175, 30, 255) url('/img/signage.svg') no-repeat center/cover;
 	color: #fff;
