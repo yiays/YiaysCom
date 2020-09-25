@@ -490,6 +490,9 @@ h2{
 .project#wipeout{
 	background: #cacaca url('/img/wipeout.svg') no-repeat center/cover;
 }
+.project#wipeout .poster>p>img{
+	filter: none;
+}
 .project#signage{
 	background: rgb(175, 30, 255) url('/img/signage.svg') no-repeat center/cover;
 	color: #fff;
