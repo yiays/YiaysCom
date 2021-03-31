@@ -459,47 +459,47 @@ h2{
 	}
 }
 .project#pukeko{
-	background: #134FB0 url('/img/pukeko.svg') no-repeat center/cover;
+	background: #134FB0 url('img/pukeko.svg') no-repeat center/cover;
 	color: rgb(255,255,255);
 }
 .project#pukeko h3{
 	font-weight: 100;
 }
 .project#merely{
-	background: #127DAB url('/img/merely.svg') no-repeat center/cover;
+	background: #127DAB url('img/merely.svg') no-repeat center/cover;
 	color: rgb(255,255,255);
 	color: rgba(255,255,255,0.8);
 }
 .project#kahoot{
 	font-weight:900;
-	background: rgb(255,212,100) url('/img/kahoot.svg') no-repeat center/cover;
+	background: rgb(255,212,100) url('img/kahoot.svg') no-repeat center/cover;
 	color:white;
 }
 .project#meme{
 	color:white;
-	background: rgb(83,92,104) url('/img/memedb.svg') no-repeat center/cover;
+	background: rgb(83,92,104) url('img/memedb.svg') no-repeat center/cover;
 	font-family: 'Lato', Arial, Helvetica, sans-serif;
 }
 .project#dino{
-	background: #cacaca url('/img/dino.svg') no-repeat center/cover;
+	background: #cacaca url('img/dino.svg') no-repeat center/cover;
 	font-family: "Monaco", "Roboto Mono", monospace;
 }
 .project#dino .poster>p>img{
 	filter: none;
 }
 .project#wipeout{
-	background: #cacaca url('/img/wipeout.svg') no-repeat center/cover;
+	background: #cacaca url('img/wipeout.svg') no-repeat center/cover;
 }
 .project#wipeout .poster>p>img{
 	filter: none;
 }
 .project#signage{
-	background: rgb(175, 30, 255) url('/img/signage.svg') no-repeat center/cover;
+	background: rgb(175, 30, 255) url('img/signage.svg') no-repeat center/cover;
 	color: #fff;
 }
 .project#blog{
 	font-weight:900;
-	background: #44A8EB url('/img/blog.svg') no-repeat center/cover;
+	background: #44A8EB url('img/blog.svg') no-repeat center/cover;
 	color: #fff;
 }
 .project .poster::before{
