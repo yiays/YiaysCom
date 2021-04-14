@@ -34,25 +34,24 @@ $(document).ready(function(){
 						//$('#commits').append('<li>'+ev.created_at+'</td><td>'+ev.repo.name+'</td><td>Commit#'+ev.payload.head.substring(0,7)+'</td><td>'+ev.payload.commits[0].message+'</li>');
 						// Comitted <a href="">#3deac40</a> to <a href>yiays/merely</a>: Fix m/die easter egg <i class="dim">- 3 days ago</i>
 						$('#commits').append('<li class="event">'+
-																		 '<img alt="commit" src="img/oct/git-commit.svg">'+
-																		 '<b>Committed <a href="https://github.com/'+ev.repo.name+'/commit/'+ev.payload.head+'">#'+ev.payload.head.substring(0,7)+'</a>'+
-																		 ' to <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+':'+ev.payload.ref.substring(11)+'</a></b><br>'+
-																		 '<ul>'+notes+'</ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i>'+
-																		 '</li>'
-						);
+																 '<img alt="commit" src="img/oct/git-commit.svg" width="16" height="16">'+
+																 '<b>Committed <a href="https://github.com/'+ev.repo.name+'/commit/'+ev.payload.head+'">#'+ev.payload.head.substring(0,7)+'</a>'+
+																 ' to <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+':'+ev.payload.ref.substring(11)+'</a></b><br>'+
+																 '<ul>'+notes+'</ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i>'+
+																 '</li>');
 					}
 				}
 				else if(ev.type == "ForkEvent"){
-					$('#commits').append('<li class="event"><img alt="fork" src="img/oct/repo-forked.svg"><b>Forked <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a> to <a href="https://github.com/'+ev.payload.forkee.full_name+'">'+ev.payload.forkee.full_name+'</a></b><ul><li>'+ev.payload.forkee.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+					$('#commits').append('<li class="event"><img alt="fork" src="img/oct/repo-forked.svg" width="16" height="16"><b>Forked <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a> to <a href="https://github.com/'+ev.payload.forkee.full_name+'">'+ev.payload.forkee.full_name+'</a></b><ul><li>'+ev.payload.forkee.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
 				}
 				else if(ev.type == "CreateEvent"){
 					if(created.indexOf(ev.repo.name)==-1){
-						$('#commits').append('<li class="event"><img alt="repo create" src="img/oct/repo.svg"><b>Created <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+						$('#commits').append('<li class="event"><img alt="repo create" src="img/oct/repo.svg" width="16" height="16"><b>Created <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.description+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
 						created.push(ev.repo.name);
 					}
 				}
 				else if(ev.type == "PullRequestEvent"){
-					$('#commits').append('<li class="event"><img alt="fork" src="img/oct/repo-pull.svg"><b>'+ev.payload.action[0].toUpperCase()+ev.payload.action.slice(1)+' a <a href="'+ev.payload.pull_request.html_url+'">pull request</a> in <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.pull_request.title+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
+					$('#commits').append('<li class="event"><img alt="fork" src="img/oct/repo-pull.svg" width="16" height="16"><b>'+ev.payload.action[0].toUpperCase()+ev.payload.action.slice(1)+' a <a href="'+ev.payload.pull_request.html_url+'">pull request</a> in <a href="https://github.com/'+ev.repo.name+'">'+ev.repo.name+'</a></b><ul><li>'+ev.payload.pull_request.title+'</li></ul><i class="dim">'+date_fold(new Date(ev.created_at))+'</i></li>');
 				}
 			});
 		},
