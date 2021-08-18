@@ -477,7 +477,7 @@ h2{
 	font-family: 'Lato', Arial, Helvetica, sans-serif;
 }
 .project#dino{
-	background: #cacaca url('img/dino.svg') no-repeat center/cover;
+	background: #cacaca url('img/genericwhite.svg') no-repeat center/cover;
 	font-family: "Monaco", "Roboto Mono", monospace;
 }
 .project#dino .poster>p>img{
@@ -489,8 +489,9 @@ h2{
 .project#wipeout .poster>p>img{
 	filter: none;
 }
-.project#signage{
-	background: rgb(175, 30, 255) url('img/signage.svg') no-repeat center/cover;
+.project#cb{
+	font-weight: 300;
+	background: #000 url('img/cb.svg') no-repeat center/cover;
 	color: #fff;
 }
 .project#blog{
