@@ -16,12 +16,59 @@
 		
 		<link rel="stylesheet" href="normalize.css">
 		<link rel="stylesheet" href="style.css?v=5">
+
+		<style>
+			.beta-toggle {
+				position: absolute;
+				top: 1em;
+				right: 1em;
+				display: inline-block;
+				padding: 0.4em;
+				background: #000;
+				color: #fff;
+				box-shadow: #000 0 0 0.1em;
+				border-radius: 1em;
+			}
+			.beta-toggle > .beta-slider {
+				position: relative;
+				display: inline-block;
+				width: 1.8em;
+				height: 1em;
+				top: 0.1em;
+				margin-right: 0.2em;
+				background: rgb(163,73,164);
+				border-radius: 1em;
+				transition: background 0.25s ease;
+			}
+			.beta-toggle > .beta-slider::before {
+				content: '';
+				position: absolute;
+				left: 0.1em;
+				top: 0.1em;
+				display: inline-block;
+				width: 0.8em;
+				height: 0.8em;
+				background: #fff;
+				border-radius: 0.8em;
+				transition: left 0.25s ease;
+			}
+			.beta-toggle:focus > .beta-slider {
+				background: rgb(112,146,190);
+			}
+			.beta-toggle:focus > .beta-slider::before {
+				left: 0.9em;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="background gradient-1">
 			<div class="gradient-2"></div>
 		</div>
 		<div class="main">
+			<a class="beta-toggle" href="/?beta=1">
+				<span class="beta-slider"></span>
+				Beta
+			</a>
 			<div class="floaty">
 				<span class="floaty-hint">Click on the image to continue...</span>
 				<div class="bubble">
@@ -205,7 +252,7 @@
 		<footer>
 			Website made from scratch (and JQuery) by Yiays.
 			<img class="watermark" src="img/watermark.png" width="500" height="500" alt="Sheep in square brackets (watermark form of Yiays.com logo)">
-			<span style="position: absolute; right: 2rem;">&copy; 2020 Yiays</span>
+			<span style="position: absolute; right: 2rem;">&copy; 2021 Yiays</span>
 		</footer>
 		
 		<script src="//cdn.yiays.com/jquery-3.6.0.min.js"></script>
