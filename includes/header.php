@@ -18,13 +18,13 @@ require_once('router.php');
 		<meta name="theme-color" content="#000000">
 		
 		<link rel="stylesheet" href="/normalize.css">
-		<link rel="stylesheet" href="/style.beta.css?v=0.0.74">
+		<link rel="stylesheet" href="/style.beta.css?v=0.0.99">
 
     <style>
       .beta-toggle {
         position: absolute;
-        top: 1em;
-        right: 1em;
+        top: 1.5em;
+        right: 1.5em;
         display: inline-block;
         padding: 0.4em;
         background: #000;
@@ -71,6 +71,9 @@ require_once('router.php');
     </a>
     <div class="main">
       <nav>
+        <span class="nav-item hide-small text-skinny">
+          Yiays.com
+        </span>
         <a class="nav-item <?php print($url=='/'?'active':''); ?>" href="/">
           About
         </a>

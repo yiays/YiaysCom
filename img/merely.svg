@@ -1,1 +1,11 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200"><defs><style>.cls-1{fill:none;}.cls-2{clip-path:url(#clip-path);}.cls-3{fill:#6579b0;}.cls-4{fill:#7387b8;}.cls-5{fill:#9bafcf;}.cls-6{fill:#127dab;}.cls-7{fill:#87acd3;}</style><clipPath id="clip-path"><rect class="cls-1" x="-220" width="200" height="200"/></clipPath></defs><title>Projects</title><g class="cls-2"><circle class="cls-3" cx="-52" cy="168" r="173"/><circle class="cls-4" cx="-52" cy="168" r="121"/><circle class="cls-5" cx="-52" cy="168" r="63"/></g><rect class="cls-6" width="200" height="200"/><path class="cls-7" d="M169,100a69,69,0,1,1-69-69A69,69,0,0,1,169,100ZM100,6a94,94,0,1,0,94,94A94,94,0,0,0,100,6Z"/></svg>
+<svg data-name="Layer 1" version="1.1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style>.cls-1{fill:none;}.cls-2{clip-path:url(#clip-path);}.cls-3{fill:#6579b0;}.cls-4{fill:#7387b8;}.cls-5{fill:#9bafcf;}.cls-6{fill:#127dab;}.cls-7{fill:#87acd3;}</style>
+  <clipPath id="clip-path">
+   <rect class="cls-1" x="-220" width="200" height="200"/>
+  </clipPath>
+ </defs>
+ <title>Projects</title>
+ <rect class="cls-6" width="200" height="200"/>
+ <path class="cls-7" d="m169 100a69 69 0 1 1-69-69 69 69 0 0 1 69 69zm-69-94a94 94 0 1 0 94 94 94 94 0 0 0-94-94z"/>
+</svg>
