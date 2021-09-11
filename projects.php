@@ -3,7 +3,7 @@ $title = 'Projects';
 $desc = 'Here, you\'ll find projects created as part of my studies or in my free time, a handful of them have become somewhat popular with some communities.';
 $keywords = 'portfolio, work, examples, source code, github';
 require('includes/header.php');?>
-<article>
+<article style="background:rgb(88, 38, 88);margin-bottom:-0.5em;">
   <h1>My projects</h1>
   <p>
     Here, you'll find projects created as part of my studies or in my free time, a handful of them have become somewhat popular with some communities.

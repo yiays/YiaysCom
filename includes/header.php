@@ -18,7 +18,7 @@ require_once('router.php');
 		<meta name="theme-color" content="#000000">
 		
 		<link rel="stylesheet" href="/normalize.css">
-		<link rel="stylesheet" href="/style.beta.css?v=0.0.99">
+		<link rel="stylesheet" href="/style.beta.css?v=0.1.12">
 
     <style>
       .beta-toggle {
@@ -71,6 +71,9 @@ require_once('router.php');
     </a>
     <div class="main">
       <nav>
+        <p class="nav-item show-small text-center text-skinny" style="width:100%;">
+          Yiays.com
+        </p>
         <span class="nav-item hide-small text-skinny">
           Yiays.com
         </span>
@@ -84,3 +87,4 @@ require_once('router.php');
           Projects
         </a>
       </nav>
+      <div class="y-scroller">

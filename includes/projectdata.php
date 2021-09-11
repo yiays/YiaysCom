@@ -1,15 +1,6 @@
 <?php
 class Project {
-  public $id;
-  public $title;
-  public $img;
-  public $langs;
-  public $techs;
-  public $desc;
-  public $link;
-  public $github;
-
-  function __construct($id, $title, $img, $screenshots, $langs, $techs, $desc, $link, $github=null)
+  function __construct($id, $title, $img, $screenshots, $langs, $techs, $users, $desc, $link, $github=null, $article=null)
   {
     $this->id = $id;
     $this->title = $title;
@@ -17,15 +8,17 @@ class Project {
     $this->screenshots = $screenshots;
     $this->langs = $langs;
     $this->techs = $techs;
+    $this->users = $users;
     $this->desc = $desc;
     $this->link = $link;
     $this->github = $github;
+    $this->article = $article;
   }
 
   function print()
   {
     return "
-      <section class=\"project\" id=\"$this->id\" data-langs=\"$this->langs\">
+      <section class=\"project\" id=\"$this->id\">
         <div class=\"x-scroller\">
           <div class=\"carousel\">
             <div title=\"Artwork that represents $this->title\" style=\"background-image:url('$this->img');\" width=150 height=150></div>
@@ -33,10 +26,17 @@ class Project {
           </div>
         </div>
         <h3>$this->title</h3>
-        <span class=\"dim\">Built for <i>$this->techs</i> with <i>$this->langs</i></span>
+        <span class=\"dim\">
+          Users: <b>$this->users</b>
+          <br>Platforms: <i>$this->techs</i>
+          <br>Technologies <i>$this->langs</i>
+        </span>
         <p>$this->desc</p>
-        <a class=\"btn c-mild-bg\" href=\"$this->link\" target=_blank>View Website</a>
-        <a class=\"btn c-octocat-bg\" href=\"$this->github\" target=_blank>View on GitHub</a>
+        <div class=\"flex-row\">
+          ".($this->link?"<a class=\"btn\" href=\"$this->link\" target=_blank>View Website</a>":'')."
+          ".($this->article?"<a class=\"btn\" href=\"$this->article\" target=_blank>Read Article</a>":'')."
+          ".($this->github?"<a class=\"btn\" href=\"$this->github\" target=_blank>View on GitHub</a>":'')."
+        </div>
       </section>
     ";
   }
@@ -66,6 +66,20 @@ class Project {
 
 $projects = [
   new Project(
+    'yiayscom',
+    'Yiays.com',
+    '/img/yiayscom.svg',
+    [],
+    'Javascript (optional)',
+    "Web (mobile friendly)",
+    "~200 monthly visits",
+    "This website, updated yearly to showcase my skills as they grow. With this most recent design refresh, I'm also merging the blog into this site.",
+    '',
+    'https://github.com/yiays/YiaysCom',
+    'https://l.yiays.com/yiayscom-history'
+  ),
+
+  new Project(
     'meme',
     "MemeDB",
     "/img/memedb.svg",
@@ -75,6 +89,7 @@ $projects = [
     ],
     "PHP, MySQL, and Javascript",
     "Database, Discord, and Web (mobile friendly)",
+    "~6,000 monthly visits",
     "A massive database of memes with crowd-sourced metadata, making for one of the best places on the web to search for memes.",
     "https://meme.yiays.com/",
     "https://github.com/TeamMemeDB/"
@@ -90,9 +105,11 @@ $projects = [
     ],
     "Python and Javascript",
     "Discord and Web (mobile friendly)",
+    "~60 Discord guilds",
     "Merely is a framework for discord bots written atop of Discord.py which makes advanced features like module reloading and translation possible. MerelyBot is an example implementation.",
     "https://merely.yiays.com/",
-    "https://github.com/yiays/merely/"
+    "https://github.com/yiays/merely/",
+    'https://l.yiays.com/merely-3-year'
   ),
 
   new Project(
@@ -104,9 +121,11 @@ $projects = [
     ],
     "Python",
     "Discord",
+    "~5,000 Discord Guilds",
     "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
-    "https://l.yiays.com/confessionbot",
-    "https://github.com/yiays/Translate-Confessionbot/"
+    '',
+    "https://github.com/yiays/Translate-Confessionbot/",
+    "https://l.yiays.com/confessionbot"
   ),
 
   new Project(
@@ -120,6 +139,7 @@ $projects = [
     ],
     "PHP, MySQL, Javascript (optional), and Python",
     "Database, Discord, Web (mobile friendly), and UWP",
+    "~70 Monthly Visits",
     "PukekoHost is a democratized game hosting service where members of a Discord server can crowdfund servers for their favourite games.",
     "https://pukeko.yiays.com/",
     "https://github.com/Pukeko-Host/"
@@ -132,8 +152,9 @@ $projects = [
     [],
     "Python, Javascript, and C#",
     "Discord and Web (mobile frendly)",
+    "Currently inactive",
     "A clone of Kahoot that can be played within a Discord server. Currently being rewritten.",
-    "https://kahoot.yiays.com/",
+    '',
     "https://github.com/yiays/noncopyrightedquizgamename/"
   ),
 
@@ -146,6 +167,7 @@ $projects = [
     ],
     "C#, MySQL, and PHP",
     "Database, PC, and Android",
+    "Currently inactive",
     "A clone of the Dino Game in Chrome, but in 3D and with a global leaderboard.",
     "https://github.com/yiays/dino/releases",
     "https://github.com/yiays/dino"
@@ -161,6 +183,7 @@ $projects = [
     ],
     "Javascript",
     "Web (mobile friendly)",
+    "Currently inactive",
     "A fan site for a game franchise. Features some interesting CSS effects.",
     "https://wipeout.yiays.com/",
     "https://github.com/yiays/design/tree/assessment-2/"
@@ -175,8 +198,9 @@ $projects = [
     ],
     "PHP, MySQL, and Javascript",
     "Database and Web (mobile friendly)",
+    "~230 monthly visits",
     "An alternative design for the blog on this website, highly experimental.",
-    "https://blog.yiays.com/?old=1",
+    "https://blog.yiays.com/",
     "https://github.com/yiays/blog/"
   )
 ];

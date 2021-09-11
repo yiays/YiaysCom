@@ -67,13 +67,26 @@ hr {
 .text-skinny {
   font-weight: 300;
 }
-.flex-row {
+.flex-row, .flex-col {
   display: flex;
+  flex-wrap: wrap;
+}
+.flex-row {
   flex-direction: row;
 }
 .flex-col {
-  display: flex;
   flex-direction: column;
+}
+.show-small, .show-med {
+  display: none;
+}
+.x-scroller {
+  display: block;
+  overflow-x: auto;
+}
+.y-scroller {
+  display: block;
+  overflow-y: auto;
 }
 
 /*
@@ -85,6 +98,7 @@ hr {
 	padding: 0.5em;
 	margin: 0 0.5rem 0.5rem 0;
 	cursor: pointer;
+  border: white solid 1px;
   border-radius: 0.5em;
 	box-shadow: inset 0 0 0 1.1em rgba(255,255,255,0);
 	transition: box-shadow 250ms;
@@ -141,20 +155,37 @@ hr {
 }
 
 /*
+  CUSTOM SCROLLBAR
+*/
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: none;
+}
+::-webkit-scrollbar-thumb {
+  background: #444;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/*
   CONTENT
 */
 .main{
+  display: flex;
+  flex-direction: column;
 	position: relative;
-	min-height: calc(100vh - 3.7em);
+	height: calc(100vh - 3.7em);
   width: calc(100vw - 1em);
   width: -webkit-fill-available;
   width: -moz-available;
   width: fill-available;
   max-width: 96em;
   align-self: center;
-  background-color: rgb(15, 15, 15);
-	background-size: cover;
-  background-attachment: fixed;
+  background: rgb(15, 15, 15);
   margin: 1em 1em 0.8em 1em;
   border-radius: 1em;
   overflow: hidden;
@@ -164,10 +195,8 @@ nav {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: rgb(112, 146, 190);
-  background-image: linear-gradient(90deg, rgb(0, 68, 97), rgb(88, 38, 88));
-  padding-right: 5em;
-  border-bottom: white solid 1px;
+  background: rgb(112, 146, 190) linear-gradient(90deg, rgb(0, 68, 97), rgb(88, 38, 88));
+  /* border-bottom: white solid 1px; */
 }
 nav > .nav-item {
   font-size: 1.25rem;
@@ -224,10 +253,6 @@ article, section {
   z-index: 1;
 }
 
-.x-scroller {
-  display: block;
-  overflow-x: auto;
-}
 .carousel {
   display: flex;
   flex-direction: row;
@@ -283,10 +308,19 @@ article, section {
   .hide-med {
     display: none;
   }
+  .show-med {
+    display: unset;
+  }
 }
 
 @media screen and (max-width: 48em) {
+  nav, .flex-row {
+    justify-content: center;
+  }
   .hide-small {
     display: none;
+  }
+  .show-small {
+    display: unset;
   }
 }

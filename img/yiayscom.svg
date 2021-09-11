@@ -1,0 +1,23 @@
+<svg data-name="Layer 1" version="1.1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <clipPath id="clip-path">
+   <rect x="-220" y="-220" width="200" height="200"/>
+  </clipPath>
+ </defs>
+ <title>Projects</title>
+ <g>
+  <rect width="200" height="200" fill="#1a1a1a"/>
+  <g stroke-linecap="round" stroke-width="4.4036">
+   <rect width="50" height="25" rx="0" ry="0" fill="#024361" stop-color="#000000" style="-inkscape-stroke:none"/>
+   <rect x="50" width="50" height="25" rx="0" ry="0" fill="#1d3a5e" stop-color="#000000" style="-inkscape-stroke:none"/>
+   <rect x="100" width="50" height="25" rx="0" ry="0" fill="#37315b" stop-color="#000000" style="-inkscape-stroke:none"/>
+   <rect x="150" width="50" height="25" rx="0" ry="0" fill="#562758" stop-color="#000000" style="-inkscape-stroke:none"/>
+  </g>
+ </g>
+ <g transform="matrix(1.4091 0 0 1.4 -59.545 -52)" stroke-linecap="round" stroke-width="4.8022">
+  <rect x="90" y="110" width="80" height="45" fill="#2b142c" stop-color="#000000" style="-inkscape-stroke:none"/>
+  <rect x="80" y="100" width="80" height="45" fill="#3f1c40" stop-color="#000000" style="-inkscape-stroke:none"/>
+  <rect x="70" y="90" width="80" height="45" fill="#562758" stop-color="#000000" style="-inkscape-stroke:none"/>
+  <rect x="60" y="80" width="80" height="45" fill="#024361" stop-color="#000000" style="-inkscape-stroke:none"/>
+ </g>
+</svg>

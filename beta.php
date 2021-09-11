@@ -3,12 +3,12 @@ $title = false;
 $desc = false;
 $keywords = 'homepage';
 require('includes/header.php');
-?><article class="hero">
-  <div class="hero-bg">
+?><article style="background:rgb(112, 146, 190) linear-gradient(90deg, rgb(0, 68, 97), rgb(88, 38, 88));margin-bottom: -0.5em;">
+  <!--<div class="hero-bg">
     <video autoplay muted loop>
       <source type="video/webm" src="/img/hero.webm">
     </video>
-  </div>
+  </div>-->
   <img class="pfp" src="img/pfp.jpg?v=2" alt="[Yiays] profile picture" width="1024" height="1024">
   <div>
     <h1>Hello, I'm Yiays.</h1>
@@ -17,11 +17,11 @@ require('includes/header.php');
     </p>
 </div>
   <div class="flex-row">
-    <a class="btn c-octocat-bg" href="https://github.com/yiays/" target="_blank">GitHub</a>
-    <a class="btn c-blue-bg" href="https://linkedin.com/in/yiays/" target="_blank">LinkedIn</a>
-    <a class="btn c-gmail-bg" href="mailto:yesiateyoursheep@gmail.com">Email</a>
+    <a class="btn" href="https://github.com/yiays/" target="_blank">GitHub</a>
+    <a class="btn" href="https://linkedin.com/in/yiays/" target="_blank">LinkedIn</a>
+    <a class="btn" href="mailto:contact@yiays.com">Email</a>
   </div>
-  <a href="#skip" class="btn text-center" style="width:1em;align-self:center;margin:0;margin-top:auto;">&darr;</a>
+  <a href="#skip" class="btn text-center" style="width:0.9em;align-self:center;margin:0;margin-top:auto;padding-top:0.3em;border:none;">&darr;</a>
 </article>
 <hr>
 <section class="featured-projects" id="skip">
@@ -55,7 +55,7 @@ require('includes/header.php');
 <section>
   <h1>Featured articles</h1>
   <p>
-    I occasionally write an article here and there about my misadventures programming. I also like to document the history of my ever-evolving projects.
+    I occasionally write an article here and there about my misadventures programming. I also document the history of my ever-evolving projects.
   </p>
 </section>
 <?php
