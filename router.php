@@ -8,7 +8,7 @@ if(isset($_GET['beta'])) {
 
 $url = explode('?', $_SERVER['REQUEST_URI'])[0];
 
-if(key_exists('beta', $_COOKIE) & $_COOKIE['beta']) {
+if(key_exists('beta', $_COOKIE) && $_COOKIE['beta']) {
   switch($url) {
     case '/':
       require('beta.php');

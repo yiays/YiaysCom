@@ -10,7 +10,8 @@ require('includes/header.php');?>
   </p>
 </article>
 <hr>
-<?php require('includes/projectdata.php');
+<?php
+require('includes/projectdata.php');
 $i = 0;
 foreach($projects as $project) {
   print($project->print());

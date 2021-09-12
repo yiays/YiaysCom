@@ -10,5 +10,13 @@ require('includes/header.php');?>
   </p>
 </article>
 <hr>
-<?php require('includes/footer.php');
+<?php 
+require('includes/blogdata.php');
+$i = 0;
+foreach($articles as $article) {
+  print($article->preview_wide());
+  if($i++ != count($articles) - 1) print('<hr>');
+}
+
+require('includes/footer.php');
 ?>

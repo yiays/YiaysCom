@@ -87,6 +87,7 @@ hr {
 .y-scroller {
   display: block;
   overflow-y: auto;
+  overflow-y: overlay; /* TODO: replace with scrollbar-gutter when it's ready */
 }
 
 /*
@@ -165,10 +166,10 @@ hr {
   background: none;
 }
 ::-webkit-scrollbar-thumb {
-  background: #444;
+  background: rgba(255, 255, 255, 0.25);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #888;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /*
@@ -268,6 +269,7 @@ article, section {
   min-height: 9em;
   max-height: 18em;
   background-size: cover;
+  background-position: center;
   border-radius: 1em;
 }
 .carousel > *:not(:last-child) {

@@ -57,6 +57,27 @@ require('includes/header.php');
   <p>
     I occasionally write an article here and there about my misadventures programming. I also document the history of my ever-evolving projects.
   </p>
+  <div class="x-scroller">
+    <div class="carousel carousel-end-promo">
+      <?php require_once('includes/blogdata.php');
+      shuffle($articles);
+      $i = 0;
+      foreach($articles as $article) {
+        print($article->preview());
+        if($i++ == 2) {
+          print("
+            <a href=\"/blog/\" style=\"background-image: url('/img/blog.svg');\">
+              <div class=\"info\">
+                <b>All posts</b><br>
+                See the new blog
+              </div>
+            </a>
+          ");
+          break;
+        }
+      } ?>
+    </div>
+  </div>
 </section>
 <?php
 require('includes/footer.php');

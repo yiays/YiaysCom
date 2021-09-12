@@ -8,7 +8,7 @@ require_once('router.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title><?php print($title?$title.' - Yiays.com':'Yiays.com'); ?></title>
-    <meta name="keywords" content="yiays, web developer, programmer, database, designer, merely, kahootdiscord, pukekohost, project, <?php echo $tags; ?>">
+    <meta name="keywords" content="yiays, web developer, programmer, database, designer, merely, kahootdiscord, pukekohost, project, <?php echo $keywords; ?>">
     <meta name="description" content="<?php print($desc?$desc:"I'm a student experienced with full-stack web development, software development, database design and implementation. Here you can find my work."); ?>">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
@@ -18,7 +18,7 @@ require_once('router.php');
 		<meta name="theme-color" content="#000000">
 		
 		<link rel="stylesheet" href="/normalize.css">
-		<link rel="stylesheet" href="/style.beta.css?v=0.1.12">
+		<link rel="stylesheet" href="/style.beta.css?v=0.1.14">
 
     <style>
       .beta-toggle {
