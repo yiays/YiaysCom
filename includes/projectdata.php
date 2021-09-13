@@ -1,6 +1,18 @@
 <?php
 class Project {
-  function __construct($id, $title, $img, $screenshots, $langs, $techs, $users, $desc, $link, $github=null, $article=null)
+  public string $id;
+  public string $title;
+  public string $img;
+  public array $screenshots;
+  public string $langs;
+  public string $techs;
+  public string $users;
+  public string $desc;
+  public ?string $link;
+  public ?string $github;
+  public ?string $article;
+
+  function __construct($id, $title, $img, $screenshots, $langs, $techs, $users, $desc, $link=null, $github=null, $article=null)
   {
     $this->id = $id;
     $this->title = $title;
@@ -15,8 +27,7 @@ class Project {
     $this->article = $article;
   }
 
-  function print()
-  {
+  function print() : string {
     return "
       <section class=\"project\" id=\"$this->id\">
         <div class=\"x-scroller\">
@@ -41,8 +52,7 @@ class Project {
     ";
   }
 
-  function preview()
-  {
+  function preview() : string {
     return "
       <a class=\"project-mini\" href=\"/projects/#$this->id\" style=\"background-image: url('$this->img');\">
         <div class=\"info\">
@@ -53,7 +63,7 @@ class Project {
     ";
   }
 
-  function print_screenshots(){
+  function print_screenshots() : string {
     $out = "";
     foreach($this->screenshots as $screenshot => $screendesc) {
       $out .= "
@@ -74,7 +84,7 @@ $projects = [
     "Web (mobile friendly)",
     "~200 monthly visits",
     "This website, updated yearly to showcase my skills as they grow. With this most recent design refresh, I'm also merging the blog into this site.",
-    '',
+    null,
     'https://github.com/yiays/YiaysCom',
     'https://l.yiays.com/yiayscom-history'
   ),
@@ -123,7 +133,7 @@ $projects = [
     "Discord",
     "~5,000 Discord Guilds",
     "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
-    '',
+    null,
     "https://github.com/yiays/Translate-Confessionbot/",
     "https://l.yiays.com/confessionbot"
   ),
@@ -154,7 +164,7 @@ $projects = [
     "Discord and Web (mobile frendly)",
     "Currently inactive",
     "A clone of Kahoot that can be played within a Discord server. Currently being rewritten.",
-    '',
+    null,
     "https://github.com/yiays/noncopyrightedquizgamename/"
   ),
 

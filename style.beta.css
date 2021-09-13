@@ -302,6 +302,23 @@ article, section {
   margin-bottom: 0.8em;
 }
 
+.post > .post-header {
+  margin: -1em;
+  margin-bottom: 1em;
+  padding: 1em;
+  border-bottom: white solid 1px;
+}
+.post > .post-header > img {
+  width: calc(100% + 2em);
+  height: auto;
+  margin: -1em;
+  margin-top: 1em;
+  margin-bottom: -1.25em;
+}
+.post > .post-content img {
+  max-width: 100%;
+  height: auto;
+}
 
 @media screen and (max-width: 64em) {
   .main {

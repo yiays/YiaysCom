@@ -8,8 +8,15 @@ require_once('router.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title><?php print($title?$title.' - Yiays.com':'Yiays.com'); ?></title>
+    <meta name="og:title" content="<?php print(htmlspecialchars($title?$title.' - Yiays.com':'Yiays.com')); ?>">
     <meta name="keywords" content="yiays, web developer, programmer, database, designer, merely, kahootdiscord, pukekohost, project, <?php echo $keywords; ?>">
-    <meta name="description" content="<?php print($desc?$desc:"I'm a student experienced with full-stack web development, software development, database design and implementation. Here you can find my work."); ?>">
+    <meta name="description" content="<?php print(htmlspecialchars($desc?$desc:"I'm a student experienced with full-stack web development, software development, database design and implementation. Here you can find my work.")); ?>">
+    <meta name="og:description" content="<?php print(htmlspecialchars($desc?$desc:"I'm a student experienced with full-stack web development, software development, database design and implementation. Here you can find my work.")); ?>">
+    <?php
+      if(isset($image)) print("<meta name=\"og:image\" content\"".$image."\">");
+    ?>
+    <meta name="og:url" content="<?php echo "https://yiays.com".$url; ?>">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/icon/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/icon/favicon-32x32.png">
@@ -18,7 +25,7 @@ require_once('router.php');
 		<meta name="theme-color" content="#000000">
 		
 		<link rel="stylesheet" href="/normalize.css">
-		<link rel="stylesheet" href="/style.beta.css?v=0.1.14">
+		<link rel="stylesheet" href="/style.beta.css?v=0.1.18">
 
     <style>
       .beta-toggle {
