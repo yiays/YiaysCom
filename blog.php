@@ -8,12 +8,58 @@ if(strlen($params[2])) {
     return $article->urlid == $params[2];
   }, ARRAY_FILTER_USE_BOTH));
 
+  require_once('../passport/api/auth.php');
+  $edit = false;
+  $user = passport\autologin();
+  if(count($params) > 3) {
+    if($params[3] == 'edit') {
+      if(key_exists('passportToken', $_COOKIE)) {
+        if(!$user || !$user->admin) {
+          http_response_code(403);
+          die('Failed to verify you as an administrator.');
+        }else{
+          $edit = true;
+        }
+      }else{
+        http_response_code(301);
+        header('location: https://passport.yiays.com/login/?redirect='.urlencode($_SERVER['REQUEST_URI']));
+      }
+    }elseif($params[3] != '') {
+      http_response_code(404);
+      die();
+    }
+  }
+
+  $article = null;
   if(!$articlematches) {
-    http_response_code(404);
-    die();
+    if(!$edit) {
+      http_response_code(404);
+      die();
+    }else{
+      $article = new Article();
+      $article->id = -1;
+      $article->author = new Author();
+      $article->author->id = $user->id;
+      $article->author->username = $user->username;
+      $article->author->pfp = $user->pfp;
+      $article->title = str_replace('-', ' ', ucfirst($params[2]));
+      $article->url = $params[2];
+      $article->tags = '';
+      $article->img = '';
+      $article->col = '#000';
+      $article->date = new DateTime();
+      $article->editdate = null;
+      $article->content = 'Click here to edit the article content.';
+      $article->hidden = true;
+    }
+  }else{
+    $article = $articlematches[0];
+    if($article->hidden && (!$user || !$user->admin)) {
+      http_response_code(404);
+      die();
+    }
   }
   
-  $article = $articlematches[0];
   $title = $article->title;
   $desc = strip_tags($ParseDown->text(explode("\n", $article->content)[0]));
   $keywords = $article->tags;

@@ -25,6 +25,9 @@ if(key_exists('beta', $_COOKIE) && $_COOKIE['beta']) {
   elseif(str_starts_with($url, '/blog/')) {
     require('blog.php');
   }
+  /*elseif(str_starts_with($url, '/login/')) {
+    require('auth.php');
+  }*/
   else {
     http_response_code(404);
     die();

@@ -14,13 +14,15 @@ class Article {
   public string $img;
   public string $col;
   public DateTime $date;
-  public DateTime $editdate;
+  public ?DateTime $editdate;
   public string $content;
+  public bool $hidden;
 
-  function __construct($row)
+  function setup($row)
   {
     $this->id = $row['PostID'];
-    $this->author = new Author($row);
+    $this->author = new Author();
+    $this->author->setup($row);
     $this->title = $row['Title'];
     $this->urlid = $row['Url'];
     $this->url = "https://yiays.com/blog/$row[Url]/";
@@ -30,6 +32,7 @@ class Article {
     $this->date = new DateTime($row['Date']);
     $this->editdate = new DateTime($row['EditDate']);
     $this->content = $row['Content'];
+    $this->hidden = $row['Hidden'];
   }
 
   function print() : string {
@@ -99,15 +102,13 @@ class Article {
 class Author {
   public int $id;
   public string $username;
-  public DateTime $date;
   public ?string $pfp;
   public ?string $bio;
 
-  function __construct($row)
+  function setup($row)
   {
     $this->id = $row['UserID'];
     $this->username = $row['Username'];
-    $this->date = new DateTime($row['DateCreated']);
     $this->pfp = null;
     $this->bio = null;
   }
@@ -119,14 +120,15 @@ class Author {
 
 $articles = [];
 $result = $conn->query(
-  "SELECT PostID,Title,Url,Tags,Cover,Colour,Date,EditDate,Content,post.UserID,auth.Username,auth.DateCreated
+  "SELECT PostID,Title,Url,Tags,Cover,Colour,Date,EditDate,Content,Hidden,post.UserID,auth.Username
   FROM post LEFT JOIN auth ON post.UserID = auth.UserID
-  WHERE post.Hidden = 0
   ORDER BY Date DESC"
 );
 if(!$result) {
   throw new Exception($conn->error);
 }
 while($row = $result->fetch_assoc()){
-  $articles[] = new Article($row);
+  $article = new Article();
+  $article->setup($row);
+  $articles[] = $article;
 }
