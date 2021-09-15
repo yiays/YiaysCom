@@ -37,17 +37,18 @@ require('includes/header.php');
       foreach($projects as $project) {
         print($project->preview());
         if($i++ == 2) {
-          print("
-            <a href=\"/projects/\" style=\"background-image: url('/img/genericpurple.svg');\">
-              <div class=\"info\">
-                <b>All projects</b><br>
-                See the expanded list
-              </div>
-            </a>
-          ");
           break;
         }
-      } ?>
+      }
+      print("
+        <a href=\"/projects/\" style=\"background-image: url('/img/genericpurple.svg');\">
+          <div class=\"info\">
+            <b>All projects</b><br>
+            See the expanded list
+          </div>
+        </a>
+      ");
+      ?>
     </div>
   </div>
 </section>
@@ -63,19 +64,22 @@ require('includes/header.php');
       shuffle($articles);
       $i = 0;
       foreach($articles as $article) {
-        print($article->preview());
-        if($i++ == 2) {
-          print("
-            <a href=\"/blog/\" style=\"background-image: url('/img/blog.svg');\">
-              <div class=\"info\">
-                <b>All posts</b><br>
-                See the new blog
-              </div>
-            </a>
-          ");
-          break;
+        if(!$article->hidden) {
+          print($article->preview());
+          if($i++ == 2) {
+            break;
+          }
         }
-      } ?>
+      }
+      print("
+        <a href=\"/blog/\" style=\"background-image: url('/img/blog.svg');\">
+          <div class=\"info\">
+            <b>All posts</b><br>
+            See the new blog
+          </div>
+        </a>
+      ");
+      ?>
     </div>
   </div>
 </section>

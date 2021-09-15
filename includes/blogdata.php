@@ -35,27 +35,10 @@ class Article {
     $this->hidden = $row['Hidden'];
   }
 
-  function print() : string {
+  function preview_wide($edit = false) : string {
     global $ParseDown;
     return "
-      <article class=\"post\" id=\"$this->id\">
-        <div class=\"post-header\" style=\"background:$this->col;\">
-          <h2>$this->title</h2>
-          <span class=\"dim\">By ".$this->author->handle().", written ".$this->date->format('Y-m-d').($this->editdate?', <i>last edited '.$this->editdate->format('Y-m-d').'</i>':'')."</span>
-          <br><span>$this->tags</span>
-          <img alt=\"$this->title\" src=\"$this->img\">
-        </div>
-        <div class=\"post-content\">
-          ".$ParseDown->text($this->content)."
-        </div>
-      </article>
-    ";
-  }
-
-  function preview_wide() : string {
-    global $ParseDown;
-    return "
-      <section class=\"post\" id=\"$this->id\">
+      <section class=\"post".($this->hidden?' dim':'')."\" id=\"$this->id\">
         <div class=\"x-scroller\">
           <div class=\"carousel\">
             <div style=\"background-image:url('$this->img');\"></div>
@@ -71,6 +54,7 @@ class Article {
         <p>".strip_tags($ParseDown->text(explode("\n", $this->content)[0]))."</p>
         <div class=\"flex-row\">
           <a class=\"btn\" href=\"$this->url\">Read More</a>
+          ".($edit?'<a class="btn" href="'.$this->url.'edit/">Edit</a>':'')."
         </div>
       </section>
     ";
