@@ -27,7 +27,7 @@ class Article {
     $this->urlid = $row['Url'];
     $this->url = "https://yiays.com/blog/$row[Url]/";
     $this->tags = $row['Tags'];
-    $this->img = "https://cdn.yiays.com/blog/src/$row[Cover]";
+    $this->img = "https://cdn.yiays.com/blog/$row[Cover]";
     $this->col = "#$row[Colour]";
     $this->date = new DateTime($row['Date']);
     $this->editdate = new DateTime($row['EditDate']);

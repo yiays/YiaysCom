@@ -109,6 +109,36 @@ hr {
 }
 
 /*
+  FORMS
+*/
+input, textarea {
+  max-width: 100%;
+  background: none;
+  color: white;
+  border: none;
+  border-bottom: white solid 1px;
+  margin-bottom: 16px;
+}
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+input:hover, textarea:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+input:focus-visible, textarea:focus-visible {
+  background: rgba(255, 255, 255, 0.25);
+  outline: none;
+  border-bottom: white solid 4px;
+  margin-bottom: 13px;
+}
+input[type=color], input[type=file] {
+  display: inline-block;
+}
+input[type=file] {
+  max-width: 30em;
+}
+
+/*
 	COLOURS
 */
 
@@ -223,7 +253,7 @@ nav > .nav-item.active {
   margin-bottom: 1em;
 }
 
-article, section {
+article, section, aside {
   display: flex;
   flex-direction: column;
   padding: 1em;
@@ -311,6 +341,9 @@ article, section {
 .post > .post-header > img {
   width: calc(100% + 2em);
   height: auto;
+  max-height: 40em;
+  object-fit: cover;
+  object-position: center;
   margin: -1em;
   margin-top: 1em;
   margin-bottom: -1.25em;

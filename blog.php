@@ -50,8 +50,8 @@ if(strlen($params[2])) {
       $article->title = str_replace('-', ' ', ucfirst($params[2]));
       $article->url = $params[2];
       $article->tags = '';
-      $article->img = '';
-      $article->col = '#000';
+      $article->img = 'https://cdn.yiays.com/blog/default.svg';
+      $article->col = '#004461';
       $article->date = new DateTime();
       $article->editdate = null;
       $article->content = 'Click here to edit the article content.';
@@ -70,22 +70,58 @@ if(strlen($params[2])) {
   $keywords = $article->tags;
   $image = $article->img;
   require('includes/header.php');
-  print("
-    <article class=\"post".($article->hidden?' dim':'')."\" id=\"$article->id\">
-      <div class=\"post-header\" style=\"background:$article->col;\">
-        <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
-          <h2 style=\"flex-grow:1;\">$article->title</h2>
-          ".userpreview($user)."
+  if($edit) {
+    print("
+    <form method\"POST\">
+      <input type=\"hidden\" name=\"id\" value=\"$article->id\">
+      <article class=\"post post-editable\" id=\"$article->id\">
+        <div class=\"post-header\" style=\"background:$article->col;\">
+          <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
+            <h2 style=\"max-width:min(30rem,60vw);\">
+              <input type=\"text\" name=\"title\" placeholder=\"Title\" value=\"".htmlspecialchars($article->title)."\">
+            </h2>
+            ".userpreview($user)."
+          </div>
+          <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
+          <br><input type=\"text\" name=\"tags\" placeholder=\"Tags\" value=\"".htmlspecialchars($article->tags)."\">
+          <img alt=\"".htmlspecialchars($article->title)."\" src=\"$article->img\">
         </div>
-        <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
-        <br><span>$article->tags</span>
-        <img alt=\"$article->title\" src=\"$article->img\">
-      </div>
-      <div class=\"post-content\">
-        ".$ParseDown->text($article->content)."
-      </div>
-    </article>
-  ");
+        <div class=\"post-content\">
+          <textarea name=\"content\" rows=30 style=\"width:100%;\">$article->content</textarea>
+        </div>
+      </article>
+      <aside class=\"editor\">
+        Colour:
+        <input type=\"color\" name=\"color\" value=\"$article->col\">
+        <br>Cover image:
+        <input type=\"file\" accept=\".jpg,.jpeg,.png,.webp,.svg\" name=\"img\">
+        <br>
+        <div class=\"flex-row\">
+          <span>Hidden:</span>
+          <input type=\"checkbox\" name=\"hidden\" checked=\"".($article->hidden?'true':'false')."\">
+          <input type=\"submit\" class=\"btn\" style=\"margin-left:auto;\" value=\"Publish\">
+        </div>
+      </aside>
+    </form>
+    ");
+  }else{
+    print("
+      <article class=\"post".($article->hidden?' dim':'')."\" id=\"$article->id\">
+        <div class=\"post-header\" style=\"background:$article->col;\">
+          <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
+            <h2 style=\"flex-grow:1;\">$article->title</h2>
+            ".userpreview($user)."
+          </div>
+          <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
+          <br><span>$article->tags</span>
+          <img alt=\"".htmlspecialchars($article->title)."\" src=\"$article->img\">
+        </div>
+        <div class=\"post-content\">
+          ".$ParseDown->text($article->content)."
+        </div>
+      </article>
+    ");
+  }
   require('includes/footer.php');
 
 }else{
@@ -122,7 +158,7 @@ if(strlen($params[2])) {
 }
 
 function userpreview($user) {
-  $result = '<span class="login-status text-center">';
+  $result = '<span class="login-status text-center" style="margin-left:auto;">';
   if (!$user) {
     $result .= "Not logged in.
       <br><sub><a href=\"https://passport.yiays.com/account/login/?redirect=".urlencode('https://yiays.com'.$_SERVER['REQUEST_URI'])."\">Login with Passport</a>";
