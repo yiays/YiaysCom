@@ -40,7 +40,7 @@ class Project {
         <span class=\"dim\">
           Users: <b>$this->users</b>
           <br>Platforms: <i>$this->techs</i>
-          <br>Technologies <i>$this->langs</i>
+          <br>Technologies: <i>$this->langs</i>
         </span>
         <p>$this->desc</p>
         <div class=\"flex-row\">

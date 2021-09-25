@@ -1,6 +1,6 @@
 <?php
-if(isset($_GET['beta'])) {
-  setcookie('beta', $_GET['beta'], time()+60*60*24*30, '/', 'yiays.com', true, false);
+if(isset($_GET['old'])) {
+  setcookie('old', $_GET['old'], time()+60*60*24*30, '/', 'yiays.com', true, false);
   http_response_code(401);
   header('location: /');
   die();
@@ -15,9 +15,15 @@ if(version_compare(PHP_VERSION, '8.0.0', '<')) {
   }
 }
 
-if(key_exists('beta', $_COOKIE) && $_COOKIE['beta']) {
+if(key_exists('old', $_COOKIE) && $_COOKIE['old']) {
+  if(strlen($url) > 1) {
+    http_response_code(404);
+    die();
+  }
+  require('old.html');
+}else{
   if($url == '/'){
-    require('beta.php');
+    require('index.php');
   }
   elseif(str_starts_with($url, '/projects/')) {
     require('projects.php');
@@ -32,11 +38,5 @@ if(key_exists('beta', $_COOKIE) && $_COOKIE['beta']) {
     http_response_code(404);
     die();
   }
-}else{
-  if(strlen($url) > 1) {
-    http_response_code(404);
-    die();
-  }
-  require('old.html');
 }
 ?>

@@ -47,14 +47,14 @@ require_once('router.php');
         height: 1em;
         top: 0.1em;
         margin-right: 0.2em;
-        background: rgb(112,146,190);
+				background: rgb(163,73,164);
         border-radius: 1em;
         transition: background 0.25s ease;
       }
       .beta-toggle > .beta-slider::before {
         content: '';
         position: absolute;
-        left: 0.9em;
+        left: 0.1em;
         top: 0.1em;
         display: inline-block;
         width: 0.8em;
@@ -72,9 +72,9 @@ require_once('router.php');
     </style>
   </head>
   <body>
-    <a class="beta-toggle" href="/?beta=0">
+    <a class="beta-toggle" href="/?old=1">
       <span class="beta-slider"></span>
-      Beta
+      Legacy
     </a>
     <div class="main">
       <nav>
