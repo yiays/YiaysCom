@@ -65,6 +65,20 @@ if(strlen($params[2])) {
       die();
     }
   }
+
+  if($edit && array_key_exists('title', $_POST) && array_key_exists('color', $_POST) && array_key_exists('contenthtml', $_POST)) {
+    $article->title = $_POST['title'];
+    $article->url = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $article->title)));
+    if(array_key_exists('tags', $_POST)) $article->tags = $_POST['tags'];
+    //if(array_key_exists('cover')) $article->img = TODO: handle file uploading
+    $article->color = substr($_POST['color'], 1);
+    $article->hidden = array_key_exists('hidden', $_POST);
+    $article->content = $ParseDown->parse($_POST['contenthtml']);
+    $article->save();
+    http_response_code(403);
+    header("location: /blog/$article->url");
+    die();
+  }
   
   $title = $article->title;
   $desc = strip_tags($ParseDown->text(explode("\n", $article->content)[0]));
@@ -73,10 +87,9 @@ if(strlen($params[2])) {
   require('includes/header.php');
   if($edit) {
     print("
-    <form method\"POST\">
-      <input type=\"hidden\" name=\"id\" value=\"$article->id\">
+    <form method=\"POST\">
       <article class=\"post post-editable\" id=\"$article->id\">
-        <div class=\"post-header\" style=\"background:$article->col;\">
+        <div class=\"post-header\" id=\"postcolor\" style=\"background:$article->col;\">
           <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
             <h2 style=\"max-width:min(30rem,60vw);\">
               <input type=\"text\" name=\"title\" placeholder=\"Title\" value=\"".htmlspecialchars($article->title)."\">
@@ -85,25 +98,54 @@ if(strlen($params[2])) {
           </div>
           <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
           <br><input type=\"text\" name=\"tags\" placeholder=\"Tags\" value=\"".htmlspecialchars($article->tags)."\">
-          <img alt=\"".htmlspecialchars($article->title)."\" src=\"$article->img\">
+          <br>Colour:
+          <input type=\"color\" id=\"color\" name=\"color\" value=\"$article->col\">
+          <br>Cover image:
+          <input type=\"file\" name=\"cover\" id=\"cover\" accept=\".jpg,.jpeg,.png,.webp,.svg\">
+          <br>
+          <div class=\"flex-row\">
+            <label for=\"hidden\">Hidden:</label>&nbsp;
+            <input type=\"checkbox\" id=\"hidden\" name=\"hidden\" ".($article->hidden?'checked':'').">
+            <input type=\"submit\" id=\"save\" class=\"btn\" style=\"margin-left:auto;\" value=\"".($article->hidden?'Save':'Publish')."\">
+          </div>
+          <img alt=\"".htmlspecialchars($article->title)." cover art\" id=\"postcover\" src=\"$article->img\">
         </div>
-        <div class=\"post-content\">
-          <textarea name=\"content\" rows=30 style=\"width:100%;\">$article->content</textarea>
+        <input type=\"hidden\" name=\"contenthtml\" id=\"submitcontent\" value=\"{UNSET}\">
+        <div class=\"post-content\" id=\"postcontent\">
+          ".$ParseDown->text($article->content)."
         </div>
       </article>
-      <aside class=\"editor\">
-        Colour:
-        <input type=\"color\" name=\"color\" value=\"$article->col\">
-        <br>Cover image:
-        <input type=\"file\" accept=\".jpg,.jpeg,.png,.webp,.svg\" name=\"img\">
-        <br>
-        <div class=\"flex-row\">
-          <span>Hidden:</span>
-          <input type=\"checkbox\" name=\"hidden\" checked=\"".($article->hidden?'true':'false')."\">
-          <input type=\"submit\" class=\"btn\" style=\"margin-left:auto;\" value=\"Publish\">
-        </div>
-      </aside>
     </form>
+    <script src=\"https://cdn.ckeditor.com/ckeditor5/29.2.0/balloon-block/ckeditor.js\"></script>
+    <script>
+      let editor;
+      let postcontent = document.querySelector('#postcontent');
+      let submitcontent = document.querySelector('#submitcontent');
+      let savebtn = document.querySelector('#save');
+      let hiddenchk = document.querySelector('#hidden');
+      let colorinp = document.querySelector('#color');
+      let post = document.querySelector('#postcolor');
+      let coverfs = document.querySelector('#cover');
+      let postcover = document.querySelector('#postcover');
+      BalloonEditor
+        .create(postcontent)
+        .then(newEditor => {editor = newEditor;})
+        .catch(error => {
+          console.error(error);
+        });
+      savebtn.addEventListener('click', (e)=>{
+        submitcontent.value = editor.getData();
+      });
+      hiddenchk.addEventListener('input', (e)=>{
+        savebtn.value = (hiddenchk.checked==true)?'Save':'Publish';
+      });
+      colorinp.addEventListener('input', (e)=>{
+        post.style.background = colorinp.value;
+      });
+      coverfs.addEventListener('input', (e)=>{
+        if(coverfs.files[0]) postcover.src = URL.createObjectURL(coverfs.files[0]);
+      });
+    </script>
     ");
   }else{
     print("
@@ -115,7 +157,7 @@ if(strlen($params[2])) {
           </div>
           <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
           <br><span>$article->tags</span>
-          <img alt=\"".htmlspecialchars($article->title)."\" src=\"$article->img\">
+          <img alt=\"".htmlspecialchars($article->title)." cover art\" src=\"$article->img\">
         </div>
         <div class=\"post-content\">
           ".$ParseDown->text($article->content)."

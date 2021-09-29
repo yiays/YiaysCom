@@ -35,6 +35,39 @@ class Article {
     $this->hidden = $row['Hidden'];
   }
 
+  function save() {
+    global $conn;
+    if($this->id >= 0)
+      $result = $conn->query("
+        UPDATE post
+        SET
+          Hidden = ".($this->hidden?'true':'false').",
+          Title = '".$conn->real_escape_string($this->title)."',
+          Content = '".$conn->real_escape_string($this->content)."',
+          Tags = '".$conn->real_escape_string($this->tags)."',
+          Cover = '".$conn->real_escape_string(substr($this->img, 27))."',
+          Colour = '".$conn->real_escape_string($this->col)."'
+        WHERE PostID = $this->id;
+      ");
+    else
+      $result = $conn->query("
+        INSERT INTO post(UserID, Hidden, Title, Url, Content, Tags, Cover, Colour)
+        VALUES (
+          ".$this->author->id.",
+          ".($this->hidden?'true':'false').",
+          '".$conn->real_escape_string($this->title)."',
+          '".$conn->real_escape_string($this->url)."',
+          '".$conn->real_escape_string($this->content)."',
+          '".$conn->real_escape_string($this->tags)."',
+          '".$conn->real_escape_string(substr($this->img, 27))."',
+          '".$conn->real_escape_string($this->col)."'
+        );
+      ");
+    if(!$result) {
+      throw new Exception($conn->error);
+    }
+  }
+
   function preview_wide($edit = false) : string {
     global $ParseDown;
     return "
@@ -51,7 +84,7 @@ class Article {
           ".($this->editdate?'<i>(Last edited '.$this->editdate->format('Y-m-d').')</i>':'')."
           ".($this->tags?"<br>Tags: <i>$this->tags</i>":'')."
         </span>
-        <p>".strip_tags($ParseDown->text(explode("\n", $this->content)[0]))."</p>
+        <p>".strip_tags($ParseDown->text(explode('</', explode("\n", $this->content)[0])[0]))."</p>
         <div class=\"flex-row\">
           <a class=\"btn\" href=\"$this->url\">Read More</a>
           ".($edit?'<a class="btn" href="'.$this->url.'edit/">Edit</a>':'')."
