@@ -104,8 +104,8 @@ class Author {
 
 $articles = [];
 $result = $conn->query(
-  "SELECT PostID,Title,Url,Tags,Cover,Colour,Date,EditDate,Content,Hidden,post.UserID,auth.Username
-  FROM post LEFT JOIN auth ON post.UserID = auth.UserID
+  "SELECT PostID,Title,Url,Tags,Cover,Colour,Date,EditDate,Content,Hidden,UserID,passport.user.Username
+  FROM post LEFT JOIN passport.user ON post.UserID = passport.user.Id
   ORDER BY Date DESC"
 );
 if(!$result) {

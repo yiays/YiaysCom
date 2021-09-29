@@ -41,6 +41,7 @@ if(strlen($params[2])) {
       http_response_code(404);
       die();
     }else{
+      assert($user instanceof passport\User);
       $article = new Article();
       $article->id = -1;
       $article->author = new Author();
