@@ -27,8 +27,8 @@ class Article {
     $this->urlid = $row['Url'];
     $this->url = "https://yiays.com/blog/$row[Url]/";
     $this->tags = $row['Tags'];
-    $this->img = "https://cdn.yiays.com/blog/$row[Cover]";
-    $this->col = "#$row[Colour]";
+    $this->img = $row['Cover'];
+    $this->col = $row['Colour'];
     $this->date = new DateTime($row['Date']);
     $this->editdate = new DateTime($row['EditDate']);
     $this->content = $row['Content'];
@@ -45,24 +45,26 @@ class Article {
           Title = '".$conn->real_escape_string($this->title)."',
           Content = '".$conn->real_escape_string($this->content)."',
           Tags = '".$conn->real_escape_string($this->tags)."',
-          Cover = '".$conn->real_escape_string(substr($this->img, 27))."',
+          Cover = '".$conn->real_escape_string($this->img)."',
           Colour = '".$conn->real_escape_string($this->col)."'
         WHERE PostID = $this->id;
       ");
-    else
+    else {
+      $this->urlid = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $this->title)));
       $result = $conn->query("
         INSERT INTO post(UserID, Hidden, Title, Url, Content, Tags, Cover, Colour)
         VALUES (
           ".$this->author->id.",
           ".($this->hidden?'true':'false').",
           '".$conn->real_escape_string($this->title)."',
-          '".$conn->real_escape_string($this->url)."',
+          '".$conn->real_escape_string($this->urlid)."',
           '".$conn->real_escape_string($this->content)."',
           '".$conn->real_escape_string($this->tags)."',
-          '".$conn->real_escape_string(substr($this->img, 27))."',
+          '".$conn->real_escape_string($this->img)."',
           '".$conn->real_escape_string($this->col)."'
         );
       ");
+    }
     if(!$result) {
       throw new Exception($conn->error);
     }
@@ -74,7 +76,7 @@ class Article {
       <section class=\"post".($this->hidden?' dim':'')."\" id=\"$this->id\">
         <div class=\"x-scroller\">
           <div class=\"carousel\">
-            <div style=\"background-image:url('$this->img');\"></div>
+            <img src=\"https://cdn.yiays.com/blog/$this->img\" alt=\"Cover image for $this->title\">
             ".$this->carousel_images()."
           </div>
         </div>
@@ -95,7 +97,7 @@ class Article {
 
   function preview() : string {
     return "
-      <a class=\"article-mini\" href=\"$this->url\" style=\"background-color:$this->col;background-image:url($this->img);\">
+      <a class=\"article-mini\" href=\"$this->url\" style=\"background-color:$this->col;background-image:url(https://cdn.yiays.com/blog/$this->img);\">
         <div class=\"info\">
           <b>$this->title</b><br>
           $this->tags
@@ -109,9 +111,15 @@ class Article {
     $matchcount = preg_match_all("/!\[([^\]]*?)\]\((.*?)\s*(\"(?:.*[^\"])\")?\s*\)/", $this->content, $matches);
     if($matchcount) {
       for($i=0; $i<$matchcount; $i++) {
-        $result .= "<div title=\"".$matches[1][$i]."\" style=\"background-image:url(".$matches[2][$i].");\"></div>
+        $result .= "<img alt=\"".$matches[1][$i]."\" src=\"".$matches[2][$i]."\">
             ";
       }
+    }
+    $doc = new DOMDocument();
+    $doc->loadHTML($this->content);
+    foreach($doc->getElementsByTagName('img') as $img) {
+      $result .= "<img alt=\"".$img->getAttribute('alt')."\" src=\"".$img->getAttribute('src')."\">
+            ";
     }
     return $result;
   }

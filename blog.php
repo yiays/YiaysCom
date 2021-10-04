@@ -35,6 +35,14 @@ if(strlen($params[2])) {
     }
   }
 
+  if(array_key_exists('upload', $_GET)) {
+    $file = $_FILES['upload'];
+    $dest = '../cdn/blog/src/'.$file['name'];
+    handlepostfileupload($file, $dest);
+    header('content-type: application/json');
+    die(json_encode(['url'=>"https://cdn.yiays.com/blog/".$file['name']]));
+  }
+
   $article = null;
   if(!$articlematches) {
     if(!$edit) {
@@ -49,10 +57,10 @@ if(strlen($params[2])) {
       $article->author->username = $user->username;
       $article->author->pfp = $user->pfp;
       $article->title = str_replace('-', ' ', ucfirst($params[2]));
-      $article->url = $params[2];
+      $article->urlid = $params[2];
       $article->tags = '';
-      $article->img = 'https://cdn.yiays.com/blog/default.svg';
-      $article->col = '#004461';
+      $article->img = 'default.svg';
+      $article->col = '004461';
       $article->date = new DateTime();
       $article->editdate = null;
       $article->content = 'Click here to edit the article content.';
@@ -68,38 +76,43 @@ if(strlen($params[2])) {
 
   if($edit && array_key_exists('title', $_POST) && array_key_exists('color', $_POST) && array_key_exists('contenthtml', $_POST)) {
     $article->title = $_POST['title'];
-    $article->url = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $article->title)));
     if(array_key_exists('tags', $_POST)) $article->tags = $_POST['tags'];
-    //if(array_key_exists('cover')) $article->img = TODO: handle file uploading
-    $article->color = substr($_POST['color'], 1);
+    if(array_key_exists('cover', $_FILES) && $_FILES['cover']['size'] > 0) {
+      $file = $_FILES['cover'];
+      $dest = '../cdn/blog/src/'.$file['name'];
+      handlepostfileupload($file, $dest);
+      $article->img = $file['name'];
+    }
+    $article->col = substr($_POST['color'], 1);
     $article->hidden = array_key_exists('hidden', $_POST);
     $article->content = $ParseDown->parse($_POST['contenthtml']);
     $article->save();
     http_response_code(403);
-    header("location: /blog/$article->url");
+    header("location: /blog/$article->urlid");
     die();
   }
   
   $title = $article->title;
   $desc = strip_tags($ParseDown->text(explode("\n", $article->content)[0]));
   $keywords = $article->tags;
-  $image = $article->img;
+  $image = "https://cdn.yiays.com/blog/$article->img";
   require('includes/header.php');
+
   if($edit) {
     print("
-    <form method=\"POST\">
+    <form method=\"POST\" enctype=\"multipart/form-data\">
       <article class=\"post post-editable\" id=\"$article->id\">
-        <div class=\"post-header\" id=\"postcolor\" style=\"background:$article->col;\">
+        <div class=\"post-header\" id=\"postcolor\" style=\"background:#$article->col;\">
           <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
             <h2 style=\"max-width:min(30rem,60vw);\">
-              <input type=\"text\" name=\"title\" placeholder=\"Title\" value=\"".htmlspecialchars($article->title)."\">
+              <input type=\"text\" name=\"title\" placeholder=\"Title\" required value=\"".htmlspecialchars($article->title)."\">
             </h2>
             ".userpreview($user)."
           </div>
           <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
           <br><input type=\"text\" name=\"tags\" placeholder=\"Tags\" value=\"".htmlspecialchars($article->tags)."\">
           <br>Colour:
-          <input type=\"color\" id=\"color\" name=\"color\" value=\"$article->col\">
+          <input type=\"color\" id=\"color\" name=\"color\" required value=\"#$article->col\">
           <br>Cover image:
           <input type=\"file\" name=\"cover\" id=\"cover\" accept=\".jpg,.jpeg,.png,.webp,.svg\">
           <br>
@@ -108,15 +121,13 @@ if(strlen($params[2])) {
             <input type=\"checkbox\" id=\"hidden\" name=\"hidden\" ".($article->hidden?'checked':'').">
             <input type=\"submit\" id=\"save\" class=\"btn\" style=\"margin-left:auto;\" value=\"".($article->hidden?'Save':'Publish')."\">
           </div>
-          <img alt=\"".htmlspecialchars($article->title)." cover art\" id=\"postcover\" src=\"$article->img\">
+          <img alt=\"".htmlspecialchars($article->title)." cover art\" id=\"postcover\" src=\"https://cdn.yiays.com/blog/$article->img\">
         </div>
-        <input type=\"hidden\" name=\"contenthtml\" id=\"submitcontent\" value=\"{UNSET}\">
-        <div class=\"post-content\" id=\"postcontent\">
-          ".$ParseDown->text($article->content)."
-        </div>
+        <input type=\"hidden\" name=\"contenthtml\" id=\"submitcontent\">
+        <div class=\"post-content\" id=\"postcontent\">$article->content</div>
       </article>
     </form>
-    <script src=\"https://cdn.ckeditor.com/ckeditor5/29.2.0/balloon-block/ckeditor.js\"></script>
+    <script src=\"https://cdn.yiays.com/ckeditor.js\"></script>
     <script>
       let editor;
       let postcontent = document.querySelector('#postcontent');
@@ -128,7 +139,11 @@ if(strlen($params[2])) {
       let coverfs = document.querySelector('#cover');
       let postcover = document.querySelector('#postcover');
       BalloonEditor
-        .create(postcontent)
+        .create(postcontent, {
+          simpleUpload: {
+            uploadUrl: '?upload'
+          }
+        })
         .then(newEditor => {editor = newEditor;})
         .catch(error => {
           console.error(error);
@@ -150,14 +165,14 @@ if(strlen($params[2])) {
   }else{
     print("
       <article class=\"post".($article->hidden?' dim':'')."\" id=\"$article->id\">
-        <div class=\"post-header\" style=\"background:$article->col;\">
+        <div class=\"post-header\" style=\"background:#$article->col;\">
           <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
             <h2 style=\"flex-grow:1;\">$article->title</h2>
             ".userpreview($user)."
           </div>
           <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
           <br><span>$article->tags</span>
-          <img alt=\"".htmlspecialchars($article->title)." cover art\" src=\"$article->img\">
+          <img alt=\"".htmlspecialchars($article->title)." cover art\" src=\"https://cdn.yiays.com/blog/$article->img\">
         </div>
         <div class=\"post-content\">
           ".$ParseDown->text($article->content)."
@@ -210,5 +225,15 @@ function userpreview($user) {
       <br><sub>Not you? <a href=\"https://passport.yiays.com/account/logout/?redirect=".urlencode('https://yiays.com'.$_SERVER['REQUEST_URI'])."\">Logout</a>";
   }
   return $result.'</span>';
+}
+
+function handlepostfileupload($file, $dest) {
+  if(getimagesize($file['tmp_name']) !== false && !file_exists($dest) && $file['size'] < 500000) {
+    move_uploaded_file($file['tmp_name'], $dest);
+  } else {
+    print_r($_FILES);
+    header('content-type: application/json');
+    die(json_encode(['error'=>['message'=>"The provided cover image was either too large, already uploaded, or invalid."]]));
+  }
 }
 ?>
