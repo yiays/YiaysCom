@@ -25,7 +25,7 @@ require_once('router.php');
 		<meta name="theme-color" content="#000000">
 		
 		<link rel="stylesheet" href="/normalize.css">
-		<link rel="stylesheet" href="/style.beta.css?v=0.1.29">
+		<link rel="stylesheet" href="/style.beta.css?v=0.2.3">
 
     <style>
       .beta-toggle {
