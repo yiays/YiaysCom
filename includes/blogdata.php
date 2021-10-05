@@ -10,7 +10,7 @@ class Article {
   public string $title;
   public string $urlid;
   public string $url;
-  public string $tags;
+  public array $tags;
   public string $img;
   public string $col;
   public DateTime $date;
@@ -26,7 +26,7 @@ class Article {
     $this->title = $row['Title'];
     $this->urlid = $row['Url'];
     $this->url = "https://yiays.com/blog/$row[Url]/";
-    $this->tags = $row['Tags'];
+    $this->tags = explode(', ', $row['Tags']);
     $this->img = $row['Cover'];
     $this->col = $row['Colour'];
     $this->date = new DateTime($row['Date']);
@@ -44,7 +44,7 @@ class Article {
           Hidden = ".($this->hidden?'true':'false').",
           Title = '".$conn->real_escape_string($this->title)."',
           Content = '".$conn->real_escape_string($this->content)."',
-          Tags = '".$conn->real_escape_string($this->tags)."',
+          Tags = '".$conn->real_escape_string(implode(', ', $this->tags))."',
           Cover = '".$conn->real_escape_string($this->img)."',
           Colour = '".$conn->real_escape_string($this->col)."'
         WHERE PostID = $this->id;
@@ -59,7 +59,7 @@ class Article {
           '".$conn->real_escape_string($this->title)."',
           '".$conn->real_escape_string($this->urlid)."',
           '".$conn->real_escape_string($this->content)."',
-          '".$conn->real_escape_string($this->tags)."',
+          '".$conn->real_escape_string(implode(', ', $this->tags))."',
           '".$conn->real_escape_string($this->img)."',
           '".$conn->real_escape_string($this->col)."'
         );
@@ -84,7 +84,7 @@ class Article {
         <span class=\"dim\">
           Published by <b>".$this->author->handle()."</b> on <i>".$this->date->format('Y-m-d')."</i>
           ".($this->editdate?'<i>(Last edited '.$this->editdate->format('Y-m-d').')</i>':'')."
-          ".($this->tags?"<br>Tags: <i>$this->tags</i>":'')."
+          ".($this->tags?"<br>Tags: <i>".implode(', ', $this->tags)."</i>":'')."
         </span>
         <p>".strip_tags($ParseDown->text(explode('</', explode("\n", $this->content)[0])[0]))."</p>
         <div class=\"flex-row\">
@@ -100,7 +100,7 @@ class Article {
       <a class=\"article-mini\" href=\"$this->url\" style=\"background-color:$this->col;background-image:url(https://cdn.yiays.com/blog/$this->img);\">
         <div class=\"info\">
           <b>$this->title</b><br>
-          $this->tags
+          ".implode(', ', $this->tags)."
         </div>
       </a>
     ";

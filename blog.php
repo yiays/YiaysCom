@@ -58,7 +58,7 @@ if(strlen($params[2])) {
       $article->author->pfp = $user->pfp;
       $article->title = str_replace('-', ' ', ucfirst($params[2]));
       $article->urlid = $params[2];
-      $article->tags = '';
+      $article->tags = [];
       $article->img = 'default.svg';
       $article->col = '004461';
       $article->date = new DateTime();
@@ -76,7 +76,7 @@ if(strlen($params[2])) {
 
   if($edit && array_key_exists('title', $_POST) && array_key_exists('color', $_POST) && array_key_exists('contenthtml', $_POST)) {
     $article->title = $_POST['title'];
-    if(array_key_exists('tags', $_POST)) $article->tags = $_POST['tags'];
+    if(array_key_exists('tags', $_POST)) $article->tags = explode(', ',$_POST['tags']);
     if(array_key_exists('cover', $_FILES) && $_FILES['cover']['size'] > 0) {
       $file = $_FILES['cover'];
       $dest = '../cdn/blog/src/'.$file['name'];
@@ -94,7 +94,7 @@ if(strlen($params[2])) {
   
   $title = $article->title;
   $desc = strip_tags($ParseDown->text(explode("\n", $article->content)[0]));
-  $keywords = $article->tags;
+  $keywords = implode(', ', $article->tags);
   $image = "https://cdn.yiays.com/blog/$article->img";
   require('includes/header.php');
 
@@ -110,7 +110,7 @@ if(strlen($params[2])) {
             ".userpreview($user)."
           </div>
           <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
-          <br><input type=\"text\" name=\"tags\" placeholder=\"Tags\" value=\"".htmlspecialchars($article->tags)."\">
+          <br><input type=\"text\" name=\"tags\" placeholder=\"Tags\" value=\"".htmlspecialchars(implode(', ', $article->tags))."\">
           <br>Colour:
           <input type=\"color\" id=\"color\" name=\"color\" required value=\"#$article->col\">
           <br>Cover image:
@@ -171,7 +171,7 @@ if(strlen($params[2])) {
             ".userpreview($user)."
           </div>
           <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
-          <br><span>$article->tags</span>
+          <br><span>".implode(', ', $article->tags)."</span>
           <img alt=\"".htmlspecialchars($article->title)." cover art\" src=\"https://cdn.yiays.com/blog/$article->img\">
         </div>
         <div class=\"post-content\">
@@ -179,6 +179,29 @@ if(strlen($params[2])) {
         </div>
       </article>
     ");
+    ?>
+    <aside>
+      <h2>Related articles</h2>
+      <div class="x-scroller">
+        <div class="carousel">
+          <?php
+          usort($articles, function($a, $b) {
+            global $article;
+            return count(array_intersect($article->tags, $b->tags)) - count(array_intersect($article->tags, $a->tags));
+          });
+          $i = 0;
+          foreach($articles as $relatedarticle) {
+            if(!$relatedarticle->hidden && $relatedarticle!=$article) {
+              print($relatedarticle->preview());
+              if($i++ == 3) {
+                break;
+              }
+            }
+          }?>
+        </div>
+      </div>
+    </aside>
+    <?php
   }
   require('includes/footer.php');
 
