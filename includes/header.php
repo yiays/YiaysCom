@@ -25,7 +25,7 @@ require_once('router.php');
 		<meta name="theme-color" content="#000000">
 		
 		<link rel="stylesheet" href="/normalize.css">
-		<link rel="stylesheet" href="/style.beta.css?v=0.2.3">
+		<link rel="stylesheet" href="/style.beta.css?v=0.3.1">
 
     <style>
       .beta-toggle {
@@ -85,7 +85,7 @@ require_once('router.php');
           Yiays.com
         </span>
         <a class="nav-item <?php print($url=='/'?'active':''); ?>" href="/">
-          About
+          Home
         </a>
         <a class="nav-item <?php print(strpos($url,'/blog/')===0?'active':''); ?>" href="/blog/">
           Blog

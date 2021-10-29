@@ -17,6 +17,8 @@ require('includes/header.php');
     </p>
 </div>
   <div class="flex-row">
+    <a class="btn" href="/blog/who-is-yiays/">Read More</a>
+    <span class="spacer"></span>
     <a class="btn" href="https://github.com/yiays/" target="_blank">GitHub</a>
     <a class="btn" href="https://linkedin.com/in/yiays/" target="_blank">LinkedIn</a>
     <a class="btn" href="mailto:contact@yiays.com">Email</a>
