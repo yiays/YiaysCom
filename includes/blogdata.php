@@ -80,7 +80,7 @@ class Article {
             ".$this->carousel_images()."
           </div>
         </div>
-        <h3>$this->title</h3>
+        <h3><a href=\"$this->url\">$this->title</a></h3>
         <span class=\"dim\">
           Published by <b>".$this->author->handle()."</b> on <i>".$this->date->format('Y-m-d')."</i>
           ".($this->editdate?'<i>(Last edited '.$this->editdate->format('Y-m-d').')</i>':'')."

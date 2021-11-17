@@ -37,10 +37,20 @@ if(strlen($params[2])) {
 
   if(array_key_exists('upload', $_GET)) {
     $file = $_FILES['upload'];
-    $dest = '../cdn/blog/src/'.$file['name'];
-    handlepostfileupload($file, $dest);
+    $filename = $file['name'];
+    $dest = '../cdn/blog/src/';
+    handlepostfileupload($file, $dest.$filename);
+    if(!str_ends_with($filename, '.gif') && !str_ends_with($filename, '.svg')) {
+      $im = imagecreatefromstring(file_get_contents($dest.$filename));
+      $ofilename = $filename;
+      $filename = explode('.', $ofilename);
+      array_pop($filename);
+      $filename = implode('.', $filename).'.webp';
+      imagewebp($im, $dest.$filename);
+      unlink($dest.$ofilename);
+    }
     header('content-type: application/json');
-    die(json_encode(['url'=>"https://cdn.yiays.com/blog/".$file['name']]));
+    die(json_encode(['url'=>"https://cdn.yiays.com/blog/$filename"]));
   }
 
   $article = null;
