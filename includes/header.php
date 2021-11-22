@@ -25,7 +25,7 @@ require_once('router.php');
 		<meta name="theme-color" content="#000000">
 		
 		<link rel="stylesheet" href="/normalize.css">
-		<link rel="stylesheet" href="/style.beta.css?v=0.3.1">
+		<link rel="stylesheet" href="/style.beta.css?v=0.3.2">
 
     <style>
       .beta-toggle {
@@ -94,4 +94,4 @@ require_once('router.php');
           Projects
         </a>
       </nav>
-      <div class="y-scroller">
+      <div>
