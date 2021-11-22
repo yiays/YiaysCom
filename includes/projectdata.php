@@ -102,7 +102,8 @@ $projects = [
     "~6,000 monthly visits",
     "A massive database of memes with crowd-sourced metadata, making for one of the best places on the web to search for memes.",
     "https://meme.yiays.com/",
-    "https://github.com/TeamMemeDB/"
+    "https://github.com/TeamMemeDB/",
+    "https://l.yiays.com/github-2020"
   ),
 
   new Project(
@@ -133,7 +134,7 @@ $projects = [
     "Discord",
     "~5,000 Discord Guilds",
     "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
-    null,
+    "https://top.gg/bot/562440687363293195",
     "https://github.com/yiays/Translate-Confessionbot/",
     "https://l.yiays.com/confessionbot"
   ),
@@ -152,7 +153,8 @@ $projects = [
     "~70 Monthly Visits",
     "PukekoHost is a democratized game hosting service where members of a Discord server can crowdfund servers for their favourite games.",
     "https://pukeko.yiays.com/",
-    "https://github.com/Pukeko-Host/"
+    "https://github.com/Pukeko-Host/",
+    "https://l.yiays.com/github-2020"
   ),
   
   new Project(
@@ -165,7 +167,8 @@ $projects = [
     "Currently inactive",
     "A clone of Kahoot that can be played within a Discord server. Currently being rewritten.",
     null,
-    "https://github.com/yiays/noncopyrightedquizgamename/"
+    "https://github.com/yiays/noncopyrightedquizgamename/",
+    "https://l.yiays.com/github-2019"
   ),
 
   new Project(
