@@ -40,15 +40,7 @@ if(strlen($params[2])) {
     $filename = $file['name'];
     $dest = '../cdn/blog/src/';
     handlepostfileupload($file, $dest.$filename);
-    if(!str_ends_with($filename, '.gif') && !str_ends_with($filename, '.svg')) {
-      $im = imagecreatefromstring(file_get_contents($dest.$filename));
-      $ofilename = $filename;
-      $filename = explode('.', $ofilename);
-      array_pop($filename);
-      $filename = implode('.', $filename).'.webp';
-      imagewebp($im, $dest.$filename);
-      unlink($dest.$ofilename);
-    }
+    converttowebp($dest, $filename);
     header('content-type: application/json');
     die(json_encode(['url'=>"https://cdn.yiays.com/blog/$filename"]));
   }
@@ -89,9 +81,11 @@ if(strlen($params[2])) {
     if(array_key_exists('tags', $_POST)) $article->tags = explode(', ',$_POST['tags']);
     if(array_key_exists('cover', $_FILES) && $_FILES['cover']['size'] > 0) {
       $file = $_FILES['cover'];
-      $dest = '../cdn/blog/src/'.$file['name'];
-      handlepostfileupload($file, $dest);
-      $article->img = $file['name'];
+      $filename = $file['name'];
+      $dest = '../cdn/blog/src/';
+      handlepostfileupload($file, $dest.$filename);
+      converttowebp($dest, $filename);
+      $article->img = $filename;
     }
     $article->col = substr($_POST['color'], 1);
     $article->hidden = array_key_exists('hidden', $_POST);
@@ -261,12 +255,24 @@ function userpreview($user) {
 }
 
 function handlepostfileupload($file, $dest) {
-  if(getimagesize($file['tmp_name']) !== false && !file_exists($dest) && $file['size'] < 500000) {
+  if(getimagesize($file['tmp_name']) !== false && !file_exists($dest) && $file['size'] < 2000000) {
     move_uploaded_file($file['tmp_name'], $dest);
   } else {
     print_r($_FILES);
     header('content-type: application/json');
-    die(json_encode(['error'=>['message'=>"The provided cover image was either too large, already uploaded, or invalid."]]));
+    die(json_encode(['error'=>['message'=>"The provided image was either too large, already uploaded, or invalid."]]));
+  }
+}
+
+function converttowebp($dest, &$filename) {
+  if(!str_ends_with($filename, '.gif') && !str_ends_with($filename, '.svg')) {
+    $im = imagecreatefromstring(file_get_contents($dest.$filename));
+    $ofilename = $filename;
+    $filename = explode('.', $ofilename);
+    array_pop($filename);
+    $filename = implode('.', $filename).'.webp';
+    imagewebp($im, $dest.$filename);
+    unlink($dest.$ofilename);
   }
 }
 ?>
