@@ -8,13 +8,6 @@ if(isset($_GET['old'])) {
 
 $url = explode('?', $_SERVER['REQUEST_URI'])[0];
 
-if(version_compare(PHP_VERSION, '8.0.0', '<')) {
-  // str_starts_with polyfil
-  function str_starts_with(string $haystack, string $needle): bool {
-    return strpos($haystack, $needle) === 0;
-  }
-}
-
 if(key_exists('old', $_COOKIE) && $_COOKIE['old']) {
   if(strlen($url) > 1) {
     http_response_code(404);
@@ -30,6 +23,9 @@ if(key_exists('old', $_COOKIE) && $_COOKIE['old']) {
   }
   elseif(str_starts_with($url, '/blog/')) {
     require('blog.php');
+  }
+  elseif(str_starts_with($url, '/services/')) {
+    require('services.php');
   }
   /*elseif(str_starts_with($url, '/login/')) {
     require('auth.php');

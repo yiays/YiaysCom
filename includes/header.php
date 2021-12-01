@@ -93,5 +93,8 @@ require_once('router.php');
         <a class="nav-item <?php print($url=='/projects/'?'active':''); ?>" href="/projects/">
           Projects
         </a>
+        <a class="nav-item <?php print($url=='/services/'?'active':''); ?>" href="/services/">
+          Services
+        </a>
       </nav>
       <div>

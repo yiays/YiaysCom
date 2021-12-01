@@ -21,7 +21,7 @@ require('includes/header.php');
     <span class="spacer"></span>
     <a class="btn" href="https://github.com/yiays/" target="_blank">GitHub</a>
     <a class="btn" href="https://linkedin.com/in/yiays/" target="_blank">LinkedIn</a>
-    <a class="btn" href="mailto:contact@yiays.com">Email</a>
+    <a class="btn" href="mailto:yesiateyoursheep@gmail.com">Email</a>
   </div>
   <a href="#skip" class="btn text-center" style="width:0.9em;align-self:center;margin:0;margin-top:auto;padding-top:0.3em;border:none;">&darr;</a>
 </article>
