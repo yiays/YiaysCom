@@ -119,7 +119,7 @@ $projects = [
     "~60 Discord guilds",
     "Merely is a framework for discord bots written atop of Discord.py which makes advanced features like module reloading and translation possible. MerelyBot is an example implementation.",
     "https://merely.yiays.com/",
-    "https://github.com/yiays/merely/",
+    "https://github.com/MerelyServices/Merely-Framework",
     'https://l.yiays.com/merely-3-year'
   ),
 
@@ -135,7 +135,7 @@ $projects = [
     "~5,000 Discord Guilds",
     "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
     "https://top.gg/bot/562440687363293195",
-    "https://github.com/yiays/Translate-Confessionbot/",
+    "https://github.com/yiays/ConfessionBot-2.0/",
     "https://l.yiays.com/confessionbot"
   ),
 
