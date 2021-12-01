@@ -11,6 +11,7 @@ class Article {
   public string $urlid;
   public string $url;
   public array $tags;
+  public int $views;
   public string $img;
   public string $col;
   public DateTime $date;
@@ -27,6 +28,7 @@ class Article {
     $this->urlid = $row['Url'];
     $this->url = "https://yiays.com/blog/$row[Url]/";
     $this->tags = explode(', ', $row['Tags']);
+    $this->views = intval($row['Views']);
     $this->img = $row['Cover'];
     $this->col = $row['Colour'];
     $this->date = new DateTime($row['Date']);
@@ -70,6 +72,17 @@ class Article {
     }
   }
 
+  function view($userid = 'NULL') {
+    global $conn;
+    $result = $conn->query("
+      INSERT INTO viewers(PostID, UserID) VALUES($this->id, $userid)
+    ");
+    if(!$result) {
+      throw new Exception($conn->error);
+    }
+    $this->views += 1;
+  }
+
   function preview_wide($edit = false) : string {
     global $ParseDown;
     return "
@@ -84,7 +97,7 @@ class Article {
         <span class=\"dim\">
           Published by <b>".$this->author->handle()."</b> on <i>".$this->date->format('Y-m-d')."</i>
           ".($this->editdate?'<i>(Last edited '.$this->editdate->format('Y-m-d').')</i>':'')."
-          ".($this->tags?"<br>Tags: <i>".implode(', ', $this->tags)."</i>":'')."
+          ".($this->tags?"<br>Tags: <i>".implode(', ', $this->tags)."</i>":'')." | $this->views Views
         </span>
         <p>".strip_tags($ParseDown->text(explode('</', explode("\n", $this->content)[0])[0]))."</p>
         <div class=\"flex-row\">
@@ -145,8 +158,11 @@ class Author {
 
 $articles = [];
 $result = $conn->query(
-  "SELECT PostID,Title,Url,Tags,Cover,Colour,Date,EditDate,Content,Hidden,UserID,passport.user.Username
-  FROM post LEFT JOIN passport.user ON post.UserID = passport.user.Id
+  "SELECT post.PostID,Title,Url,Tags,Cover,Colour,Date,EditDate,Content,Hidden,post.UserID,passport.user.Username,COUNT(viewers.ViewTime) AS Views
+  FROM (post
+    LEFT JOIN passport.user ON post.UserID = passport.user.Id)
+    LEFT JOIN viewers ON post.PostID = viewers.PostID
+  GROUP BY post.PostID
   ORDER BY Date DESC"
 );
 if(!$result) {

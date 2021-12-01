@@ -167,6 +167,7 @@ if(strlen($params[2])) {
     </script>
     ");
   }else{
+    $article->view($user?$user->id:'NULL');
     print("
       <article class=\"post".($article->hidden?' dim':'')."\" id=\"$article->id\">
         <div class=\"post-header\" style=\"background:#$article->col;\">
@@ -175,7 +176,7 @@ if(strlen($params[2])) {
             ".userpreview($user)."
           </div>
           <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
-          <br><span>".implode(', ', $article->tags)."</span>
+          <br><span>".implode(', ', $article->tags)."</span> | $article->views Views
           <img alt=\"".htmlspecialchars($article->title)." cover art\" src=\"https://cdn.yiays.com/blog/$article->img\">
         </div>
         <div class=\"post-content\">
