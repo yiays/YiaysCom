@@ -16,13 +16,17 @@ require('includes/header.php');
 <section>
   <h2>Hire</h2>
   <p>I'm available for full-time or part-time work right now. If you're potentially interested, I have a LinkedIn where you can find out more about my professional experience.</p>
-  <a class="btn" href="https://linkedin.com/in/yiays/" target="_blank">View my LinkedIn</a>
+  <div class="flex-row">
+    <a class="btn" href="https://linkedin.com/in/yiays/" target="_blank">View my LinkedIn</a>
+  </div>
 </section>
 <hr>
 <section>
   <h2>Freelance</h2>
   <p>Looking to commission a website, app, or bot? Contact me for a quote. If you're looking to own a customized version of an existing project of mine it could work out to be incredibly affordable. <i>I also provide hosting solutions!</i></p>
-  <a class="btn" href="mailto:yesiateyoursheep@gmail.com">Contact me via email</a>
+  <div class="flex-row">
+    <a class="btn" href="mailto:yesiateyoursheep@gmail.com">Contact me via email</a>
+  </div>
 </section>
 <hr>
 <section>
@@ -35,7 +39,9 @@ require('includes/header.php');
     <li><a href="https://discord.gg/ejR6Egqcdn" target="_blank">Yiays Bot Support</a> (Discord Server)</li>
   </ul>
   <sub><i>Coming soon; <a href="/projects/#meme">MemeDB</a></i></sub><br>
-  <a class="btn" href="https://www.patreon.com/yiays" target="_blank">Support my projects on Patreon</a>
+  <div class="flex-row">
+    <a class="btn" href="https://www.patreon.com/yiays" target="_blank">Support my projects on Patreon</a>
+  </div>
 </section>
 <?php
 require('includes/footer.php');

@@ -27,7 +27,7 @@ require('includes/header.php');
 </article>
 <hr>
 <section class="featured-projects" id="skip">
-  <h1>Featured projects</h1>
+  <h2>Featured projects</h2>
   <p>
     Here, you'll find projects created as part of my studies or in my free time, a handful of them have become somewhat popular with some communities.
   </p>
@@ -56,7 +56,7 @@ require('includes/header.php');
 </section>
 <hr>
 <section>
-  <h1>Featured articles</h1>
+  <h2>Featured articles</h2>
   <p>
     I occasionally write an article here and there about my misadventures programming. I also document the history of my ever-evolving projects.
   </p>
@@ -83,6 +83,16 @@ require('includes/header.php');
       ");
       ?>
     </div>
+  </div>
+</section>
+<hr>
+<section>
+  <h2>Work with me</h2>
+  <p>
+    I'm available for work - freelance or otherwise - right now. I also offer benefits to Patreon subscribers in some of my projects. Find out more on the services page!
+  </p>
+  <div class="flex-row">
+    <a class="btn" href="/services/">Services</a>
   </div>
 </section>
 <?php
