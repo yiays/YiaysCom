@@ -52,7 +52,7 @@ class Article {
         WHERE PostID = $this->id;
       ");
     else {
-      $this->urlid = strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $this->title)));
+      $this->urlid = substr(strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $this->title))), 0, 64);
       $result = $conn->query("
         INSERT INTO post(UserID, Hidden, Title, Url, Content, Tags, Cover, Colour)
         VALUES (
