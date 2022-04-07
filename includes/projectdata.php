@@ -16,7 +16,7 @@ class Project {
   {
     $this->id = $id;
     $this->title = $title;
-    $this->img = $img;
+    $this->img = $img?$img:'/img/genericpurple.svg';
     $this->screenshots = $screenshots;
     $this->langs = $langs;
     $this->techs = $techs;
@@ -117,7 +117,7 @@ $projects = [
     "Python and Javascript",
     "Discord and Web (mobile friendly)",
     "~60 Discord guilds",
-    "Merely is a framework for discord bots written atop of Discord.py which makes advanced features like module reloading and translation possible. MerelyBot is an example implementation.",
+    "Merely is a framework for discord bots written atop of disnake (a fork of Discord.py) which implements advanced features like module reloading and translation. MerelyBot is an example implementation.",
     "https://merely.yiays.com/",
     "https://github.com/MerelyServices/Merely-Framework",
     'https://l.yiays.com/merely-3-year'
@@ -132,11 +132,29 @@ $projects = [
     ],
     "Python",
     "Discord",
-    "~5,000 Discord Guilds",
+    "~10,000 Discord Guilds",
     "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
     "https://top.gg/bot/562440687363293195",
     "https://github.com/yiays/ConfessionBot-2.0/",
     "https://l.yiays.com/confessionbot"
+  ),
+
+  new Project(
+    'whiteboard',
+    "Whiteboard Games",
+    '/img/genericpurple.svg',
+    [
+      "/img/screenshots/whiteboard1.png" => "List of games, can be filtered by subject",
+      "/img/screenshots/whiteboard2.png" => "Focused mobile, tablet, and smartboard friendly interface",
+      "/img/screenshots/whiteboard3.png" => "A variety of games, challenging students with different subjects"
+      //TODO: add a screenshot about leaderboards
+    ],
+    "Javascript",
+    "Web (mobile and smartboard friendly)",
+    "Active use in a classroom",
+    "A collection of educational games for use in a classroom, being actively developed with a teacher and their classroom of primary school-age students.",
+    "https://games.yiays.com",
+    "https://github.com/yiays/Whiteboard-Games"
   ),
 
   new Project(
@@ -212,7 +230,7 @@ $projects = [
     "PHP, MySQL, and Javascript",
     "Database and Web (mobile friendly)",
     "~230 monthly visits",
-    "An alternative design for the blog on this website, highly experimental.",
+    "An alternative design for the blog on this website, being phased out.",
     "https://blog.yiays.com/",
     "https://github.com/yiays/blog/"
   )
