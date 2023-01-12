@@ -90,6 +90,15 @@ if(strlen($params[2])) {
     $article->col = substr($_POST['color'], 1);
     $article->hidden = array_key_exists('hidden', $_POST);
     $article->content = $ParseDown->parse($_POST['contenthtml']);
+    # Add IDs to all post headings
+    preg_match_all('/<(h[123456])>(.*)<\/h[123456]>/U', $article->content, $headings);
+    $norepeatid = [];
+    for($i=0; $i<count($headings[0]); $i++) {
+      $headingid = preg_replace('/-+/', '-', preg_replace('/[^a-z0-9]/', '-', strtolower($headings[2][$i])));
+      if(array_search($headingid, $norepeatid)) continue;
+      $article->content = str_replace($headings[0][$i], "<{$headings[1][$i]} id=\"{$headingid}\">{$headings[2][$i]}</{$headings[1][$i]}>", $article->content);
+      $norepeatid[]=$headingid;
+    }
     $article->save();
     http_response_code(403);
     header("location: /blog/$article->urlid");
@@ -164,6 +173,8 @@ if(strlen($params[2])) {
       coverfs.addEventListener('input', (e)=>{
         if(coverfs.files[0]) postcover.src = URL.createObjectURL(coverfs.files[0]);
       });
+
+      window.onbeforeunload = () => true;
     </script>
     ");
   }else{
