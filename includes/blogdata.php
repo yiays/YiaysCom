@@ -124,14 +124,16 @@ class Article {
     $matchcount = preg_match_all("/!\[([^\]]*?)\]\((.*?)\s*(\"(?:.*[^\"])\")?\s*\)/", $this->content, $matches);
     if($matchcount) {
       for($i=0; $i<$matchcount; $i++) {
-        $result .= "<img alt=\"".$matches[1][$i]."\" src=\"".$matches[2][$i]."\">
+        $imgurl = str_replace('.webp', '.thumb.webp', $matches[2][$i]);
+        $result .= "<img alt=\"".$matches[1][$i]."\" src=\"".$imgurl."\" width=400 height=300>
             ";
       }
     }
     $doc = new DOMDocument();
     $doc->loadHTML($this->content);
     foreach($doc->getElementsByTagName('img') as $img) {
-      $result .= "<img alt=\"".$img->getAttribute('alt')."\" src=\"".$img->getAttribute('src')."\">
+      $imgurl = str_replace('.webp', '.thumb.webp', $img->getAttribute('src'));
+      $result .= "<img alt=\"".$img->getAttribute('alt')."\" src=\"".$imgurl."\">
             ";
     }
     return $result;

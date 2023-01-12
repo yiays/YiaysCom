@@ -132,16 +132,32 @@ $projects = [
     ],
     "Python",
     "Discord",
-    "~10,000 Discord Guilds",
+    "~18,000 Discord Guilds",
     "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
     "https://top.gg/bot/562440687363293195",
-    "https://github.com/yiays/ConfessionBot-2.0/",
+    "https://github.com/yiays/ConfessionBot/",
     "https://l.yiays.com/confessionbot"
   ),
 
   new Project(
-    'whiteboard',
-    "Whiteboard Games",
+    'translator',
+    "Babel Translator",
+    '/img/genericwhite.svg',
+    [
+      "https://cdn.yiays.com/blog/babel-translator.webp" => "Landing page for the translator GUI"
+    ],
+    "Javascript",
+    "Web (PWA)",
+    "~4 Volunteer Translators",
+    "Provides tools to help translators work with my Babel language format.",
+    "https://translate.yiays.com",
+    "https://github.com/yiays/Babel-Translator",
+    "https://l.yiays.com/github-2022"
+  ),
+
+  new Project(
+    'smartboard',
+    "Smartboard Games",
     '/img/genericpurple.svg',
     [
       "/img/screenshots/whiteboard1.png" => "List of games, can be filtered by subject",
@@ -154,7 +170,8 @@ $projects = [
     "Active use in a classroom",
     "A collection of educational games for use in a classroom, being actively developed with a teacher and their classroom of primary school-age students.",
     "https://games.yiays.com",
-    "https://github.com/yiays/Whiteboard-Games"
+    "https://github.com/yiays/Smartboard-Games",
+    "https://l.yiays.com/github-2022"
   ),
 
   new Project(
@@ -189,7 +206,7 @@ $projects = [
     "https://l.yiays.com/github-2019"
   ),
 
-  new Project(
+  /*new Project(
     'dino',
     "Dino",
     "/img/genericwhite.svg",
@@ -202,7 +219,7 @@ $projects = [
     "A clone of the Dino Game in Chrome, but in 3D and with a global leaderboard.",
     "https://github.com/yiays/dino/releases",
     "https://github.com/yiays/dino"
-  ),
+  ),*/
 
   new Project(
     'wipeout',

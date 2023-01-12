@@ -1,6 +1,4 @@
-<?php
-require_once('router.php');
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -23,6 +21,10 @@ require_once('router.php');
 		<link rel="icon" type="image/png" sizes="16x16" href="/icon/favicon-16x16.png">
 		<link rel="manifest" href="/site.webmanifest">
 		<meta name="theme-color" content="#000000">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 		
 		<link rel="stylesheet" href="/normalize.css">
 		<link rel="stylesheet" href="/style.css?v=0.3.3">
