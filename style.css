@@ -290,6 +290,17 @@ article, section, aside {
   z-index: 1;
 }
 
+.login-status {
+  position: relative;
+}
+.login-status a[href="edit/"] {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin: 0.5em 0;
+  font-size: 1.25rem;
+}
+
 .carousel {
   display: flex;
   flex-direction: row;
