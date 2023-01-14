@@ -1,6 +1,6 @@
 <?php
-require_once('../blog.conn.php');
-require_once('includes/ParseDown.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../blog.conn.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/includes/ParseDown.php');
 
 $ParseDown = new Parsedown();
 

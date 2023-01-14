@@ -22,7 +22,7 @@ if(key_exists('old', $_COOKIE) && $_COOKIE['old']) {
     require('projects.php');
   }
   elseif(str_starts_with($url, '/blog/')) {
-    require('blog.php');
+    require('blog/index.php');
   }
   elseif(str_starts_with($url, '/services/')) {
     require('services.php');
