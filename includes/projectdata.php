@@ -192,7 +192,7 @@ $projects = [
     "https://l.yiays.com/github-2020"
   ),
   
-  new Project(
+  /*new Project(
     'kahoot',
     "KahootDiscord",
     "/img/kahoot.svg",
@@ -204,9 +204,9 @@ $projects = [
     null,
     "https://github.com/yiays/noncopyrightedquizgamename/",
     "https://l.yiays.com/github-2019"
-  ),
+  ),*/
 
-  /*new Project(
+  new Project(
     'dino',
     "Dino",
     "/img/genericwhite.svg",
@@ -219,7 +219,7 @@ $projects = [
     "A clone of the Dino Game in Chrome, but in 3D and with a global leaderboard.",
     "https://github.com/yiays/dino/releases",
     "https://github.com/yiays/dino"
-  ),*/
+  ),
 
   new Project(
     'wipeout',
@@ -235,21 +235,6 @@ $projects = [
     "A fan site for a game franchise. Features some interesting CSS effects.",
     "https://wipeout.yiays.com/",
     "https://github.com/yiays/design/tree/assessment-2/"
-  ),
-
-  new Project(
-    'blog',
-    "Blog",
-    "/img/blog.svg",
-    [
-      "/img/screenshots/blog.jpg" => "Grid layout featuring all blog posts"
-    ],
-    "PHP, MySQL, and Javascript",
-    "Database and Web (mobile friendly)",
-    "~230 monthly visits",
-    "An alternative design for the blog on this website, being phased out.",
-    "https://blog.yiays.com/",
-    "https://github.com/yiays/blog/"
   )
 ];
 ?>
