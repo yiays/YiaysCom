@@ -3,12 +3,7 @@ $title = false;
 $desc = false;
 $keywords = 'homepage';
 require('includes/header.php');
-?><article style="background:rgb(112, 146, 190) linear-gradient(90deg, rgb(0, 68, 97), rgb(88, 38, 88));margin-bottom: -0.5em;">
-  <!--<div class="hero-bg">
-    <video autoplay muted loop>
-      <source type="video/webm" src="/img/hero.webm">
-    </video>
-  </div>-->
+?><article class="hero">
   <img class="pfp" src="img/pfp.jpg?v=2" alt="[Yiays] profile picture" width="1024" height="1024">
   <div>
     <h1>Hello, I'm Yiays.</h1>

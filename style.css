@@ -101,10 +101,19 @@ hr {
 	cursor: pointer;
   border: white solid 1px;
   border-radius: 0.5em;
+  background: none;
 	box-shadow: inset 0 0 0 1.1em rgba(255,255,255,0);
 	transition: box-shadow 250ms;
 }
 .btn:hover{
+	box-shadow: inset 0 0 0 1.1em rgba(255,255,255,0.25);
+}
+.hero .btn{
+  color: #fff;
+  border-color: #fff;
+	box-shadow: inset 0 0 0 1.1em rgba(255,255,255,0);
+}
+.hero .btn:hover{
 	box-shadow: inset 0 0 0 1.1em rgba(255,255,255,0.25);
 }
 .spacer {
@@ -118,21 +127,22 @@ hr {
 /*
   FORMS
 */
-input, textarea {
+input:not(.btn), textarea {
   max-width: 100%;
   background: none;
   color: white;
   border: none;
   border-bottom: white solid 1px;
   margin-bottom: 16px;
+  line-height: 1;
 }
 input::placeholder, textarea::placeholder {
   color: rgba(255, 255, 255, 0.75);
 }
-input:hover, textarea:hover {
+input:not(.btn):hover, textarea:hover {
   background: rgba(255, 255, 255, 0.1);
 }
-input:focus-visible, textarea:focus-visible {
+input:not(.btn):focus-visible, textarea:focus-visible {
   background: rgba(255, 255, 255, 0.25);
   outline: none;
   border-bottom: white solid 4px;
@@ -143,6 +153,24 @@ input[type=color], input[type=file] {
 }
 input[type=file] {
   max-width: 30em;
+}
+input[type=checkbox], input[type=radio] {
+  height: 1em;
+}
+
+.hero input:not(.btn), .hero textarea {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+.hero input::placeholder, .hero textarea::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+.hero input:not(.btn):hover, .hero textarea:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.hero input:not(.btn):focus-visible, .hero textarea:focus-visible {
+  background: rgba(255, 255, 255, 0.25);
+  border-bottom-color: #fff;
 }
 
 /*
@@ -266,28 +294,9 @@ article, section, aside {
 }
 
 .hero {
-  position: relative;
-  box-sizing: border-box;
-  min-height: 712px;
-  max-height: calc(100vh - 5.5em);
-}
-.hero > .hero-bg {
-  position: absolute;
-  top: 0;
-  bottom: -0.5em;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-}
-.hero-bg > video {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 100%;
-  min-height: 100%;
-}
-.hero > *:not(.hero-bg) {
-  z-index: 1;
+  color: #fff;
+  background:rgb(112, 146, 190) linear-gradient(90deg, rgb(0, 68, 97), rgb(88, 38, 88));
+  margin-bottom: -0.5em;
 }
 
 .login-status {
@@ -378,6 +387,10 @@ article, section, aside {
   height: auto;
 }
 
+/*
+  MEDIA QUERIES
+*/
+
 @media screen and (max-width: 64em) {
   .main {
     margin: 1em 0.5em 0.8em 0.5em;
@@ -399,5 +412,32 @@ article, section, aside {
   }
   .show-small {
     display: unset;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    background: #ddd;
+    color: #000;
+  }
+  .main {
+    background: #fff;
+  }
+  nav {
+    color: #fff;
+  }
+  hr {
+    border-bottom-color: #000;
+  }
+  .post > .post-header {
+    border-bottom-color: #000;
+  }
+  
+  .btn{
+    border-color: #000;
+    box-shadow: inset 0 0 0 1.1em rgba(0,0,0,0);
+  }
+  .btn:hover{
+    box-shadow: inset 0 0 0 1.1em rgba(0,0,0,0.25);
   }
 }

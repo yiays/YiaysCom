@@ -6,7 +6,7 @@ $desc = "Work with Yiays to build your next project or contribute funds towards 
 $keywords = "employ, commission, hire, freelance, support, fund, Patreon, subscription, chatbot, website, app, database, program";
 require('includes/header.php');
 ?>
-<article style="background:#2B365D;margin-bottom:-0.5em;">
+<article class="hero" style="background:#2B365D;">
   <h1>Services</h1>
   <p>
   Work with Yiays to build your next project - be it web, desktop, mobile, or a chatbot - or contribute funds towards improving an existing project you use.

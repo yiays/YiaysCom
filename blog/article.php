@@ -43,7 +43,7 @@ if($edit) {
   $article->view($user?$user->id:'NULL');
   print("
     <article class=\"post".($article->hidden?' dim':'')."\" id=\"$article->id\">
-      <div class=\"post-header\" style=\"background:#$article->col;\">
+      <div class=\"post-header hero\" style=\"background:#$article->col;\">
         <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
           <h2 style=\"flex-grow:1;\">$article->title</h2>
           ".userpreview($user, true)."

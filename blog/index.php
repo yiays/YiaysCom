@@ -16,7 +16,7 @@ if(strlen($params[2])) {
   $desc = 'I occasionally write an article here and there about my misadventures programming. I also like to document the history of my ever-evolving projects.';
   $keywords = 'blog, journal, documentation, history';
   require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');?>
-  <article style="background:rgb(0, 68, 97);margin-bottom:-0.5em;">
+  <article class="hero" style="background:rgb(0, 68, 97);">
     <div class="flex-row" style="flex-wrap:nowrap;">
       <h1 style="flex-grow:1;">Blog</h1>
       <?php echo userpreview($user); ?>

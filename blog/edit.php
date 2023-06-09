@@ -76,7 +76,7 @@ require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
 ?>
 <form method="POST" enctype="multipart/form-data">
   <article class="post post-editable" id="<?php echo $article->id; ?>">
-    <div class="post-header" id="postcolor" style="background:#<?php echo $article->col; ?>;">
+    <div class="post-header hero" id="postcolor" style="background:#<?php echo $article->col; ?>;">
       <div class="flex-row" style="flex-wrap:nowrap;">
         <h2 style="max-width:min(30rem,60vw);">
           <input type="text" name="title" placeholder="Title" required value="<?php echo htmlspecialchars($article->title); ?>">
