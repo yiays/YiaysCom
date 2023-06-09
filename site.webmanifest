@@ -1,1 +1,19 @@
-{"name":"Yiays.com","short_name":"Yiays","icons":[{"src":"icon/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"icon/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#7295cd","background_color":"#7295cd","display":"standalone"}
+{
+  "name": "Yiays.com",
+  "short_name": "Yiays",
+  "icons": [
+    {
+      "src": "icon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone"
+}
