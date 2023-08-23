@@ -97,9 +97,9 @@ $projects = [
       "/img/screenshots/meme1.jpg" => "List of all of the most recently added memes",
       "/img/screenshots/meme2.jpg" => "The interactive meme editor for authenticated users"
     ],
-    "PHP, MySQL, and Javascript",
-    "Database, Discord, and Web (mobile friendly)",
-    "~6,000 monthly visits",
+    "NextJS and MongoDB (coming soon)",
+    "Database and Web (mobile friendly)",
+    "Pending a rewrite",
     "A massive database of memes with crowd-sourced metadata, making for one of the best places on the web to search for memes.",
     "https://meme.yiays.com/",
     "https://github.com/TeamMemeDB/",
@@ -205,21 +205,6 @@ $projects = [
     "https://github.com/yiays/noncopyrightedquizgamename/",
     "https://l.yiays.com/github-2019"
   ),*/
-
-  new Project(
-    'dino',
-    "Dino",
-    "/img/genericwhite.svg",
-    [
-      "/img/screenshots/dino.jpg" => "Screenshot of the game"
-    ],
-    "C#, MySQL, and PHP",
-    "Database, PC, and Android",
-    "Currently inactive",
-    "A clone of the Dino Game in Chrome, but in 3D and with a global leaderboard.",
-    "https://github.com/yiays/dino/releases",
-    "https://github.com/yiays/dino"
-  ),
 
   new Project(
     'wipeout',
