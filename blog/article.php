@@ -35,25 +35,26 @@ if($edit) {
   }
 
   $title = $article->title;
-  $desc = strip_tags($ParseDown->text(explode("\n", $article->content)[0]));
+  $content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$article->urlid.md");
+  $desc = strip_tags($ParseDown->text(explode("\n", $content)[0]));
   $keywords = implode(', ', $article->tags);
   $image = "https://cdn.yiays.com/blog/$article->img";
   require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
   
-  $article->view($user?$user->id:'NULL');
+  $article->view();
   print("
-    <article class=\"post".($article->hidden?' dim':'')."\" id=\"$article->id\">
+    <article class=\"post".($article->hidden?' dim':'')."\">
       <div class=\"post-header hero\" style=\"background:#$article->col;\">
         <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
           <h2 style=\"flex-grow:1;\">$article->title</h2>
           ".userpreview($user, true)."
         </div>
-        <span class=\"dim\">By ".$article->author->handle().", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
+        <span class=\"dim\">By ".$article->author.", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
         <br><span>".implode(', ', $article->tags)."</span> | $article->views Views
         <img alt=\"".htmlspecialchars($article->title)." cover art\" src=\"https://cdn.yiays.com/blog/$article->img\">
       </div>
       <div class=\"post-content\">
-        ".$ParseDown->text($article->content)."
+        ".$ParseDown->text($content)."
       </div>
     </article>
   ");
@@ -63,14 +64,13 @@ if($edit) {
     <div class="x-scroller">
       <div class="carousel">
         <?php
-        $articles = fetch_articles(1);
         usort($articles, function($a, $b) {
           global $article;
           return count(array_intersect($article->tags, $b->tags)) - count(array_intersect($article->tags, $a->tags));
         });
         $i = 0;
         foreach($articles as $relatedarticle) {
-          if(!$relatedarticle->hidden && $relatedarticle->id!=$article->id) {
+          if(!$relatedarticle->hidden && $relatedarticle->urlid!=$article->urlid) {
             print($relatedarticle->preview());
             if($i++ == 3) {
               break;

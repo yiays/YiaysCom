@@ -1,13 +1,9 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/router.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/includes/blogdata.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/../passport/api/auth.php');
-try {
-  $user = passport\autologin();
-} catch(Exception $e) {
-  trigger_error($e->getMessage(), E_USER_WARNING);
-  $user = null;
-}
+
+$user = null;
+
 $params = explode('/', $url);
 if(strlen($params[2])) {
   require('article.php');
@@ -33,7 +29,6 @@ if(strlen($params[2])) {
   <?php } ?>
   <hr>
   <?php
-  $articles = fetch_articles();
   $i = 0;
   foreach($articles as $article) {
     if(!$article->hidden || ($user && $user->admin)) {

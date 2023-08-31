@@ -1,12 +1,9 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/../blog.conn.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/includes/ParseDown.php');
-
 $ParseDown = new Parsedown();
 
 class Article {
-  public int $id;
-  public Author $author;
+  public string $author;
   public string $title;
   public string $urlid;
   public string $url;
@@ -16,77 +13,36 @@ class Article {
   public string $col;
   public DateTime $date;
   public ?DateTime $editdate;
-  public string $content;
   public bool $hidden;
 
-  function setup($row)
-  {
-    $this->id = $row['PostID'];
-    $this->author = new Author();
-    $this->author->setup($row);
-    $this->title = $row['Title'];
-    $this->urlid = $row['Url'];
-    $this->url = "https://yiays.com/blog/$row[Url]/";
-    $this->tags = explode(', ', $row['Tags']);
-    $this->views = intval($row['Views']);
-    $this->img = $row['Cover'];
-    $this->col = $row['Colour'];
-    $this->date = new DateTime($row['Date']);
-    $this->editdate = new DateTime($row['EditDate']);
-    $this->content = $row['Content'];
-    $this->hidden = $row['Hidden'];
+  function __construct($author, $title, $urlid, $tags, $img, $col, $date, $editdate, $hidden) {
+    $this->author = $author;
+    $this->title = $title;
+    $this->urlid = $urlid;
+    $this->url = "https://yiays.com/blog/$urlid/";
+    $this->tags = $tags;
+    $this->views = intval(file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.views"));
+    $this->img = $img;
+    $this->col = $col;
+    $this->date = $date;
+    $this->editdate = $editdate;
+    $this->hidden = $hidden;
   }
 
-  function save() {
-    global $conn;
-    if($this->id >= 0)
-      $result = $conn->query("
-        UPDATE post
-        SET
-          Hidden = ".($this->hidden?'true':'false').",
-          Title = '".$conn->real_escape_string($this->title)."',
-          Content = '".$conn->real_escape_string($this->content)."',
-          Tags = '".$conn->real_escape_string(implode(', ', $this->tags))."',
-          Cover = '".$conn->real_escape_string($this->img)."',
-          Colour = '".$conn->real_escape_string($this->col)."'
-        WHERE PostID = $this->id;
-      ");
-    else {
-      $this->urlid = substr(strtolower(preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', $this->title))), 0, 64);
-      $result = $conn->query("
-        INSERT INTO post(UserID, Hidden, Title, Url, Content, Tags, Cover, Colour)
-        VALUES (
-          ".$this->author->id.",
-          ".($this->hidden?'true':'false').",
-          '".$conn->real_escape_string($this->title)."',
-          '".$conn->real_escape_string($this->urlid)."',
-          '".$conn->real_escape_string($this->content)."',
-          '".$conn->real_escape_string(implode(', ', $this->tags))."',
-          '".$conn->real_escape_string($this->img)."',
-          '".$conn->real_escape_string($this->col)."'
-        );
-      ");
-    }
-    if(!$result) {
-      throw new Exception($conn->error);
-    }
+  function save($content) {
+    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.md", $content);
   }
 
-  function view($userid = 'NULL') {
-    global $conn;
-    $result = $conn->query("
-      INSERT INTO viewers(PostID, UserID) VALUES($this->id, $userid)
-    ");
-    if(!$result) {
-      throw new Exception($conn->error);
-    }
+  function view() {
     $this->views += 1;
+    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.views", $this->views);
   }
 
   function preview_wide($edit = false) : string {
     global $ParseDown;
+    $content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md");
     return "
-      <section class=\"post".($this->hidden?' dim':'')."\" id=\"$this->id\">
+      <section class=\"post".($this->hidden?' dim':'')."\">
         <div class=\"x-scroller\">
           <div class=\"carousel\">
             <img src=\"https://cdn.yiays.com/blog/$this->img\" alt=\"Cover image for $this->title\">
@@ -95,11 +51,11 @@ class Article {
         </div>
         <h3><a href=\"$this->url\">$this->title</a></h3>
         <span class=\"dim\">
-          Published by <b>".$this->author->handle()."</b> on <i>".$this->date->format('Y-m-d')."</i>
+          Published by <b>".$this->author."</b> on <i>".$this->date->format('Y-m-d')."</i>
           ".($this->editdate?'<i>(Last edited '.$this->editdate->format('Y-m-d').')</i>':'')."
           ".($this->tags?"<br>Tags: <i>".implode(', ', $this->tags)."</i>":'')." | $this->views Views
         </span>
-        <p>".strip_tags($ParseDown->text(explode('</', explode("\n", $this->content)[0])[0]))."</p>
+        <p>".strip_tags($ParseDown->text(explode('</', explode("\n", $content)[0])[0]))."</p>
         <div class=\"flex-row\">
           <a class=\"btn\" href=\"$this->url\">Read More</a>
           ".($edit?'<a class="btn" href="'.$this->url.'edit/">Edit</a>':'')."
@@ -120,8 +76,9 @@ class Article {
   }
 
   function carousel_images() : string {
+    $content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md");
     $result = "";
-    $matchcount = preg_match_all("/!\[([^\]]*?)\]\((.*?)\s*(\"(?:.*[^\"])\")?\s*\)/", $this->content, $matches);
+    $matchcount = preg_match_all("/!\[([^\]]*?)\]\((.*?)\s*(\"(?:.*[^\"])\")?\s*\)/", $content, $matches);
     if($matchcount) {
       for($i=0; $i<$matchcount; $i++) {
         $imgurl = str_replace('.webp', '.thumb.webp', $matches[2][$i]);
@@ -130,7 +87,7 @@ class Article {
       }
     }
     $doc = new DOMDocument();
-    $doc->loadHTML($this->content);
+    $doc->loadHTML($content);
     foreach($doc->getElementsByTagName('img') as $img) {
       $imgurl = str_replace('.webp', '.thumb.webp', $img->getAttribute('src'));
       $result .= "<img alt=\"".$img->getAttribute('alt')."\" src=\"".$imgurl."\">
@@ -139,87 +96,112 @@ class Article {
     return $result;
   }
 }
-class Author {
-  public int $id;
-  public string $username;
 
-  function setup($row)
-  {
-    $this->id = $row['UserID'];
-    $this->username = $row['Username'];
-  }
+$articles = [
+  new Article(
+    "Yiays",
+    "GitHub Activity Summary 2022",
+    'github-activity-summary-2022',
+    ['GitHub', 'Development', 'Web Development'],
+    'github-summary-2022.webp',
+    '0e1017',
+    new DateTime('2023-01-13'),
+    new DateTime('2023-01-14'),
+    false
+  ),
+  new Article(
+    'Yiays',
+    "Bringing developers, translators, and users together with Discord",
+    'bringing-developers-translators-and-users-together-with-discord',
+    ['Case Study', 'Development', 'Discord'],
+    'discord.webp',
+    '5662f6',
+    new DateTime('2022-01-25'),
+    new DateTime('2022-03-25'),
+    false
+  ),
+  new Article(
+    'Yiays',
+    "GitHub Activity Summary 2021",
+    'github-activity-summary-2021',
+    ['GutHub', 'Development', 'Web Development'],
+    'github-summary-2021.webp',
+    '0d1017',
+    new DateTime('2022-01-10'),
+    new DateTime('2023-01-12'),
+    false
+  ),
+  new Article(
+    'Yiays',
+    "The curious case of my Cookie Clicker clone",
+    'the-curious-case-of-my-cookie-clicker-clone',
+    ['GitHub', 'Web Development'],
+    'cookie-clicker-win11.webp',
+    '653319',
+    new DateTime('2021-11-30'),
+    null,
+    false
+  ),
+  new Article(
+    'Yiays',
+    "GitHub Activity Summary 2020",
+    'github-activity-summary-2020',
+    ['GitHub', 'Development', 'Web Development'],
+    'github-summary-2020.webp',
+    '0d1017',
+    new DateTime('2021-11-15'),
+    new DateTime('2023-01-12'),
+    false
+  ),
+  new Article(
+    'Yiays',
+    "Who is Yiays?",
+    'who-is-yiays',
+    ['Personal', 'Development'],
+    'who-is-yiays.webp',
+    '000000',
+    new DateTime('2021-10-08'),
+    new DateTime('2021-11-17'),
+    false
+  ),
+  new Article(
+    'Yiays',
+    "GitHub Activity Summary 2019",
+    'github-activity-summary-2019',
+    ['GitHub', 'Development', 'Web Development'],
+    'github-summary-2019.webp',
+    '0d1017',
+    new DateTime('2021-09-30'),
+    new DateTime('2023-01-12'),
+    false
+  ),
+  new Article(
+    'Yiays',
+    "A history of Yiays.com",
+    'a-history-of-my-websites',
+    ['Web Development', 'Personal'],
+    'yiayscom.webp',
+    '7295cd',
+    new DateTime('2020-03-18'),
+    new DateTime('2021-11-17'),
+    false
+  ),
+  new Article(
+    'Yiays',
+    "Introducing ConfessionBot",
+    'confession-bot-a-side-project',
+    ['Discord', 'Development'],
+    'confessionbot.webp',
+    '000000',
+    new DateTime('2019-06-22'),
+    new DateTime('2022-05-15'),
+    false
+  )
+];
 
-  function handle() : string{
-    return $this->username;
-  }
-}
-class Comment {
-  public int $id;
-  public Author $author;
-  public string $content;
-  public ?Comment $reply;
-  public DateTime $date;
-  public bool $hidden;
-
-  function setup($row) {
-    $this->id = $row['CommentID'];
-    $this->author = new Author();
-    $this->author->setup($row);
-    $this->content = $row['Content'];
-    $this->reply = null;
-    $this->date = new DateTime($row['PublishDate']);
-    $this->hidden = $row['Hidden'];
-  }
-}
-
-function fetch_articles($trim=false, $start=0, $limit=20): array {
-  global $conn;
-
-  $contentq = ($trim?"SUBSTRING(Content, 1, $trim) AS Content":'Content');
-  $result = $conn->query(
-    "SELECT post.PostID,Title,Url,Tags,Cover,Colour,Date,EditDate,$contentq,Hidden,post.UserID,passport.user.Username,COUNT(viewers.ViewTime) AS Views
-    FROM (post
-      LEFT JOIN passport.user ON post.UserID = passport.user.Id)
-      LEFT JOIN viewers ON post.PostID = viewers.PostID
-    GROUP BY post.PostID
-    ORDER BY Date DESC
-    LIMIT $start, $limit"
-  );
-  if(!$result) {
-    throw new Exception($conn->error);
-  }
-  $articles = [];
-  while($row = $result->fetch_assoc()){
-    $article = new Article();
-    $article->setup($row);
-    $articles[] = $article;
-  }
-
-  return $articles;
-}
-
-function fetch_article($url=null, $id=null): ?Article {
-  global $conn;
-
-  if(!is_null($id)) $id = (int)$id;
-  $result = $conn->query(
-    "SELECT post.PostID,Title,Url,Tags,Cover,Colour,Date,EditDate,Content,Hidden,post.UserID,passport.user.Username,COUNT(viewers.ViewTime) AS Views
-    FROM (post
-      LEFT JOIN passport.user ON post.UserID = passport.user.Id)
-      LEFT JOIN viewers ON post.PostID = viewers.PostID
-    WHERE ".($url?"Url = '".$conn->real_escape_string($url)."'":"PostID = $id")."
-    GROUP BY post.PostID
-    ORDER BY Date DESC"
-  );
-  if(!$result) {
-    throw new Exception($conn->error);
-  }
-  if($result->num_rows == 1) {
-    $article = new Article();
-    $article->setup($result->fetch_assoc());
-
-    return $article;
-  } else {
-    return null;
+function fetch_article($urlid) {
+  global $articles;
+  foreach($articles as $article) {
+    if($article->urlid == $urlid) return $article;
   }
 }

@@ -86,7 +86,7 @@ $projects = [
     "This website, updated yearly to showcase my skills as they grow. With this most recent design refresh, I'm also merging the blog into this site.",
     null,
     'https://github.com/yiays/YiaysCom',
-    'https://l.yiays.com/yiayscom-history'
+    'https://yiays.com/blog/a-history-of-my-websites/'
   ),
 
   new Project(
@@ -103,7 +103,7 @@ $projects = [
     "A massive database of memes with crowd-sourced metadata, making for one of the best places on the web to search for memes.",
     "https://meme.yiays.com/",
     "https://github.com/TeamMemeDB/",
-    "https://l.yiays.com/github-2020"
+    "https://yiays.com/blog/github-activity-summary-2020/"
   ),
 
   new Project(
@@ -119,8 +119,7 @@ $projects = [
     "~60 Discord guilds",
     "Merely is a framework for discord bots written atop of disnake (a fork of Discord.py) which implements advanced features like module reloading and translation. MerelyBot is an example implementation.",
     "https://merely.yiays.com/",
-    "https://github.com/MerelyServices/Merely-Framework",
-    'https://l.yiays.com/merely-3-year'
+    "https://github.com/MerelyServices/Merely-Framework"
   ),
 
   new Project(
@@ -136,7 +135,7 @@ $projects = [
     "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
     "https://top.gg/bot/562440687363293195",
     "https://github.com/yiays/ConfessionBot/",
-    "https://l.yiays.com/confessionbot"
+    "https://yiays.com/blog/confession-bot-a-side-project/"
   ),
 
   new Project(
@@ -152,7 +151,7 @@ $projects = [
     "Provides tools to help translators work with my Babel language format.",
     "https://translate.yiays.com",
     "https://github.com/yiays/Babel-Translator",
-    "https://l.yiays.com/github-2022"
+    "https://yiays.com/blog/github-activity-summary-2022/"
   ),
 
   new Project(
@@ -171,7 +170,7 @@ $projects = [
     "A collection of educational games for use in a classroom, being actively developed with a teacher and their classroom of primary school-age students.",
     "https://games.yiays.com",
     "https://github.com/yiays/Smartboard-Games",
-    "https://l.yiays.com/github-2022"
+    "https://yiays.com/blog/github-activity-summary-2022/"
   ),
 
   new Project(
@@ -189,7 +188,7 @@ $projects = [
     "PukekoHost is a democratized game hosting service where members of a Discord server can crowdfund servers for their favourite games.",
     "https://pukeko.yiays.com/",
     "https://github.com/Pukeko-Host/",
-    "https://l.yiays.com/github-2020"
+    "https://yiays.com/blog/github-activity-summary-2020/"
   ),
   
   /*new Project(
@@ -203,7 +202,7 @@ $projects = [
     "A clone of Kahoot that can be played within a Discord server. Currently being rewritten.",
     null,
     "https://github.com/yiays/noncopyrightedquizgamename/",
-    "https://l.yiays.com/github-2019"
+    "https://yiays.com/blog/github-activity-summary-2019/"
   ),*/
 
   new Project(
