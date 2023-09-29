@@ -51,7 +51,7 @@ If you want to give other users these powers without making them a moderator `/b
 
 ### Privacy policy
 
-_ConfessionBot promises users confidentiality like that you'd find with a doctor or therapist._ Only breaching user's privacy when there is good reason to be concerned about somebody's wellbeing. This strict confidentiality brings about a higher level of trust and safety for everyone using ConfessionBot. You can contact the developer (Yiays#5930 or [\[email protected\]](/web/20230529193226/https://yiays.com/cdn-cgi/l/email-protection#89f0e0e8f0fac9f0e0e8f0faa7eae6e4)) at any time to request a full deletion of your data.
+_ConfessionBot promises users confidentiality like that you'd find with a doctor or therapist._ Only breaching user's privacy when there is good reason to be concerned about somebody's wellbeing. This strict confidentiality brings about a higher level of trust and safety for everyone using ConfessionBot. You can contact the developer (Yiays#5930 or [yiays@yiays.com](mailto:yiays@yiays.com)) at any time to request a full deletion of your data.
 
 ### Terms of Service
 
@@ -60,7 +60,7 @@ Before using ConfessionBot, you must read, understand, and agree to these terms.
 *   **Respect the privacy of everyone else.** - Exposing private information about anybody without their concent is strictly forbidden. This includes exposing a user's anon-ID.
 *   **Don't use ConfessionBot to conduct illegal activities.** - ConfessionBot will not serve users that wish to use anonymity for illegal activities.
 
-If you witness other users breaking the ConfessionBot terms of service, report them to the developer (Yiays#5930 or [\[email protected\]](/web/20230529193226/https://yiays.com/cdn-cgi/l/email-protection#5029393129231029393129237e333f3d)) right away.
+If you witness other users breaking the ConfessionBot terms of service, report them to the developer (Yiays#5930 or [yiays@yiays.com](mailto:yiays@yiays.com)) right away.
 
 ### Testing
 

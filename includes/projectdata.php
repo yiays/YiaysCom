@@ -80,7 +80,7 @@ $projects = [
     'Yiays.com',
     '/img/yiayscom.svg',
     [],
-    'Javascript (optional)',
+    'PHP, Javascript (optional)',
     "Web (mobile friendly)",
     "~200 monthly visits",
     "This website, updated yearly to showcase my skills as they grow. With this most recent design refresh, I'm also merging the blog into this site.",
