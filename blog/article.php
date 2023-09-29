@@ -36,6 +36,16 @@ if($edit) {
 
   $title = $article->title;
   $content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$article->urlid.md");
+  $content = $ParseDown->text($content);
+  # Add IDs to all post headings
+  preg_match_all('/<(h[123456])>(.*)<\/h[123456]>/U', $content, $headings);
+  $norepeatid = [];
+  for($i=0; $i<count($headings[0]); $i++) {
+    $headingid = preg_replace('/-+/', '-', preg_replace('/[^a-z0-9]/', '-', strtolower($headings[2][$i])));
+    if(array_search($headingid, $norepeatid)) continue;
+    $content = str_replace($headings[0][$i], "<{$headings[1][$i]} id=\"{$headingid}\">{$headings[2][$i]}</{$headings[1][$i]}>", $content);
+    $norepeatid[]=$headingid;
+  }
   $desc = strip_tags($ParseDown->text(explode("\n", $content)[0]));
   $keywords = implode(', ', $article->tags);
   $image = "https://cdn.yiays.com/blog/$article->img";
@@ -54,7 +64,7 @@ if($edit) {
         <img alt=\"".htmlspecialchars($article->title)." cover art\" src=\"https://cdn.yiays.com/blog/$article->img\">
       </div>
       <div class=\"post-content\">
-        ".$ParseDown->text($content)."
+        ".$content."
       </div>
     </article>
   ");
