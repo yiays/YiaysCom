@@ -59,7 +59,6 @@ require('includes/header.php');
     <div class="carousel carousel-end-promo">
       <?php
       require_once('includes/blogdata.php');
-      $articles = fetch_articles(1, 0, 8);
       shuffle($articles);
       $i = 0;
       foreach($articles as $article) {
