@@ -21,7 +21,9 @@ class Article {
     $this->urlid = $urlid;
     $this->url = "https://yiays.com/blog/$urlid/";
     $this->tags = $tags;
-    $this->views = intval(file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.views"));
+    if(file_exists($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.views"))
+      $this->views = intval(file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.views"));
+    else $this->views = 0;
     $this->img = $img;
     $this->col = $col;
     $this->date = $date;
@@ -30,12 +32,12 @@ class Article {
   }
 
   function save($content) {
-    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.md", $content);
+    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md", $content);
   }
 
   function view() {
     $this->views += 1;
-    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.views", $this->views);
+    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.views", $this->views);
   }
 
   function preview_wide($edit = false) : string {
