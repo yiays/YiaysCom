@@ -8,6 +8,7 @@ class Article {
   public string $urlid;
   public string $url;
   public array $tags;
+  public ?string $content = null;
   public int $views;
   public string $img;
   public string $col;
@@ -21,9 +22,7 @@ class Article {
     $this->urlid = $urlid;
     $this->url = "https://yiays.com/blog/$urlid/";
     $this->tags = $tags;
-    if(file_exists($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.views"))
-      $this->views = intval(file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$urlid.views"));
-    else $this->views = 0;
+    $this->views = 0;
     $this->img = $img;
     $this->col = $col;
     $this->date = $date;
@@ -31,13 +30,26 @@ class Article {
     $this->hidden = $hidden;
   }
 
-  function save($content) {
-    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md", $content);
+  function save() {
+    // Save blog content, if loaded, then remove from object to reduce metadata size
+    $tempcontent = $this->content;
+    if($this->content) {
+      file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md", $this->content);
+      $this->content = null;
+    }
+    // Save metadata
+    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.meta", serialize($this));
+    // Restore blog content
+    if($tempcontent) $this->content = $tempcontent;
   }
 
   function view() {
     $this->views += 1;
-    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.views", $this->views);
+    $this->save();
+  }
+
+  function fetch_content() {
+    $this->content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md");
   }
 
   function preview_wide($edit = false) : string {
@@ -99,107 +111,11 @@ class Article {
   }
 }
 
-$articles = [
-  new Article(
-    "Yiays",
-    "GitHub Activity Summary 2022",
-    'github-activity-summary-2022',
-    ['GitHub', 'Development', 'Web Development'],
-    'github-summary-2022.webp',
-    '0e1017',
-    new DateTime('2023-01-13'),
-    new DateTime('2023-01-14'),
-    false
-  ),
-  new Article(
-    'Yiays',
-    "Bringing developers, translators, and users together with Discord",
-    'bringing-developers-translators-and-users-together-with-discord',
-    ['Case Study', 'Development', 'Discord'],
-    'discord.webp',
-    '5662f6',
-    new DateTime('2022-01-25'),
-    new DateTime('2022-03-25'),
-    false
-  ),
-  new Article(
-    'Yiays',
-    "GitHub Activity Summary 2021",
-    'github-activity-summary-2021',
-    ['GutHub', 'Development', 'Web Development'],
-    'github-summary-2021.webp',
-    '0d1017',
-    new DateTime('2022-01-10'),
-    new DateTime('2023-01-12'),
-    false
-  ),
-  new Article(
-    'Yiays',
-    "The curious case of my Cookie Clicker clone",
-    'the-curious-case-of-my-cookie-clicker-clone',
-    ['GitHub', 'Web Development'],
-    'cookie-clicker-win11.webp',
-    '653319',
-    new DateTime('2021-11-30'),
-    null,
-    false
-  ),
-  new Article(
-    'Yiays',
-    "GitHub Activity Summary 2020",
-    'github-activity-summary-2020',
-    ['GitHub', 'Development', 'Web Development'],
-    'github-summary-2020.webp',
-    '0d1017',
-    new DateTime('2021-11-15'),
-    new DateTime('2023-01-12'),
-    false
-  ),
-  new Article(
-    'Yiays',
-    "Who is Yiays?",
-    'who-is-yiays',
-    ['Personal', 'Development'],
-    'who-is-yiays.webp',
-    '000000',
-    new DateTime('2021-10-08'),
-    new DateTime('2021-11-17'),
-    false
-  ),
-  new Article(
-    'Yiays',
-    "GitHub Activity Summary 2019",
-    'github-activity-summary-2019',
-    ['GitHub', 'Development', 'Web Development'],
-    'github-summary-2019.webp',
-    '0d1017',
-    new DateTime('2021-09-30'),
-    new DateTime('2023-01-12'),
-    false
-  ),
-  new Article(
-    'Yiays',
-    "A history of Yiays.com",
-    'a-history-of-my-websites',
-    ['Web Development', 'Personal'],
-    'yiayscom.webp',
-    '7295cd',
-    new DateTime('2020-03-18'),
-    new DateTime('2021-11-17'),
-    false
-  ),
-  new Article(
-    'Yiays',
-    "Introducing ConfessionBot",
-    'confession-bot-a-side-project',
-    ['Discord', 'Development'],
-    'confessionbot.webp',
-    '000000',
-    new DateTime('2019-06-22'),
-    new DateTime('2022-05-15'),
-    false
-  )
-];
+$articles = [];
+foreach(glob($_SERVER['DOCUMENT_ROOT']."/blog/articles/*.meta") as $article) {
+  $articles []= unserialize(file_get_contents($article));
+  usort($articles, fn($a, $b) => $a->date < $b->date);
+}
 
 function fetch_article($urlid) {
   global $articles;

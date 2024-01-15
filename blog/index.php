@@ -2,8 +2,6 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/router.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/includes/blogdata.php');
 
-$user = null;
-
 $params = explode('/', $url);
 if(strlen($params[2])) {
   require('article.php');
@@ -49,7 +47,7 @@ function userpreview($user, $edit=null) {
     $result .= "Logged in as <b>$user->username</b>
       <br><sub>Not you? <a href=\"https://passport.yiays.com/account/logout/?redirect=".urlencode('https://yiays.com'.$_SERVER['REQUEST_URI'])."\">Logout</a>";
   }
-  if(!is_null($edit)) {
+  if(!is_null($edit) && ($user && $user->admin)) {
     $result .= "<br><a class=\"btn\" href=\"edit/\">Edit</a>";
   }
   return $result.'</span>';

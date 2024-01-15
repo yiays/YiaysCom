@@ -1,6 +1,9 @@
 <?php
 $url = explode('?', $_SERVER['REQUEST_URI'])[0];
 
+// As passport is disabled, provide default state for user
+$user = null;
+
 if($url == '/'){
   require('index.php');
 }

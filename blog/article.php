@@ -1,20 +1,28 @@
 <?php
 $article = fetch_article($params[2]);
+$article?->fetch_content();
 
 $edit = false;
 if(count($params) > 3) {
   if($params[3] == 'edit') {
-    if(key_exists('passportToken', $_COOKIE)) {
+    // Bypass authorization when needed
+    /*class User {
+      public int $id = 0;
+      public string $username = 'Yiays';
+      public bool $admin = true;
+    }
+    $user = new User();*/
+    //if(key_exists('passportToken', $_COOKIE)) {
       if(!$user || !$user->admin) {
         http_response_code(403);
         die('Failed to verify you as an administrator.');
       }else{
         $edit = true;
       }
-    }else{
-      http_response_code(301);
+    /*}else{
+      http_response_code(302);
       header('location: https://passport.yiays.com/account/login/?redirect='.urlencode('https://yiays.com'.$_SERVER['REQUEST_URI']));
-    }
+    }*/
   }elseif($params[3] != '') {
     http_response_code(404);
     die();
@@ -35,8 +43,7 @@ if($edit) {
   }
 
   $title = $article->title;
-  $content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$article->urlid.md");
-  $content = $ParseDown->text($content);
+  $content = $ParseDown->text($article->content);
   # Add IDs to all post headings
   preg_match_all('/<(h[123456])>(.*)<\/h[123456]>/U', $content, $headings);
   $norepeatid = [];
