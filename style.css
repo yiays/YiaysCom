@@ -318,15 +318,17 @@ article, section, aside {
 .carousel > div, .carousel > a {
   position: relative;
   display: block;
-  width: 20vw;
-  min-width: 12em;
-  max-width: 18em;
   height: 20vh;
   min-height: 9em;
   max-height: 18em;
+  aspect-ratio: 1;
   background-size: cover;
   background-position: center;
   border-radius: 1em;
+  transition: aspect-ratio 500ms;
+}
+.carousel > a:hover {
+  aspect-ratio: 8/5;
 }
 .carousel > *:not(:last-child) {
   margin-right: 1em;
