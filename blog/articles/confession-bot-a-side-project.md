@@ -57,7 +57,7 @@ _ConfessionBot promises users confidentiality like that you'd find with a doctor
 
 Before using ConfessionBot, you must read, understand, and agree to these terms. _Failure to do so could result in ConfessionBot being removed from your server, or your account being blocked from interacting with ConfessionBot._
 
-*   **Respect the privacy of everyone else.** - Exposing private information about anybody without their concent is strictly forbidden. This includes exposing a user's anon-ID.
+*   **Respect the privacy of everyone else.** - Exposing private information about anybody without their consent is strictly forbidden. This includes exposing a user's anon-ID.
 *   **Don't use ConfessionBot to conduct illegal activities.** - ConfessionBot will not serve users that wish to use anonymity for illegal activities.
 
 If you witness other users breaking the ConfessionBot terms of service, report them to the developer (Yiays#5930 or [yiays@yiays.com](mailto:yiays@yiays.com)) right away.
