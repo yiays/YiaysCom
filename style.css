@@ -26,10 +26,10 @@ a {
 p {
   font-size: 1.25em;
 }
-p > a {
+p a, blockquote a, ul a, ol a {
   color: rgb(112,146,190);
 }
-p > a:hover {
+p a:hover, blockquote a:hover, ul a:hover, ol a:hover {
   font-weight: bold;
 }
 h1,h2,h3,h4,h5,h6{
@@ -49,6 +49,28 @@ h3{
 hr {
   border: none;
   border-bottom: white solid 1px;
+}
+blockquote {
+  position: relative;
+}
+blockquote::before, blockquote::after {
+  content: '';
+  display: block;
+  position: absolute;
+  background: #777;
+}
+blockquote::before {
+  left: -1.5em;
+  top: -0.5em;
+  bottom: -0.5em;
+  width: 4px;
+}
+blockquote::after {
+  left: -1.5em;
+  top: 100%;
+  top: calc(100% + 0.5em);
+  right: 0;
+  height: 1px;
 }
 
 /*
