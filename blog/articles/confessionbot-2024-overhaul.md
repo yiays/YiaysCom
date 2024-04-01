@@ -28,17 +28,19 @@ There's currently three types of settings available in the `/controlpanel`, I'm 
 
 **Toggleable settings** (any settings with a 🟢 or 🔴 emoji) simply enable or disable upon click.
 
-**Stringable settings** (any settings with a ✏️ emoji) open a text bot for you to enter any string of your choice. They also have a _🔄️ reset_ button next to them. This changes the value to \*unset\* - which disables the feature.
+**Stringable settings** (any settings with a ✏️ emoji) open a text box for you to enter any string of your choice. They also have a _🔄️ reset_ button next to them. This changes the value to \*unset\* - which disables the feature.
 
 _In all cases, these settings save immediately after clicking and you don't need to press a save or apply button._
 
 ### Simpler setup
 
-A new, interactive `/setup` command is coming soon which will replace `/set`. This will make ConfessionBot much easier to use for new users, and make it easier for all users to fully utilize the bot as more features continue to be released this year.
+A new, interactive `/setup` command has arrived which replaces `/set`. This makes ConfessionBot much easier to use for new users, it also makes it easier for _all_ users to fully utilize the bot as more features continue to be released this year.
 
-_There's no screenshots yet, but this post will be updated when they're ready._
+![](https://cdn.yiays.com/blog/cb-setupcommand.webp)
 
 > Setup can be run in any channel, and can then walk the user through setting, unsetting, and configuring all channels on the server using dropdowns and buttons.
+
+To use setup, simply choose the target channel with the top dropdown menu, then choose the channel mode with the second dropdown menu. Changes are saved automatically.
 
 ### Announcements
 
