@@ -4,7 +4,7 @@ This year, ConfessionBot will have been around for 5 years. Discord has changed 
 
 These new premium features allow for ConfessionBot to be more personal and integrated to your server.
 
-![](https://cdn.yiays.com/blog/screenshot_2024-03-11_17%3A12.webp)
+![](https://cdn.yiays.com/blog/cb-preface.webp)
 
 > Confessions now come in two new styles: confessions with server-defined messages at the start, and confessions with custom usernames and profile pictures!
 
@@ -18,7 +18,7 @@ These new premium features allow for ConfessionBot to be more personal and integ
 
 With the new control panel, advanced features can be added to ConfessionBot without creating more commands.
 
-![](https://cdn.yiays.com/blog/screenshot_2024-03-11_17%3A29.webp)
+![](https://cdn.yiays.com/blog/cb-controlpanel.webp)
 
 > The control panel exposes advanced settings that previously wouldn't have been added because of all the commands it would take to use them.
 
@@ -50,7 +50,7 @@ It's possible you found this article from an announcement. If you would like to 
 
 You will now find that in the Discord right click menu, under Apps, ConfessionBot now makes an appearance.
 
-![](https://cdn.discordapp.com/attachments/808899134706679869/1214392425716514926/image.png?ex=65f8f214&is=65e67d14&hm=ad0117b931c96aa81dd05df5ed727e25d2c0be1728632b1cd84c7cbe81e91c5c&=)
+![](https://cdn.yiays.com/blog/cb-contextmenu.webp)
 
 > Confess here starts a confession directly in paragraph mode, while Report confession sends confessions to myself for review.
 
