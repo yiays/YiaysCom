@@ -25,7 +25,7 @@ require('includes/header.php');
   <h2>Freelance</h2>
   <p>Looking to commission a website, app, or bot? Contact me for a quote. If you're looking to own a customized version of an existing project of mine it could work out to be incredibly affordable. <i>I also provide hosting solutions!</i></p>
   <div class="flex-row">
-    <a class="btn" href="mailto:yesiateyoursheep@gmail.com">Contact me via email</a>
+    <a class="btn" href="mailto:yiays@yiays.com">Contact me via email</a>
   </div>
 </section>
 <hr>
@@ -34,9 +34,10 @@ require('includes/header.php');
   <p>A small monthly subscription can help fund professional translations and focus my development efforts on projects you use. You can also enjoy premium features as they're added to my projects.</p>
   Projects that currently have Patreon benefits;
   <ul>
-    <li><a href="/projects/#cb">ConfessionBot</a> <i>(in Beta)</i></li>
-    <li><a href="/projects/#merely">merelybot</a></li>
-    <li><a href="https://discord.gg/ejR6Egqcdn" target="_blank">Yiays Bot Support</a> (Discord Server)</li>
+    <li><a href="/projects/#cb">ConfessionBot</a> - Compact mode, confession branding</li>
+    <li><a href="/projects/#merely">merelybot</a> - Download command</li>
+    <li><a href="https://discord.gg/ejR6Egqcdn" target="_blank">Yiays Bot Support</a> (Discord Server) - Priority support</li>
+    <li><i>Custom Discord bots developed and hosted for you.</i> - Requires the higher Patreon tier</li>
   </ul>
   <sub><i>Coming soon; <a href="/projects/#meme">MemeDB</a></i></sub><br>
   <div class="flex-row">
