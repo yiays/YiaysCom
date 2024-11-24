@@ -32,7 +32,7 @@ class Project {
       <section class=\"project\" id=\"$this->id\">
         <div class=\"x-scroller\">
           <div class=\"carousel\">
-            <div title=\"Artwork that represents $this->title\" style=\"background-image:url('$this->img');\" width=150 height=150></div>
+            <img alt=\"Artwork that represents $this->title\" src=\"$this->img\" width=150 height=150 style=\"aspect-ratio:1\">
             ".$this->print_screenshots()."
           </div>
         </div>
@@ -66,8 +66,12 @@ class Project {
   function print_screenshots() : string {
     $out = "";
     foreach($this->screenshots as $screenshot => $screendesc) {
+      $thumbparts = explode('.', $screenshot);
+      $thumbname = join('.', array_merge(array_slice($thumbparts, 0, -1), ['thumb', 'webp']));
       $out .= "
-        <a href=\"$screenshot\" target=\"_blank\" title=\"$screendesc\" style=\"background-image:url('$screenshot');\" height=150></a>
+        <a href=\"//cdn.yiays.com/blog/screenshots/$screenshot\" target=\"_blank\" title=\"$screendesc\" height=150>
+          <img src=\"//cdn.yiays.com/blog/screenshots/$thumbname\" alt=\"$screendesc\">
+        </a>
       ";
     }
     return $out;
@@ -94,8 +98,8 @@ $projects = [
     "MemeDB",
     "/img/memedb.svg",
     [
-      "/img/screenshots/meme1.jpg" => "List of all of the most recently added memes",
-      "/img/screenshots/meme2.jpg" => "The interactive meme editor for authenticated users"
+      "meme1.webp" => "List of all of the most recently added memes",
+      "meme2.webp" => "The interactive meme editor for authenticated users"
     ],
     "NextJS and MongoDB (coming soon)",
     "Database and Web (mobile friendly)",
@@ -111,7 +115,7 @@ $projects = [
     "ConfessionBot",
     "/img/cb.svg",
     [
-      "/img/screenshots/cb.jpg" => "An anonymous message sent through ConfessionBot"
+      "cb.webp" => "An anonymous message sent through ConfessionBot"
     ],
     "Python",
     "Discord",
@@ -127,9 +131,9 @@ $projects = [
     "Merely Music",
     "/img/merely-purple.svg",
     [
-      "/img/screenshots/merelymusic2.jpg" => "Welcome screen for Merely Music, shows you are signed in as yiays",
-      "/img/screenshots/merelymusic1.jpg" => "The about screen for Merely Music, shows the version number",
-      "/img/screenshots/merelymusic3.jpg" => "The downloads screen for Merely Music"
+      "merelymusic2.webp" => "Welcome screen for Merely Music, shows you are signed in as yiays",
+      "merelymusic1.webp" => "The about screen for Merely Music, shows the version number",
+      "merelymusic3.webp" => "The downloads screen for Merely Music"
     ],
     "Typescript",
     "Expo (Android, iOS, web)",
@@ -144,8 +148,8 @@ $projects = [
     "Merely",
     "/img/merely.svg",
     [
-      "/img/screenshots/merely1.jpg" => "Help command from merelybot in Discord",
-      "/img/screenshots/merely2.png" => "Merelybot website with video tutorials"
+      "merely1.webp" => "Help command from merelybot in Discord",
+      "merely2.webp" => "Merelybot website with video tutorials"
     ],
     "Python and Javascript",
     "Discord and Web (mobile friendly)",
@@ -160,7 +164,7 @@ $projects = [
     "Babel Translator",
     '/img/genericwhite.svg',
     [
-      "https://cdn.yiays.com/blog/babel-translator.webp" => "Landing page for the translator GUI"
+      "babel-translator.webp" => "Landing page for the translator GUI"
     ],
     "Javascript",
     "Web (PWA)",
@@ -176,9 +180,9 @@ $projects = [
     "Smartboard Games",
     '/img/genericpurple.svg',
     [
-      "/img/screenshots/whiteboard1.png" => "List of games, can be filtered by subject",
-      "/img/screenshots/whiteboard2.png" => "Focused mobile, tablet, and smartboard friendly interface",
-      "/img/screenshots/whiteboard3.png" => "A variety of games, challenging students with different subjects"
+      "whiteboard1.webp" => "List of games, can be filtered by subject",
+      "whiteboard2.webp" => "Focused mobile, tablet, and smartboard friendly interface",
+      "whiteboard3.webp" => "A variety of games, challenging students with different subjects"
       //TODO: add a screenshot about leaderboards
     ],
     "Javascript",
@@ -195,9 +199,9 @@ $projects = [
     "PukekoHost",
     "/img/pukeko.svg",
     [
-      "/img/screenshots/pukeko1.png" => "Landing page for PukekoHost, lists all supported games and features",
-      "/img/screenshots/pukeko2.png" => "Service tiers and pricing picker for a Minecraft server",
-      "/img/screenshots/pukeko3.png" => "Dashboard for customers to manage their servers"
+      "pukeko1.webp" => "Landing page for PukekoHost, lists all supported games and features",
+      "pukeko2.webp" => "Service tiers and pricing picker for a Minecraft server",
+      "pukeko3.webp" => "Dashboard for customers to manage their servers"
     ],
     "PHP, MySQL, Javascript (optional), and Python",
     "Database, Discord, Web (mobile friendly), and UWP",
@@ -227,8 +231,8 @@ $projects = [
     "WipEout Fan Site",
     "/img/wipeout.svg",
     [
-      "/img/screenshots/wipeout1.jpg" => "Landing page with video background",
-      "/img/screenshots/wipeout2.jpg" => "Information tab for a specific game"
+      "wipeout1.webp" => "Landing page with video background",
+      "wipeout2.webp" => "Information tab for a specific game"
     ],
     "Javascript",
     "Web (mobile friendly)",
