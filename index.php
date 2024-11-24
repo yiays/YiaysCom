@@ -38,7 +38,8 @@ require('includes/header.php');
         }
       }
       print("
-        <a href=\"/projects/\" style=\"background-image: url('/img/genericpurple.svg');\">
+        <a href=\"/projects/\">
+          <img src=\"/img/genericpurple.svg\" alt=\"See all projects\">
           <div class=\"info\">
             <b>All projects</b><br>
             See the expanded list
@@ -70,7 +71,8 @@ require('includes/header.php');
         }
       }
       print("
-        <a href=\"/blog/\" style=\"background-image: url('/img/blog.svg');\">
+        <a href=\"/blog/\">
+          <img src=\"/img/blog.svg\" alt=\"See all posts\">
           <div class=\"info\">
             <b>All posts</b><br>
             See the new blog

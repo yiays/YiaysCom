@@ -345,10 +345,12 @@ article, section, aside {
 }
 .carousel > * {
   position: relative;
-  display: block;
+  display: flex;
+  place-content: center;
   height: 20vh !important;
   min-height: 9em;
   max-height: 18em;
+  max-width: 28em;
   background-size: cover;
   background-position: center;
   border-radius: 1em;

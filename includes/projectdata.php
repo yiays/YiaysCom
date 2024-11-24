@@ -32,7 +32,7 @@ class Project {
       <section class=\"project\" id=\"$this->id\">
         <div class=\"x-scroller\">
           <div class=\"carousel\">
-            <img alt=\"Artwork that represents $this->title\" src=\"$this->img\" width=150 height=150 style=\"aspect-ratio:1\">
+            <img alt=\"Artwork that represents $this->title\" src=\"$this->img\" width=150 height=150 style=\"aspect-ratio:1\" loading=\"lazy\">
             ".$this->print_screenshots()."
           </div>
         </div>
@@ -54,7 +54,8 @@ class Project {
 
   function preview() : string {
     return "
-      <a class=\"project-mini\" href=\"/projects/#$this->id\" style=\"background-image: url('$this->img');\">
+      <a class=\"project-mini\" href=\"/projects/#$this->id\">
+        <img src=\"$this->img\" alt=\"$this->title\" loading=\"lazy\">
         <div class=\"info\">
           <b>$this->title</b><br>
           $this->langs
@@ -70,7 +71,7 @@ class Project {
       $thumbname = join('.', array_merge(array_slice($thumbparts, 0, -1), ['thumb', 'webp']));
       $out .= "
         <a href=\"//cdn.yiays.com/blog/screenshots/$screenshot\" target=\"_blank\" title=\"$screendesc\" height=150>
-          <img src=\"//cdn.yiays.com/blog/screenshots/$thumbname\" alt=\"$screendesc\">
+          <img src=\"//cdn.yiays.com/blog/screenshots/$thumbname\" alt=\"$screendesc\" loading=\"lazy\">
         </a>
       ";
     }

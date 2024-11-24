@@ -59,7 +59,9 @@ class Article {
       <section class=\"post".($this->hidden?' dim':'')."\">
         <div class=\"x-scroller\">
           <div class=\"carousel\">
-            <img src=\"https://cdn.yiays.com/blog/$this->img\" alt=\"Cover image for $this->title\">
+            <a href=\"$this->url\">
+              <img src=\"https://cdn.yiays.com/blog/$this->img\" alt=\"Cover image for $this->title\" loading=\"lazy\">
+            </a>
             ".$this->carousel_images()."
           </div>
         </div>
@@ -81,7 +83,8 @@ class Article {
   function preview() : string {
     $esc_img = str_replace('+', '%20', urlencode($this->img));
     return "
-      <a class=\"article-mini\" href=\"$this->url\" style=\"background-color:#$this->col;background-image:url(https://cdn.yiays.com/blog/$esc_img);\">
+      <a class=\"article-mini\" href=\"$this->url\">
+        <img src=\"//cdn.yiays.com/blog/$esc_img\" alt=\"$this->title\" loading=\"lazy\">
         <div class=\"info\">
           <b>$this->title</b><br>
           ".implode(', ', $this->tags)."
@@ -93,19 +96,21 @@ class Article {
   function carousel_images() : string {
     $content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md");
     $result = "";
+    // Find markdown images
     $matchcount = preg_match_all("/!\[([^\]]*?)\]\((.*?)\s*(\"(?:.*[^\"])\")?\s*\)/", $content, $matches);
     if($matchcount) {
       for($i=0; $i<$matchcount; $i++) {
         $imgurl = str_replace('.webp', '.thumb.webp', $matches[2][$i]);
-        $result .= "<img alt=\"".$matches[1][$i]."\" src=\"".$imgurl."\" width=400 height=300>
+        $result .= "<img alt=\"".$matches[1][$i]."\" src=\"".$imgurl."\" width=640 height=480 loading=\"lazy\">
             ";
       }
     }
+    // Find HTML images
     $doc = new DOMDocument();
     $doc->loadHTML($content);
     foreach($doc->getElementsByTagName('img') as $img) {
       $imgurl = str_replace('.webp', '.thumb.webp', $img->getAttribute('src'));
-      $result .= "<img alt=\"".$img->getAttribute('alt')."\" src=\"".$imgurl."\">
+      $result .= "<img alt=\"".$img->getAttribute('alt')."\" src=\"".$imgurl."\" loading=\"lazy\">
             ";
     }
     return $result;
