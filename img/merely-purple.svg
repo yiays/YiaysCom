@@ -1,0 +1,11 @@
+<svg data-name="Layer 1" version="1.1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style>.cls-1{fill:none;}.cls-6{fill:#66439A;}.cls-7{fill:#ad9bc9;}</style>
+  <clipPath id="clip-path">
+   <rect class="cls-1" x="-220" width="200" height="200"/>
+  </clipPath>
+ </defs>
+ <title>Projects</title>
+ <rect class="cls-6" width="200" height="200"/>
+ <path class="cls-7" d="m169 100a69 69 0 1 1-69-69 69 69 0 0 1 69 69zm-69-94a94 94 0 1 0 94 94 94 94 0 0 0-94-94z"/>
+</svg>

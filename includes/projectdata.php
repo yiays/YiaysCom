@@ -107,6 +107,39 @@ $projects = [
   ),
 
   new Project(
+    'cb',
+    "ConfessionBot",
+    "/img/cb.svg",
+    [
+      "/img/screenshots/cb.jpg" => "An anonymous message sent through ConfessionBot"
+    ],
+    "Python",
+    "Discord",
+    "~25,000 Discord Guilds",
+    "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
+    "https://top.gg/bot/562440687363293195",
+    "https://github.com/yiays/ConfessionBot/",
+    "https://yiays.com/blog/confession-bot-a-side-project/"
+  ),
+
+  new Project(
+    'merely-music',
+    "Merely Music",
+    "/img/merely-purple.svg",
+    [
+      "/img/screenshots/merelymusic2.jpg" => "Welcome screen for Merely Music, shows you are signed in as yiays",
+      "/img/screenshots/merelymusic1.jpg" => "The about screen for Merely Music, shows the version number",
+      "/img/screenshots/merelymusic3.jpg" => "The downloads screen for Merely Music"
+    ],
+    "Typescript",
+    "Expo (Android, iOS, web)",
+    "pre-alpha",
+    "Merely Music enables you to sync your music, playlists, and metadata wherever you go, with selective offline syncing available.",
+    "https://merely.yiays.com/music/",
+    "https://github.com/MerelyServices/Merely-Music/"
+  ),
+
+  new Project(
     'merely',
     "Merely",
     "/img/merely.svg",
@@ -120,22 +153,6 @@ $projects = [
     "Merely is a framework for discord bots written atop of disnake (a fork of Discord.py) which implements advanced features like module reloading and translation. MerelyBot is an example implementation.",
     "https://merely.yiays.com/",
     "https://github.com/MerelyServices/Merely-Framework"
-  ),
-
-  new Project(
-    'cb',
-    "ConfessionBot",
-    "/img/cb.svg",
-    [
-      "/img/screenshots/cb.jpg" => "An anonymous message sent through ConfessionBot"
-    ],
-    "Python",
-    "Discord",
-    "~18,000 Discord Guilds",
-    "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
-    "https://top.gg/bot/562440687363293195",
-    "https://github.com/yiays/ConfessionBot/",
-    "https://yiays.com/blog/confession-bot-a-side-project/"
   ),
 
   new Project(
