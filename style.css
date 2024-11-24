@@ -106,10 +106,16 @@ blockquote::after {
   display: block;
   overflow-x: auto;
 }
+.x-scroller > div {
+  width: fit-content;
+}
 .y-scroller {
   display: block;
   overflow-y: auto;
   overflow-y: overlay; /* TODO: replace with scrollbar-gutter when it's ready */
+}
+.y-scroller > div {
+  height: fit-content;
 }
 
 /*
@@ -337,20 +343,27 @@ article, section, aside {
   flex-direction: row;
   border-radius: 0.9em;
 }
-.carousel > div, .carousel > a {
+.carousel > * {
   position: relative;
   display: block;
-  height: 20vh;
+  height: 20vh !important;
   min-height: 9em;
   max-height: 18em;
-  aspect-ratio: 1;
   background-size: cover;
   background-position: center;
   border-radius: 1em;
-  transition: aspect-ratio 500ms;
+  overflow: hidden;
 }
-.carousel > a:hover {
-  aspect-ratio: 8/5;
+.carousel img {
+  height: 100%;
+  width: auto;
+  scale: 1;
+  opacity: 1;
+  transition: scale 500ms, opacity 500ms;
+}
+.carousel > a:hover img {
+  scale: 1.25;
+  opacity: 0.75;
 }
 .carousel > *:not(:last-child) {
   margin-right: 1em;
@@ -359,14 +372,6 @@ article, section, aside {
   display: block;
   max-width: unset;
   flex-grow: 1;
-}
-.carousel > img {
-  height: 20vh;
-  min-height: 9em;
-  max-height: 18em;
-  max-width: 30vh;
-  object-fit: cover;
-  border-radius: 1em;
 }
 .carousel .info {
   position: absolute;
