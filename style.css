@@ -471,4 +471,11 @@ article, section, aside {
   .btn:hover{
     box-shadow: inset 0 0 0 1.1em rgba(0,0,0,0.25);
   }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
 }
