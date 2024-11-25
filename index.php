@@ -65,7 +65,7 @@ require('includes/header.php');
       foreach($articles as $article) {
         if(!$article->hidden) {
           print($article->preview());
-          if($i++ == 2) {
+          if($i++ == 1) {
             break;
           }
         }
@@ -75,7 +75,7 @@ require('includes/header.php');
           <img src=\"/img/blog.svg\" alt=\"See all posts\">
           <div class=\"info\">
             <b>All posts</b><br>
-            See the new blog
+            See the blog
           </div>
         </a>
       ");

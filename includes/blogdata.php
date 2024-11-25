@@ -52,7 +52,7 @@ class Article {
     $this->content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md");
   }
 
-  function preview_wide($edit = false) : string {
+  function preview_wide($edit = false, $lazy = true) : string {
     global $ParseDown;
     $content = file_get_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md");
     return "
@@ -60,7 +60,7 @@ class Article {
         <div class=\"x-scroller\">
           <div class=\"carousel\">
             <a href=\"$this->url\">
-              <img src=\"https://cdn.yiays.com/blog/$this->img\" alt=\"Cover image for $this->title\" loading=\"lazy\">
+              <img src=\"https://cdn.yiays.com/blog/$this->img\" alt=\"Cover image for $this->title\" loading=\"".($lazy?'lazy':'eager')."\">
             </a>
             ".$this->carousel_images()."
           </div>

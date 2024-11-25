@@ -31,7 +31,7 @@ if(strlen($params[2])) {
   foreach($articles as $article) {
     if(!$article->hidden || ($user && $user->admin)) {
       if($i++ != 0) print('<hr>');
-      print($article->preview_wide(boolval($user)));
+      print($article->preview_wide(boolval($user), $i!=1));
     }
   }
 
