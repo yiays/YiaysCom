@@ -9,7 +9,8 @@ if(array_key_exists('upload', $_GET)) {
   }
   $dest = '../cdn/blog/src/';
   handlepostfileupload($file, $dest.$filename);
-  converttowebp($dest, $filename);
+  $filename = webpfilename($filename);
+
   header('content-type: application/json');
   die(json_encode(['url'=>"https://cdn.yiays.com/blog/".urlencode($filename)]));
 }
@@ -50,7 +51,7 @@ if($edit && array_key_exists('title', $_POST) && array_key_exists('color', $_POS
     $filename = $file['name'];
     $dest = '../cdn/blog/src/';
     handlepostfileupload($file, $dest.$filename);
-    converttowebp($dest, $filename);
+    $filename = webpfilename($filename);
     $article->img = $filename;
   }
   $article->col = substr($_POST['color'], 1);
@@ -140,4 +141,26 @@ require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
   }
 
   addEventListener('beforeunload', beforeunload, {capture: true});
-</script>
+</script><?php
+
+function webpfilename($filename) {
+  if(!str_ends_with($filename, '.gif') && !str_ends_with($filename, '.svg')) {
+    $ofilename = $filename;
+    $filename = explode('.', $ofilename);
+    array_pop($filename);
+    return implode('.', $filename).'.webp';
+  }
+}
+
+function handlepostfileupload($file, $dest) {
+  if(getimagesize($file['tmp_name']) !== false && !file_exists($dest) && $file['size'] < 2000000) {
+    move_uploaded_file($file['tmp_name'], $dest);
+    // Have the CDN generate thumbnails
+    file_get_contents("https://cdn.yiays.com/blog/optimize.php");
+  } else {
+    print_r($_FILES);
+    header('content-type: application/json');
+    die(json_encode(['error'=>['message'=>"The provided image was either too large, already uploaded, or invalid."]]));
+  }
+}
+?>

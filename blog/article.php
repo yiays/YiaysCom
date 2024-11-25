@@ -90,28 +90,5 @@ if($edit) {
   </aside>
 <?php
 }
-
 require($_SERVER['DOCUMENT_ROOT'].'/includes/footer.php');
-
-function handlepostfileupload($file, $dest) {
-  if(getimagesize($file['tmp_name']) !== false && !file_exists($dest) && $file['size'] < 2000000) {
-    move_uploaded_file($file['tmp_name'], $dest);
-  } else {
-    print_r($_FILES);
-    header('content-type: application/json');
-    die(json_encode(['error'=>['message'=>"The provided image was either too large, already uploaded, or invalid."]]));
-  }
-}
-
-function converttowebp($dest, &$filename) {
-  if(!str_ends_with($filename, '.gif') && !str_ends_with($filename, '.svg')) {
-    $im = imagecreatefromstring(file_get_contents($dest.$filename));
-    $ofilename = $filename;
-    $filename = explode('.', $ofilename);
-    array_pop($filename);
-    $filename = implode('.', $filename).'.webp';
-    imagewebp($im, $dest.$filename);
-    unlink($dest.$ofilename);
-  }
-}
 ?>
