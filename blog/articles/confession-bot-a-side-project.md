@@ -5,41 +5,72 @@ ConfessionBot is the most advanced anonymous messaging bot on Discord, with mod 
 *   Multiple channels support, each channel can have its own configuration
 *   Secure ID obfuscation or complete anonymity available
 *   Vetting, prevent messages from being posted publicly without approval from a moderator
+*   Option to hide anon-ids in public channels but show in vetting channels
 *   Image support
+*   Reply support using the right click / long press menu
 *   Users can be blocked from sending anonymous messages
-*   Users can trust ConfessionBot as admins are not given free reign to expose users.
+*   ConfessionBot can automatically use your language in user settings or the server language in server settings
+*   Users can trust ConfessionBot as admins are not given free rein to expose users
+
+#### Premium features
+
+ConfessionBot premium can be obtained by boosting the [official server](https://discord.gg/wfKx24kDUR), contributing translations, or by supporting Yiays on [Patreon](https://patreon.com/yiays).
+
+> Premium features are intended for admins of a server. Perks affect all members of your server.
+
+*   **Compact mode:** Anonymous messages can appear to come from their own user accounts, with their Anon-ID as the username, and their colour as the profile picture.
+*   **Confession branding:** Add a mention, or decoration before all anonymous messages on your server.
+*   **Priority support:** Get faster response times on the official support server.
+*   **Shared perks:** MerelyBot premium perks also apply if you use that bot.
+
+In addition, there is a higher tier of support on Yiays' Patreon which allows you to request custom features with a custom discord bot. [Talk with Yiays on Discord](https://discord.gg/wfKx24kDUR) before subscribing.
 
 ### Translation support
 
 Anyone can contribute translations using the [Babel Translation Editor](https://translate.yiays.com) and submit any changes to the [official discord server](https://discord.gg/wfKx24kDUR). This also grants you ConfessionBot premium.
 
-As of March 2022, ConfessionBot has at least partial support for the following languages (use `/language` for an updated list);
+As of November 2024, ConfessionBot has at least partial support for the following languages (use `/language list` for an updated list);
 
+*   English (default)
 *   French
-*   Chineese (Simplified)
+*   German
+*   Polish
+*   Vietnamese
+*   Chinese (Simplified)
 *   Tagalog
 *   Portugues
 
-Thank you to Your Local Musk, ooxxe04, Jessa, ChoccyMilk, and Windows for your contributions!
+Thank you to 3n3scan, charabe, 00xxe04, y4neko, stethoscope, kob, Windows, Jessa, and ChoccyMilk for your contributions!
 
 ### Settings
 
 #### Channel Types
 
-![](https://cdn.yiays.com/blog/cb-channels.webp)
+![](https://cdn.yiays.com/blog/cb-setup.webp)
 
 There are 4 anonymous channel types. Set any channel to any of them using `/set`.
 
-*   **👁️ Traceable:** Anon-IDs will appear next to each confession, these stay the same for each person until someone uses `/shuffle`.
-*   **🙈 Untraceable:** Anon-IDs will only appear in a vetting channel (if you have one set). This reduces the chances of users being identified but also makes moderation and conversation more difficult.
-*   **📣 Feedback:** Anyone can send messages here, even if they can't see the channel. Good for an anonymous tip, or something similar.
-*   **🤔 Vetting:** These channels don't accept anonymous messages directly, but instead intercept them and ask moderators if they should be allowed to be posted publicly.
+*   **💬 Anonymous:** Anyone that can see this channel can send anonymous messages here.
+    *   This is the standard experience.
+*   **📣 Feedback:** All member of the server can send messages here, even if they can't see the channel using `/confess-to`, or by confessing to an unset channel.
+    *   Good for anonymous tips, requests, or something similar.
+*   **🤔 Vetting:** These channels intercept anonymous messages headed to any other channel; a moderator must approve each message before they are sent.
+    *   This effectively blocks all anonymous spam, harassment, and other attention-grabbing behaviour. _Highly recommended._
+*   🛒 **Marketplace:** Messages require more information, like a price, payment methods, and a description before they are sent here. Offers can be sent and accepted anonymously.
+    *   This is an experimental channel type which requires a custom bot to use. Anonymity is ended once a buyer and a seller agree on a price, their usernames are shared with each other.
+
+In addition, Anon-IDs can be toggled on or off for most of these channel types using the Traceable toggle.
+
+*   🟢**AnonIDs: Shown:** Each message will start with a (cryptographically secure) 6-character string and a colour. For example `Anon-fbd872`.
+    *   Naturally, users might eventually notice patterns emerging from one Anon-ID, and they may start to make guesses as to who they are. Use `/shuffle` to change all Anon-IDs on your server in order to continue protecting the privacy of your users.
+*   🔴**AnonIDs: Hidden:** No colour or string will appear next to messages, users will be indistinguishable from one another.
+    *   Blocking Anon-IDs is more difficult when they are hidden, but they _are_ still recoverable. You will need to [join the support server](https://discord.gg/wfKx24kDUR) in order to get help with this.
 
 #### Image support
 
 ![](https://cdn.yiays.com/blog/cb-imagesupport.webp)
 
-Images are supported alongside text by default, this can be disabled using `/imagesupport disable`.
+Images are supported alongside text by default, this can be disabled using `/controlpanel` and clicking on 🟢 _Image Support: True_.
 
 #### Moderation
 
@@ -47,7 +78,7 @@ Images are supported alongside text by default, this can be disabled using `/ima
 
 Anyone with moderator permissions can block users from sending anonymous messages with `/block`, shuffle anon-ids with `/shuffle`, or approve and deny messages in vetting.
 
-If you want to give other users these powers without making them a moderator `/botmod` them.
+If you want to give other users these powers without making them a moderator, change the command permissions in your server settings.
 
 ### Privacy policy
 
@@ -72,4 +103,4 @@ If you're interested, you can [add this bot to your server](https://top.gg/bot/5
 
 ### Support the developer
 
-You can support this bot by [rating it on the top.gg discord bot list](https://top.gg/bot/562440687363293195)! Or by subscribing to ConfessionBot premium (returning soon…) - use `/premium` to learn more.
+You can support this bot by [rating it on the top.gg discord bot list](https://top.gg/bot/562440687363293195) or by subscribing to [ConfessionBot Premium](#premium-features).
