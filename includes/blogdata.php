@@ -32,13 +32,16 @@ class Article {
 
   function save() {
     // Save blog content, if loaded, then remove from object to reduce metadata size
+    $MDDIR = $_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md";
+    $METADIR = $_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.meta";
+
     $tempcontent = $this->content;
     if($this->content) {
-      file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.md", $this->content);
+      file_put_contents($MDDIR, $this->content);
       $this->content = null;
     }
     // Save metadata
-    file_put_contents($_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.meta", serialize($this));
+    file_put_contents($METADIR, serialize($this));
     // Restore blog content
     if($tempcontent) $this->content = $tempcontent;
   }
@@ -69,7 +72,7 @@ class Article {
         <span class=\"dim\">
           Published by <b>".$this->author."</b> on <i>".$this->date->format('Y-m-d')."</i>
           ".($this->editdate?'<i>(Last edited '.$this->editdate->format('Y-m-d').')</i>':'')."
-          ".($this->tags?"<br>Tags: <i>".implode(', ', $this->tags)."</i>":'')." | $this->views Views
+          ".($this->tags?"<br>Tags: <i>".implode(', ', $this->tags)."</i>":'')." | ".number_format($this->views)." Views
         </span>
         <p>".strip_tags($ParseDown->text(explode('</', explode("\n", $content)[0])[0]))."</p>
         <div class=\"flex-row\">

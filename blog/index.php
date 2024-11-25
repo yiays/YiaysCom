@@ -48,9 +48,6 @@ function userpreview($user, $edit=null) {
     $result .= "Logged in as <b>$user->username</b>
       <br><sub>Not you? <a href=\"https://passport.yiays.com/?logout&redirect=".urlencode('https://yiays.com'.$_SERVER['REQUEST_URI'])."\">Logout</a>";
   }
-  if(!is_null($edit) && ($user && $user->username == 'yiays')) {
-    $result .= "<br><a class=\"btn\" href=\"edit/\">Edit</a>";
-  }
   return $result.'</span>';
 }
 ?>

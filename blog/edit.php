@@ -14,10 +14,11 @@ if(array_key_exists('upload', $_GET)) {
   die(json_encode(['url'=>"https://cdn.yiays.com/blog/".urlencode($filename)]));
 }
 
+$wasdraft = true;
 if(is_null($article)) {
-  //assert($user instanceof passport\User);
   $article = new Article(
-    author: $user->username,
+    // Hardcoded capitalized username as I am the only possible author
+    author: 'Yiays',//$user->username,
     title: str_replace('-', ' ', ucfirst($params[2])),
     urlid: $params[2],
     tags: [],
@@ -29,9 +30,14 @@ if(is_null($article)) {
   );
   $article->content = 'Click here to edit the article content.';
 }else{
-  if($article->hidden && (!$user || !$user->username == 'yiays')) {
-    http_response_code(404);
-    die();
+  if($article->hidden) {
+    if($user && $user->username == 'yiays') {}
+    else {
+      http_response_code(404);
+      die();
+    }
+  }else{
+    $wasdraft = false;
   }
 }
 
@@ -49,10 +55,14 @@ if($edit && array_key_exists('title', $_POST) && array_key_exists('color', $_POS
   }
   $article->col = substr($_POST['color'], 1);
   $article->hidden = array_key_exists('hidden', $_POST);
+  if(!$article->hidden && !$wasdraft) {
+    $article->editdate = new DateTime();
+  }
   $article->content = $_POST['contenthtml'];
   $article->save();
   http_response_code(403);
   header("location: /blog/$article->urlid");
+  die();
 }
 
 $title = "Editing ".$article->title;

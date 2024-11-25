@@ -51,11 +51,14 @@ if($edit) {
     <article class=\"post".($article->hidden?' dim':'')."\">
       <div class=\"post-header hero\" style=\"background:#$article->col;\">
         <div class=\"flex-row\" style=\"flex-wrap:nowrap;\">
-          <h2 style=\"flex-grow:1;\">$article->title</h2>
+          <h2 style=\"flex-grow:1;\">
+            $article->title
+            ".($user&&$user->username=='yiays'?"<a class=\"btn\" href=\"/blog/$article->urlid/edit\">Edit</a>":'')."
+          </h2>
           ".userpreview($user, true)."
         </div>
         <span class=\"dim\">By ".$article->author.", written ".$article->date->format('Y-m-d').($article->editdate?', <i>last edited '.$article->editdate->format('Y-m-d').'</i>':'')."</span>
-        <br><span>".implode(', ', $article->tags)."</span> | $article->views Views
+        <br><span>".implode(', ', $article->tags)."</span> | ".number_format($article->views)." Views
         <img alt=\"".htmlspecialchars($article->title)." cover art\" src=\"https://cdn.yiays.com/blog/$article->img\">
       </div>
       <div class=\"post-content\">
