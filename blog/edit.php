@@ -29,7 +29,7 @@ if(is_null($article)) {
   );
   $article->content = 'Click here to edit the article content.';
 }else{
-  if($article->hidden && (!$user || !$user->admin)) {
+  if($article->hidden && (!$user || !$user->username == 'yiays')) {
     http_response_code(404);
     die();
   }

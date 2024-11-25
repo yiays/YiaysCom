@@ -9,6 +9,7 @@ if(strlen($params[2])) {
   $title = 'Blog';
   $desc = 'I occasionally write an article here and there about my misadventures programming. I also like to document the history of my ever-evolving projects.';
   $keywords = 'blog, journal, documentation, history';
+
   require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');?>
   <article class="hero" style="background:rgb(0, 68, 97);">
     <div class="flex-row" style="flex-wrap:nowrap;">
@@ -19,7 +20,7 @@ if(strlen($params[2])) {
     I occasionally write an article here and there about my misadventures programming. I also document the history of my ever-evolving projects.
     </p>
   </article>
-  <?php if($user && $user->admin) { ?>
+  <?php if($user && $user->username == 'yiays') { ?>
   <hr>
   <section class="flex-row">
     <a class="btn" href="/blog/new-article/edit/">New Article</a>
@@ -29,7 +30,7 @@ if(strlen($params[2])) {
   <?php
   $i = 0;
   foreach($articles as $article) {
-    if(!$article->hidden || ($user && $user->admin)) {
+    if(!$article->hidden || ($user && $user->username == 'yiays')) {
       if($i++ != 0) print('<hr>');
       print($article->preview_wide(boolval($user), $i!=1));
     }
@@ -42,12 +43,12 @@ function userpreview($user, $edit=null) {
   $result = '<span class="login-status text-center" style="margin-left:auto;">';
   if (!$user) {
     $result .= "Not logged in.
-      <br><sub><a href=\"https://passport.yiays.com/account/login/?redirect=".urlencode('https://yiays.com'.$_SERVER['REQUEST_URI'])."\">Login with Passport</a>";
+      <br><sub><a href=\"https://passport.yiays.com/?redirect=".urlencode('https://yiays.com'.$_SERVER['REQUEST_URI'])."\">Login with Passport</a>";
   }else{
     $result .= "Logged in as <b>$user->username</b>
-      <br><sub>Not you? <a href=\"https://passport.yiays.com/account/logout/?redirect=".urlencode('https://yiays.com'.$_SERVER['REQUEST_URI'])."\">Logout</a>";
+      <br><sub>Not you? <a href=\"https://passport.yiays.com/?logout&redirect=".urlencode('https://yiays.com'.$_SERVER['REQUEST_URI'])."\">Logout</a>";
   }
-  if(!is_null($edit) && ($user && $user->admin)) {
+  if(!is_null($edit) && ($user && $user->username == 'yiays')) {
     $result .= "<br><a class=\"btn\" href=\"edit/\">Edit</a>";
   }
   return $result.'</span>';

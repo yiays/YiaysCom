@@ -5,24 +5,12 @@ $article?->fetch_content();
 $edit = false;
 if(count($params) > 3) {
   if($params[3] == 'edit') {
-    // Bypass authorization when needed
-    /*class User {
-      public int $id = 0;
-      public string $username = 'Yiays';
-      public bool $admin = true;
+    if($user && $user->username == 'yiays') {
+      $edit = true;
+    }else{
+      http_response_code(403);
+      die('Failed to verify you as an administrator.');
     }
-    $user = new User();*/
-    //if(key_exists('passportToken', $_COOKIE)) {
-      if(!$user || !$user->admin) {
-        http_response_code(403);
-        die('Failed to verify you as an administrator.');
-      }else{
-        $edit = true;
-      }
-    /*}else{
-      http_response_code(302);
-      header('location: https://passport.yiays.com/account/login/?redirect='.urlencode('https://yiays.com'.$_SERVER['REQUEST_URI']));
-    }*/
   }elseif($params[3] != '') {
     http_response_code(404);
     die();
@@ -36,7 +24,7 @@ if($edit) {
     http_response_code(404);
     die();
   }else{
-    if($article->hidden && (!$user || !$user->admin)) {
+    if($article->hidden && (!$user || !$user->username == 'yiays')) {
       http_response_code(404);
       die();
     }
