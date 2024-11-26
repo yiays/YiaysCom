@@ -102,7 +102,7 @@ class Article {
     if($matchcount) {
       for($i=0; $i<$matchcount; $i++) {
         $imgurl = str_replace('.webp', '.thumb.webp', $matches[2][$i]);
-        $result .= "<img alt=\"".$matches[1][$i]."\" src=\"".$imgurl."\" width=640 height=480 loading=\"lazy\">
+        $result .= "<div><img alt=\"".$matches[1][$i]."\" src=\"".$imgurl."\" loading=\"lazy\"></div>
             ";
       }
     }
