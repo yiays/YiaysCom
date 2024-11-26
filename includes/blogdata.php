@@ -36,10 +36,8 @@ class Article {
     $METADIR = $_SERVER['DOCUMENT_ROOT']."/blog/articles/$this->urlid.meta";
 
     $tempcontent = $this->content;
-    if($this->content) {
-      file_put_contents($MDDIR, $this->content);
-      $this->content = null;
-    }
+    file_put_contents($MDDIR, isset($this->content)? $this->content: '');
+    $this->content = null;
     // Save metadata
     file_put_contents($METADIR, serialize($this));
     // Restore blog content

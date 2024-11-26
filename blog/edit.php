@@ -70,7 +70,7 @@ $title = "Editing ".$article->title;
 $desc = strip_tags($ParseDown->text(explode("\n", $article->content)[0]));
 $keywords = implode(', ', $article->tags);
 $image = "https://cdn.yiays.com/blog/$article->img";
-$stylesheet = `<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css">`;
+$stylesheet = "<link rel=\"stylesheet\" href=\"https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css\">";
 require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
 
 ?>
@@ -105,15 +105,15 @@ require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
     </div>
   </article>
 </form>
-  <script type="importmap">
-  {
-    "imports": {
-      "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js",
-      "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.3.1/"
-    }
+<script type="importmap">
+{
+  "imports": {
+    "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js",
+    "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.3.1/"
   }
-  </script>
-<script src="https://cdn.yiays.com/ckeditor/setup.js"></script>
+}
+</script>
+<script type="module" src="https://cdn.yiays.com/ckeditor/setup.js?v=1.3"></script>
 <script>
   let submitcontent = document.querySelector('#submitcontent');
   let savebtn = document.querySelector('#save');
@@ -125,7 +125,7 @@ require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
 
   savebtn.addEventListener('click', (e)=>{
     removeEventListener('beforeunload', beforeunload, {capture: true});
-    submitcontent.value = editor.getData();
+    submitcontent.value = window.ckeditor.getData();
   });
   hiddenchk.addEventListener('input', (e)=>{
     savebtn.value = (hiddenchk.checked==true)?'Save':'Publish';
