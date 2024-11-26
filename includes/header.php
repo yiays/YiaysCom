@@ -30,6 +30,8 @@
     <?php
       if(isset($stylesheet)) echo $stylesheet;
     ?>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
 		
     <link rel="preconnect" href="https://cdn.yiays.com">
 		<link rel="stylesheet" href="https://cdn.yiays.com/normalize.css">
