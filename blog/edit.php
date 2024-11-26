@@ -70,6 +70,7 @@ $title = "Editing ".$article->title;
 $desc = strip_tags($ParseDown->text(explode("\n", $article->content)[0]));
 $keywords = implode(', ', $article->tags);
 $image = "https://cdn.yiays.com/blog/$article->img";
+$stylesheet = `<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.css">`;
 require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
 
 ?>
@@ -97,13 +98,23 @@ require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
       <img alt="<?php echo htmlspecialchars($article->title); ?> cover art" id="postcover" src="https://cdn.yiays.com/blog/<?php echo $article->img; ?>">
     </div>
     <input type="hidden" name="contenthtml" id="submitcontent">
-    <div class="post-content" id="postcontent"><?php echo $article->content; ?></div>
+    <div class="editor-container editor-container_balloon-editor editor-container_include-block-toolbar" id="editor-container">
+      <div class="editor-container__editor">
+      <div class="post-content" id="editor"><?php echo $article->content; ?></div>
+      </div>
+    </div>
   </article>
 </form>
-<script src="https://cdn.yiays.com/ckeditor.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.3.1/ckeditor5.js",
+      "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.3.1/"
+    }
+  }
+  </script>
+<script src="https://cdn.yiays.com/ckeditor/setup.js"></script>
 <script>
-  let editor;
-  let postcontent = document.querySelector('#postcontent');
   let submitcontent = document.querySelector('#submitcontent');
   let savebtn = document.querySelector('#save');
   let hiddenchk = document.querySelector('#hidden');
@@ -111,16 +122,7 @@ require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');
   let post = document.querySelector('#postcolor');
   let coverfs = document.querySelector('#cover');
   let postcover = document.querySelector('#postcover');
-  BalloonEditor
-    .create(postcontent, {
-      simpleUpload: {
-        uploadUrl: '?upload'
-      }
-    })
-    .then(newEditor => {editor = newEditor;})
-    .catch(error => {
-      console.error(error);
-    });
+
   savebtn.addEventListener('click', (e)=>{
     removeEventListener('beforeunload', beforeunload, {capture: true});
     submitcontent.value = editor.getData();
