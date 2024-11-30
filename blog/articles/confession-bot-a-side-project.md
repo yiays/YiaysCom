@@ -1,6 +1,6 @@
 ConfessionBot is the most advanced anonymous messaging bot on Discord, with mod tools, multiple anonymous channel types, image support, and much more!
 
-### Features
+## Features
 
 *   Multiple channels support, each channel can have its own configuration
 *   Secure ID obfuscation or complete anonymity available
@@ -12,7 +12,7 @@ ConfessionBot is the most advanced anonymous messaging bot on Discord, with mod 
 *   ConfessionBot can automatically use your language in user settings or the server language in server settings
 *   Users can trust ConfessionBot as admins are not given free rein to expose users
 
-#### Premium features
+Premium features
 
 ConfessionBot premium can be obtained by boosting the [official server](https://discord.gg/wfKx24kDUR), contributing translations, or by supporting Yiays on [Patreon](https://patreon.com/yiays).
 
@@ -25,7 +25,7 @@ ConfessionBot premium can be obtained by boosting the [official server](https://
 
 In addition, there is a higher tier of support on Yiays' Patreon which allows you to request custom features with a custom discord bot. [Talk with Yiays on Discord](https://discord.gg/wfKx24kDUR) before subscribing.
 
-### Translation support
+## Translation support
 
 Anyone can contribute translations using the [Babel Translation Editor](https://translate.yiays.com) and submit any changes to the [official discord server](https://discord.gg/wfKx24kDUR). This also grants you ConfessionBot premium.
 
@@ -42,9 +42,9 @@ As of November 2024, ConfessionBot has at least partial support for the followin
 
 Thank you to 3n3scan, charabe, 00xxe04, y4neko, stethoscope, kob, Windows, Jessa, and ChoccyMilk for your contributions!
 
-### Settings
+## Settings
 
-#### Channel Types
+Channel Types
 
 ![](https://cdn.yiays.com/blog/cb-setup.webp)
 
@@ -61,18 +61,18 @@ There are 4 anonymous channel types. Set any channel to any of them using `/set`
 
 In addition, Anon-IDs can be toggled on or off for most of these channel types using the Traceable toggle.
 
-*   🟢**AnonIDs: Shown:** Each message will start with a (cryptographically secure) 6-character string and a colour. For example `Anon-fbd872`.
+*   🟢**AnonIDs: Shown:** Each message will start with a (cryptographically secure) 6-character string and a colour. For example, `Anon-fbd872`.
     *   Naturally, users might eventually notice patterns emerging from one Anon-ID, and they may start to make guesses as to who they are. Use `/shuffle` to change all Anon-IDs on your server in order to continue protecting the privacy of your users.
-*   🔴**AnonIDs: Hidden:** No colour or string will appear next to messages, users will be indistinguishable from one another.
+*   🔴**AnonIDs: Hidden:** No colour or string will appear next to messages; users will be indistinguishable from one another.
     *   Blocking Anon-IDs is more difficult when they are hidden, but they _are_ still recoverable. You will need to [join the support server](https://discord.gg/wfKx24kDUR) in order to get help with this.
 
-#### Image support
+Image support
 
 ![](https://cdn.yiays.com/blog/cb-imagesupport.webp)
 
 Images are supported alongside text by default, this can be disabled using `/controlpanel` and clicking on 🟢 _Image Support: True_.
 
-#### Moderation
+Moderation
 
 ![](https://cdn.yiays.com/blog/cb-moderation.webp)
 
@@ -80,11 +80,11 @@ Anyone with moderator permissions can block users from sending anonymous message
 
 If you want to give other users these powers without making them a moderator, change the command permissions in your server settings.
 
-### Privacy policy
+## Privacy policy
 
 _ConfessionBot promises users confidentiality like that you'd find with a doctor or therapist._ Only breaching user's privacy when there is good reason to be concerned about somebody's wellbeing. This strict confidentiality brings about a higher level of trust and safety for everyone using ConfessionBot. You can contact the developer (Yiays#5930 or [yiays@yiays.com](mailto:yiays@yiays.com)) at any time to request a full deletion of your data.
 
-### Terms of Service
+## Terms of Service
 
 Before using ConfessionBot, you must read, understand, and agree to these terms. _Failure to do so could result in ConfessionBot being removed from your server, or your account being blocked from interacting with ConfessionBot._
 
@@ -93,7 +93,7 @@ Before using ConfessionBot, you must read, understand, and agree to these terms.
 
 If you witness other users breaking the ConfessionBot terms of service, report them to the developer (Yiays#5930 or [yiays@yiays.com](mailto:yiays@yiays.com)) right away.
 
-### Testing
+## Testing
 
 On the [Official Support Server](https://discord.gg/wfKx24kDUR), you can test out the bot, ask for help, or request new features and I'll do my best to get back to you quickly.
 
@@ -101,6 +101,6 @@ On the [Official Support Server](https://discord.gg/wfKx24kDUR), you can test ou
 
 If you're interested, you can [add this bot to your server](https://top.gg/bot/562440687363293195)!
 
-### Support the developer
+## Support the developer
 
 You can support this bot by [rating it on the top.gg discord bot list](https://top.gg/bot/562440687363293195) or by subscribing to [ConfessionBot Premium](#premium-features).
