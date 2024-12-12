@@ -33,14 +33,21 @@ if($edit) {
   $title = $article->title;
   $content = $ParseDown->text($article->content);
   # Add IDs to all post headings
-  preg_match_all('/<(h[123456])>(.*)<\/h[123456]>/U', $content, $headings);
+  $doc = new DOMDocument();
+  $doc->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+  $doctitles = array_merge(
+    iterator_to_array($doc->getElementsByTagName('h1')),
+    iterator_to_array($doc->getElementsByTagName('h2')),
+    iterator_to_array($doc->getElementsByTagName('h3'))
+  );
   $norepeatid = [];
-  for($i=0; $i<count($headings[0]); $i++) {
-    $headingid = preg_replace('/-+/', '-', preg_replace('/[^a-z0-9]/', '-', strtolower($headings[2][$i])));
-    if(array_search($headingid, $norepeatid)) continue;
-    $content = str_replace($headings[0][$i], "<{$headings[1][$i]} id=\"{$headingid}\">{$headings[2][$i]}</{$headings[1][$i]}>", $content);
+  foreach($doctitles as $doctitle) {
+    $headingid = preg_replace('/-+/', '-', preg_replace('/[^a-z0-9]/', '-', strtolower($doctitle->textContent)));
+    if(in_array($headingid, $norepeatid)) continue;
+    $doctitle->setAttribute('id', $headingid);
     $norepeatid[]=$headingid;
   }
+  $content = $doc->saveHTML();
   $desc = strip_tags($ParseDown->text(explode("\n", $content)[0]));
   $keywords = implode(', ', $article->tags);
   $image = "https://cdn.yiays.com/blog/$article->img";
