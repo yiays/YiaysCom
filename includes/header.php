@@ -42,19 +42,16 @@
 		
     <link rel="preconnect" href="https://cdn.yiays.com">
 		<link rel="stylesheet" href="https://cdn.yiays.com/normalize.css">
-		<link rel="stylesheet" href="/style.css?v=0.5.9">
+		<link rel="stylesheet" href="/style.css?v=0.5.21">
   </head>
   <body>
     <div class="main">
       <nav>
-        <p class="nav-item show-small text-center text-skinny" style="width:100%;">
+        <a href="/" class="nav-item show-small text-center text-skinny" style="width:100%;">
           Yiays.com
-        </p>
-        <span class="nav-item hide-small text-skinny">
+        </a>
+        <a href="/" class="nav-item hide-small text-skinny">
           Yiays.com
-        </span>
-        <a class="nav-item <?php print($url=='/'?'active':''); ?>" href="/">
-          Home
         </a>
         <a class="nav-item <?php print(strpos($url,'/blog/')===0?'active':''); ?>" href="/blog/">
           Blog

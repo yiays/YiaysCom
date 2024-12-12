@@ -49,6 +49,7 @@ h3{
 hr {
   border: none;
   border-bottom: white solid 1px;
+  margin: 0;
 }
 blockquote {
   position: relative;
@@ -105,9 +106,11 @@ blockquote::after {
 .x-scroller {
   display: block;
   overflow-x: auto;
+  margin-bottom: 1em;
 }
 .x-scroller > div {
   width: fit-content;
+  margin: 0;
 }
 .y-scroller {
   display: block;
@@ -331,7 +334,6 @@ article, section, aside {
 .hero {
   color: #fff;
   background:rgb(112, 146, 190) linear-gradient(90deg, rgb(0, 68, 97), rgb(88, 38, 88));
-  margin-bottom: -0.5em;
 }
 
 .login-status {
@@ -349,6 +351,11 @@ article, section, aside {
   display: flex;
   flex-direction: row;
   border-radius: 0.9em;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+.carousel-grid {
+  flex-wrap: wrap;
 }
 .carousel > * {
   position: relative;
@@ -363,6 +370,9 @@ article, section, aside {
   border-radius: 1em;
   overflow: hidden;
 }
+.carousel:not(.carousel-grid) > * {
+  max-width: min(28em, 85vw);
+}
 .carousel img {
   height: 100%;
   width: auto;
@@ -373,14 +383,6 @@ article, section, aside {
 .carousel > a:hover img {
   scale: 1.25;
   opacity: 0.75;
-}
-.carousel > *:not(:last-child) {
-  margin-right: 1em;
-}
-.carousel.carousel-end-promo > div:last-child, .carousel.carousel-end-promo > a:last-child {
-  display: block;
-  max-width: unset;
-  flex-grow: 1;
 }
 .carousel .info {
   position: absolute;
