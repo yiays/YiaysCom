@@ -4,7 +4,7 @@ $desc = false;
 $keywords = 'homepage';
 require('includes/header.php');
 ?><article class="hero">
-  <img class="pfp" src="img/pfp.jpg?v=2" alt="[Yiays] profile picture" width="1024" height="1024">
+  <img class="pfp" src="/img/pfp.jpg?v=2" alt="[Yiays] profile picture" width="1024" height="1024">
   <div>
     <h1>Hello, I'm Yiays.</h1>
     <p>
@@ -26,61 +26,43 @@ require('includes/header.php');
   <p>
     Here, you'll find projects created as part of my studies or in my free time, a handful of them have become somewhat popular with some communities.
   </p>
-  <div class="x-scroller">
-    <div class="carousel carousel-end-promo">
-      <?php require_once('includes/projectdata.php');
-      shuffle($projects);
-      $i = 0;
-      foreach($projects as $project) {
-        print($project->preview());
-        if($i++ == 2) {
-          break;
-        }
+  <div class="carousel carousel-grid">
+    <?php require_once('includes/projectdata.php');
+    $i = 0;
+    foreach($projects as $project) {
+      print($project->preview());
+      if(++$i == 6) {
+        break;
       }
-      print("
-        <a href=\"/projects/\">
-          <img src=\"/img/genericpurple.svg\" alt=\"See all projects\">
-          <div class=\"info\">
-            <b>All projects</b><br>
-            See the expanded list
-          </div>
-        </a>
-      ");
-      ?>
-    </div>
+    }
+    ?>
+  </div>
+  <div class="flex-row">
+    <a href="/projects/" class="btn">See all projects</a>
   </div>
 </section>
 <hr>
 <section>
-  <h2>Featured articles</h2>
+  <h2>Most recent articles</h2>
   <p>
     I occasionally write an article here and there about my misadventures programming. I also document the history of my ever-evolving projects.
   </p>
-  <div class="x-scroller">
-    <div class="carousel carousel-end-promo">
-      <?php
-      require_once('includes/blogdata.php');
-      shuffle($articles);
-      $i = 0;
-      foreach($articles as $article) {
-        if(!$article->hidden) {
-          print($article->preview());
-          if($i++ == 1) {
-            break;
-          }
+  <div class="carousel carousel-grid">
+    <?php
+    require_once('includes/blogdata.php');
+    $i = 0;
+    foreach($articles as $article) {
+      if(!$article->hidden) {
+        print($article->preview());
+        if(++$i == 3) {
+          break;
         }
       }
-      print("
-        <a href=\"/blog/\">
-          <img src=\"/img/blog.svg\" alt=\"See all posts\">
-          <div class=\"info\">
-            <b>All posts</b><br>
-            See the blog
-          </div>
-        </a>
-      ");
-      ?>
-    </div>
+    }
+    ?>
+  </div>
+  <div class="flex-row">
+    <a href="/blog/" class="btn">See all posts</a>
   </div>
 </section>
 <hr>

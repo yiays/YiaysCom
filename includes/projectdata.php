@@ -52,13 +52,27 @@ class Project {
     ";
   }
 
+  function mainlang() : string {
+    $comma = strpos($this->langs, ',') ?: 999;
+    $and = strpos($this->langs, ' and') ?: 999;
+    return substr($this->langs, 0, min($comma, $and));
+  }
+
+  function usercount() : string {
+    if(preg_match('/\d/', $this->users)) {
+      $space = strpos($this->users, ' ') ?: 999;
+      return substr($this->users, 0, $space) . ' users';
+    }
+    return $this->users;
+  }
+
   function preview() : string {
     return "
       <a class=\"project-mini\" href=\"/projects/#$this->id\">
         <img src=\"$this->img\" alt=\"$this->title\" loading=\"lazy\">
         <div class=\"info\">
           <b>$this->title</b><br>
-          $this->langs
+          ".$this->mainlang().", ".$this->usercount()."
         </div>
       </a>
     ";
@@ -104,7 +118,7 @@ $projects = [
     ],
     "NextJS and MongoDB (coming soon)",
     "Database and Web (mobile friendly)",
-    "Pending a rewrite",
+    "Pending rewrite",
     "A massive database of memes with crowd-sourced metadata, making for one of the best places on the web to search for memes.",
     "https://meme.yiays.com/",
     "https://github.com/TeamMemeDB/",
