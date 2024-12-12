@@ -361,45 +361,51 @@ article, section, aside {
   position: relative;
   display: flex;
   place-content: center;
-  height: 20vh !important;
-  min-height: 9em;
-  max-height: 18em;
-  max-width: 28em;
-  background-size: cover;
-  background-position: center;
+  height: 14em;
+  min-height: 10em;
+  max-height: 15em;
+  max-width: min(28em, 85vw);
+  min-width: 10em;
+  background: black;
   border-radius: 1em;
   overflow: hidden;
 }
-.carousel:not(.carousel-grid) > * {
-  max-width: min(28em, 85vw);
+.carousel.carousel-grid > * {
+  flex-grow: 1;
+}
+.carousel.carousel-grid > .project-mini {
+  max-width: 15em;
+  height: auto;
+}
+.carousel.carousel-grid > .article-mini {
+  flex-basis: 24em;
+  max-width: 31em;
 }
 .carousel img {
-  height: 100%;
   width: auto;
   scale: 1;
   opacity: 1;
   transition: scale 500ms, opacity 500ms;
 }
-.carousel > a:hover img {
-  scale: 1.25;
-  opacity: 0.75;
+.carousel-btn {
+  padding-bottom: 3.8em;
 }
-.carousel .info {
+.carousel-btn .label {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  margin: 0.8em;
   padding: 0.8em;
   color: #fff;
-  background: rgba(0,0,0,0.75);
-	box-shadow: rgba(0,0,0,0.25) 0.25rem 0.25rem 0.5rem 0;
-  border-radius: 0.8em;
-  transition: color ease 0.25s, background ease 0.25s;
+  background: black;
+  transition: background ease 0.25s;
 }
-.carousel > a:hover > .info {
-  color: #000;
-  background: rgba(255, 255, 255, 0.75);
+.carousel-btn:hover > .label {
+  background: #4b4b4b;
+}
+.carousel > a:hover img {
+  scale: 1.25;
+  opacity: 0.75;
 }
 
 .credits {

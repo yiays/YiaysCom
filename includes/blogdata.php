@@ -84,9 +84,9 @@ class Article {
   function preview() : string {
     $esc_img = str_replace('+', '%20', urlencode($this->img));
     return "
-      <a class=\"article-mini\" href=\"$this->url\">
+      <a class=\"carousel-btn article-mini\" href=\"$this->url\">
         <img src=\"//cdn.yiays.com/blog/$esc_img\" alt=\"$this->title\" loading=\"lazy\">
-        <div class=\"info\">
+        <div class=\"label\">
           <b>$this->title</b><br>
           ".implode(', ', $this->tags)."
         </div>

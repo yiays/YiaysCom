@@ -68,9 +68,9 @@ class Project {
 
   function preview() : string {
     return "
-      <a class=\"project-mini\" href=\"/projects/#$this->id\">
+      <a class=\"carousel-btn project-mini\" href=\"/projects/#$this->id\">
         <img src=\"$this->img\" alt=\"$this->title\" loading=\"lazy\">
-        <div class=\"info\">
+        <div class=\"label\">
           <b>$this->title</b><br>
           ".$this->mainlang().", ".$this->usercount()."
         </div>
@@ -160,7 +160,7 @@ $projects = [
 
   new Project(
     'merely',
-    "Merely",
+    "MerelyBot",
     "/img/merely.svg",
     [
       "merely1.webp" => "Help command from merelybot in Discord",
