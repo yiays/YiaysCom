@@ -24,7 +24,8 @@ if(strlen($params[2])) {
   <?php if($user && $user->username == 'yiays') { ?>
   <hr>
   <section class="flex-row">
-    <a class="btn" href="/blog/new-article/edit/">New Article</a>
+    <input type="text" name="articleid" id="articleid" placeholder="new-article">
+    <a href="/blog/new-article/edit/" id="new-article" class="btn">New Article</a>
   </section>
   <?php } ?>
   <hr>
@@ -36,7 +37,18 @@ if(strlen($params[2])) {
       print($article->preview_wide(boolval($user), $i!=1));
     }
   }
+  ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const input = document.getElementById('articleid');
+      const link = document.getElementById('new-article');
 
+      input.addEventListener('input', function() {
+          link.href = input.value? `/blog/${input.value}/edit/`: '/blog/new-article/edit/';
+      });
+    });
+  </script>
+  <?php
   require($_SERVER['DOCUMENT_ROOT'].'/includes/footer.php');
 }
 
