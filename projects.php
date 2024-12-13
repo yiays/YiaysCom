@@ -1,12 +1,13 @@
 <?php
 $title = 'Projects';
-$desc = 'Here, you\'ll find projects created as part of my studies or in my free time, a handful of them have become somewhat popular with some communities.';
+$desc = "These projects are both a showcase of my skills and a culmination of years of work put towards making free and open source software and services I want to see in the world.";
 $keywords = 'portfolio, work, examples, source code, github';
 require('includes/header.php');?>
 <article class="hero" style="background:rgb(88, 38, 88);">
   <h1>My projects</h1>
   <p>
-    Here, you'll find projects created as part of my studies or in my free time, a handful of them have become somewhat popular with some communities.
+    These projects are both a showcase of my skills and a culmination of years of work put
+    towards making free and open source software and services I want to see in the world.
   </p>
 </article>
 <hr>

@@ -102,7 +102,7 @@ $projects = [
     'PHP, Javascript (optional)',
     "Web (mobile friendly)",
     "~200 monthly visits",
-    "This website, updated yearly to showcase my skills as they grow. With this most recent design refresh, I'm also merging the blog into this site.",
+    "The website you're browsing right now. Frequently updated with new blog posts and projects. This is the centralized hub for everything I want to share.",
     null,
     'https://github.com/yiays/YiaysCom',
     'https://yiays.com/blog/a-history-of-my-websites/'
@@ -135,7 +135,7 @@ $projects = [
     "Python",
     "Discord",
     "~25,000 Discord Guilds",
-    "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is the most popular implementation of the Merely framework.",
+    "ConfessionBot adds anonymous messaging to Discord, being used by thousands of Discord servers, ConfessionBot is powered by my Merely framework.",
     "https://top.gg/bot/562440687363293195",
     "https://github.com/yiays/ConfessionBot/",
     "https://yiays.com/blog/confession-bot-a-side-project/"
@@ -184,7 +184,7 @@ $projects = [
     "Javascript",
     "Web (PWA)",
     "~4 Volunteer Translators",
-    "Provides tools to help translators work with my Babel language format.",
+    "Provides tools to help translators work with my Babel language format. If you install the PWA, it works offline, too.",
     "https://translate.yiays.com",
     "https://github.com/yiays/Babel-Translator",
     "https://yiays.com/blog/github-activity-summary-2022/"
@@ -202,8 +202,8 @@ $projects = [
     ],
     "Javascript",
     "Web (mobile and smartboard friendly)",
-    "Active use in a classroom",
-    "A collection of educational games for use in a classroom, being actively developed with a teacher and their classroom of primary school-age students.",
+    "~30 Monthly Visits",
+    "A collection of educational games for use in and out of classroom environments. Features leaderboards and badges.",
     "https://games.yiays.com",
     "https://github.com/yiays/Smartboard-Games",
     "https://yiays.com/blog/github-activity-summary-2022/"
@@ -220,8 +220,8 @@ $projects = [
     ],
     "PHP, MySQL, Javascript (optional), and Python",
     "Database, Discord, Web (mobile friendly), and UWP",
-    "~70 Monthly Visits",
-    "PukekoHost is a democratized game hosting service where members of a Discord server can crowdfund servers for their favourite games.",
+    "Inactive",
+    "Pukekohost is crowd-funded game server hosting as a service. An experimental new business model which we might launch one day.",
     "https://pukeko.yiays.com/",
     "https://github.com/Pukeko-Host/",
     "https://yiays.com/blog/github-activity-summary-2020/"

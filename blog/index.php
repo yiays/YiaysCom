@@ -7,7 +7,7 @@ if(strlen($params[2])) {
   require('article.php');
 }else{
   $title = 'Blog';
-  $desc = 'I occasionally write an article here and there about my misadventures programming. I also like to document the history of my ever-evolving projects.';
+  $desc = "I write about my successes and failures as a form of self reflection. Hopefully, these chronicals will help myself and others.";
   $keywords = 'blog, journal, documentation, history';
 
   require($_SERVER['DOCUMENT_ROOT'].'/includes/header.php');?>
@@ -17,7 +17,8 @@ if(strlen($params[2])) {
       <?php echo userpreview($user); ?>
     </div>
     <p>
-    I occasionally write an article here and there about my misadventures programming. I also document the history of my ever-evolving projects.
+      I write about my successes and failures as a form of self reflection. Hopefully, these
+      chronicals will help myself and others.
     </p>
   </article>
   <?php if($user && $user->username == 'yiays') { ?>

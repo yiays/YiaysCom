@@ -1,14 +1,18 @@
 <?php
 $title = false;
-$desc = false;
-$keywords = 'homepage';
+$desc = "I'm a freelance developer, creating software and services I want to see in the world and making it open source.\nTake a look at what I'm building.";
+$keywords = 'yiays,developer,web developer,business,freelance,software,portfolio,demo,blog';
 require('includes/header.php');
 ?><article class="hero">
   <img class="pfp" src="/img/pfp.jpg?v=2" alt="[Yiays] profile picture" width="1024" height="1024">
   <div>
     <h1>Hello, I'm Yiays.</h1>
     <p>
-    I'm a web / software developer with an IT degree and experience with a vast variety of programming languages, web technologies, tooling, and design methodologies.
+      I'm a freelance developer, creating software and services I want to see in the world
+      and making it open source.
+    </p>
+    <p>
+      Take a look at what I'm building.
     </p>
 </div>
   <div class="flex-row">
@@ -24,7 +28,8 @@ require('includes/header.php');
 <section class="featured-projects" id="skip">
   <h2>Featured projects</h2>
   <p>
-    Here, you'll find projects created as part of my studies or in my free time, a handful of them have become somewhat popular with some communities.
+    These projects are both a showcase of my skills and a culmination of years of work put
+    towards making free and open source software and services I want to see in the world.
   </p>
   <div class="carousel carousel-grid">
     <?php require_once('includes/projectdata.php');
@@ -43,9 +48,10 @@ require('includes/header.php');
 </section>
 <hr>
 <section>
-  <h2>Most recent articles</h2>
+  <h2>Recent articles</h2>
   <p>
-    I occasionally write an article here and there about my misadventures programming. I also document the history of my ever-evolving projects.
+    I write about my successes and failures as a form of self reflection. Hopefully, these
+    chronicals will help myself and others.
   </p>
   <div class="carousel carousel-grid">
     <?php
