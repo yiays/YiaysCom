@@ -72,7 +72,7 @@ class Project {
         <img src=\"$this->img\" alt=\"$this->title\" loading=\"lazy\">
         <div class=\"label\">
           <b>$this->title</b><br>
-          ".$this->mainlang().", ".$this->usercount()."
+          <span class=\"c-grey\">".$this->mainlang().", ".$this->usercount()."</span>
         </div>
       </a>
     ";
@@ -175,22 +175,6 @@ $projects = [
   ),
 
   new Project(
-    'translator',
-    "Babel Translator",
-    '/img/genericwhite.svg',
-    [
-      "babel-translator.webp" => "Landing page for the translator GUI"
-    ],
-    "Javascript",
-    "Web (PWA)",
-    "~4 Volunteer Translators",
-    "Provides tools to help translators work with my Babel language format. If you install the PWA, it works offline, too.",
-    "https://translate.yiays.com",
-    "https://github.com/yiays/Babel-Translator",
-    "https://yiays.com/blog/github-activity-summary-2022/"
-  ),
-
-  new Project(
     'smartboard',
     "Smartboard Games",
     '/img/genericpurple.svg',
@@ -206,6 +190,22 @@ $projects = [
     "A collection of educational games for use in and out of classroom environments. Features leaderboards and badges.",
     "https://games.yiays.com",
     "https://github.com/yiays/Smartboard-Games",
+    "https://yiays.com/blog/github-activity-summary-2022/"
+  ),
+
+  new Project(
+    'translator',
+    "Babel Translator",
+    '/img/genericwhite.svg',
+    [
+      "babel-translator.webp" => "Landing page for the translator GUI"
+    ],
+    "Javascript",
+    "Web (PWA)",
+    "~4 Volunteer Translators",
+    "Provides tools to help translators work with my Babel language format. If you install the PWA, it works offline, too.",
+    "https://translate.yiays.com",
+    "https://github.com/yiays/Babel-Translator",
     "https://yiays.com/blog/github-activity-summary-2022/"
   ),
 

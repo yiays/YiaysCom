@@ -88,7 +88,7 @@ class Article {
         <img src=\"//cdn.yiays.com/blog/$esc_img\" alt=\"$this->title\" loading=\"lazy\">
         <div class=\"label\">
           <b>$this->title</b><br>
-          ".implode(', ', $this->tags)."
+          <span class=\"c-grey\">".implode(', ', $this->tags)."</span>
         </div>
       </a>
     ";

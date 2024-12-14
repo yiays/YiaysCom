@@ -42,7 +42,7 @@
 		
     <link rel="preconnect" href="https://cdn.yiays.com">
 		<link rel="stylesheet" href="https://cdn.yiays.com/normalize.css">
-		<link rel="stylesheet" href="/style.css?v=0.6.3">
+		<link rel="stylesheet" href="/style.css?v=0.6.4">
   </head>
   <body>
     <div class="main">
