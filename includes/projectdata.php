@@ -142,6 +142,19 @@ $projects = [
   ),
 
   new Project(
+    'autologout',
+    "AutoLogout",
+    "/img/genericwhite.svg",
+    [],
+    "Typescript, C#",
+    "Windows, Android",
+    "Public beta",
+    "AutoLogout adds downtime and screentime limits to Windows computers, plus a way to change settings remotely with an Android app.",
+    "https://autologout.yiays.com",
+    "https://github.com/yiays/AutoLogout/",
+  ),
+
+  new Project(
     'merely-music',
     "Merely Music",
     "/img/merely-purple.svg",
