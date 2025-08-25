@@ -144,7 +144,7 @@ $projects = [
   new Project(
     'autologout',
     "AutoLogout",
-    "/img/genericwhite.svg",
+    "/img/autologout.svg",
     [],
     "Typescript, C#",
     "Windows, Android",
