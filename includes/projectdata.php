@@ -145,7 +145,11 @@ $projects = [
     'autologout',
     "AutoLogout",
     "/img/autologout.svg",
-    [],
+    [
+      "autologout-screenshot.webp" => "The time limit countdown UI that appears on a managed computer",
+      "autologout-controlpanel.webp" => "Settings you can control, such as the daily time limit, and bedtime",
+      "autologout-manager-app.webp" => "Mobile app which can manage time limits on computers remotely"
+    ],
     "Typescript, C#",
     "Windows, Android",
     "Public beta",
